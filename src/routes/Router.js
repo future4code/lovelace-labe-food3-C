@@ -3,6 +3,7 @@ import {Switch, Route, BrowserRouter} from "react-router-dom"
 import ErrorPage from '../pages/ErrorPage/ErrorPage'
 import LoginPage from "../pages/LoginPage/LoginPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
+import InitialPage from "../pages/InitialPage/InitialPage";
 
 
 const Router = () => {
@@ -18,7 +19,7 @@ const Router = () => {
                 </Route>
 
                 <Route exact path="/">
-
+                    <InitialPage/>
                 </Route>
 
                 <Route exact path="/post/:id">
