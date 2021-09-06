@@ -9,6 +9,7 @@ import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import RestaurantPage from "../pages/RestaurantPage.js/RestaurantPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import UserInfoPage from "../pages/UserInfoPage/UserInfoPage";
+import InitialPage from "../pages/InitialPage/InitialPage";
 
 
 const Router = () => {
@@ -23,10 +24,9 @@ const Router = () => {
                     <SignUpPage/>
                 </Route>
 
-{/*             <Route exact path="/">
-                    <InitialPage />
+                <Route exact path="/">
+                    <InitialPage/>
                 </Route>
- */}
 
                 <Route exact path="/home">
                     <HomePage />
@@ -51,7 +51,7 @@ const Router = () => {
                 <Route exact path="/profile/info">
                     <UserInfoPage />
                 </Route>
-                
+
                 <Route>
                     <ErrorPage/>
                 </Route>
