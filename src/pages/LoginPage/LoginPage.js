@@ -1,38 +1,36 @@
-import React from "react"
-import {Button, Typography} from "@material-ui/core";
-import {goToSignUp} from "../../routes/coordinator";
-import {useHistory} from "react-router-dom";
-import useUnprotectedPage from "../../hooks/useUnprotectedPage";
-import LoginForm from "./LoginForm";
-import {ElementLogin, LoginContainer, MainContainer} from "./styled";
+import React from 'react';
+import { LogoImage, ScreenContainer, SignUpButtonContainer, StyledText } from "./styled"
+import logo from "../../assets/logo-ifuture.svg"
+import Button from '@material-ui/core/Button'
+import LoginForm from "./LoginForm"
+import { goToSignUp } from "../../routes/coordinator"
+import { useHistory } from "react-router-dom"
+import useUnprotectedPage from "../../hooks/useUnprotectedPage"
+
 
 const LoginPage = () => {
     useUnprotectedPage()
     const history = useHistory()
-
-
     return (
-        <MainContainer>
-            <LoginContainer>
-                <ElementLogin>
-                    <Typography variant={"h4"}>
-                        Login
-                    </Typography>
+        <ScreenContainer>
+            <LogoImage src={logo} alt="logo-I-future-foods" />
+            <StyledText>
+                Entrar
+            </StyledText>
+            <LoginForm />
+            <SignUpButtonContainer>
+                <Button
+                    onClick={() => goToSignUp(history)}
+                    type={"submit"}
+                    fullWidth
+                    variant={"text"}
+                    color={"secondary"}
+                >
+                    Não possui cadastro? Clique aqui.
+                </Button>
+            </SignUpButtonContainer>
 
-                    <LoginForm/>
-
-                    <Button
-                        onClick={() => goToSignUp(history)}
-                        type={"submit"}
-                        fullWidth
-                        variant={"text"}
-                        color={"primary"}
-                    >Não possui conta? Cadastre-se
-                    </Button>
-                </ElementLogin>
-
-            </LoginContainer>
-        </MainContainer>
+        </ScreenContainer>
     )
 }
 
