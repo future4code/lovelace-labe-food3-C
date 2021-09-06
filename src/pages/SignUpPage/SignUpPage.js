@@ -1,39 +1,23 @@
-import React from "react"
-import {Button, Typography} from "@material-ui/core";
-import useUnprotectedPage from "../../hooks/useUnprotectedPage";
-import {ElementLogin, LoginContainer, MainContainer} from "../LoginPage/styled";
-import SignUpForm from "./SignUpForm";
-import {goToLogin} from "../../routes/coordinator";
-import {useHistory} from "react-router-dom";
+import React from 'react'
+import logo from "../../assets/logo-ifuture.svg"
+import { ScreenContainer } from './styled'
+import SignUpForm from './SignUpForm'
+import { LogoImage } from './styled'
+import Typography from '@material-ui/core/Typography'
+import useUnprotectedPage from '../../hooks/useUnprotectedPage'
+
 
 const SignUpPage = () => {
-    useUnprotectedPage()
-    const history = useHistory()
-
-
-    return (
-        <MainContainer>
-            <LoginContainer>
-                <ElementLogin>
-                    <Typography variant={"h4"}>
-                        Criar Conta:
+  useUnprotectedPage()
+  return (
+    <ScreenContainer>
+      <LogoImage src={logo} alt="logo-I-future-foods" />
+      <Typography variant={"h6"}>
+                        Cadastrar
                     </Typography>
-
-                    <SignUpForm/>
-
-                    <Button
-                        onClick={() => goToLogin(history)}
-                        type={"submit"}
-                        fullWidth
-                        variant={"text"}
-                        color={"primary"}
-                    >Já Possui conta? Faça Login</Button>
-                </ElementLogin>
-
-
-            </LoginContainer>
-        </MainContainer>
-    )
+      <SignUpForm />
+    </ScreenContainer>
+  )
 }
 
 export default SignUpPage
