@@ -1,4 +1,6 @@
-export const primaryColor = "#e8222e"
-export const secondaryColor = "#000000"
-export const neutralColor = "#1a1a1b"
+export const primaryColor = "#e8222e" // vermelho
+export const secondaryColor = "#000000" // cinza claro (campos em branco)
+export const neutralColor = "#d0d0d0" // preto
 export const background = "transparent"
+
+// Tudo funcionando! Test!

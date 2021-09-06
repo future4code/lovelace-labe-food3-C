@@ -53,6 +53,7 @@ const SignUpForm = () => {
             fullWidth
             required
             margin={'normal'}
+            inputProps={{ pattern: "[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}" }}
           />
           <TextField
             value={form.password}
