@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../assets/images/logo-future-eats.svg"
 import {Zoom} from "@material-ui/core";
-import {goToLogin} from "../../routes/coordinator";
+import {goToHome, goToLogin} from "../../routes/coordinator";
 
 export const MainContainer = styled.div`
   display: flex;
@@ -23,8 +23,13 @@ export const Logo = styled.img`
 
 const InitialPage = () => {
     const history = useHistory()
+    const token = localStorage.getItem("token")
 
-    setTimeout(()=> goToLogin(history), 3000)
+    if(token){
+        setTimeout(()=> goToHome(history), 3000)
+    } else {
+        setTimeout(()=> goToLogin(history), 3000)
+    }
 
     return (
         <MainContainer>

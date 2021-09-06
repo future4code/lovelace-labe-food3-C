@@ -6,6 +6,7 @@ import { StyledHomePage } from "./styled";
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 
 import {useHistory} from "react-router-dom";
+import CardFeed from "../../components/CardFeed/CardFeed";
 
 const HomePage = () => {
     useProtectedPage()
@@ -67,9 +68,10 @@ const HomePage = () => {
 
 
     return (
-        <StyledHomePage>
+      <StyledHomePage>
         <SearchField />
         <TapPanel restaurants={restaurants}/>
+        <CardFeed />
         <p>Footer</p>
       </StyledHomePage>
     )
