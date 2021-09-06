@@ -16,7 +16,6 @@ const HomePage = () => {
         <StyledHomePage>
         <SearchField />
         <TapPanel />
-        <div>Home</div>
       </StyledHomePage>
     )
 }
