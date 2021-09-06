@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Typography from '@material-ui/core/Typography'
 
 export const ScreenContainer = styled.div`
   display: flex;
@@ -19,6 +20,7 @@ export const InputsContainer = styled.div`
     Button {
         margin-top: 10px;
         border-radius: 2px;
+        height: 2.625rem
     }
 `
 
@@ -39,6 +41,11 @@ export const SignUpButtonContainer = styled.div`
 export const LogoImage = styled.img`
   width: 6.5rem;
   height: 3.625rem;
-  margin: 1rem 8rem 1rem;
+  margin: 1rem 8rem 2rem;
   object-fit: contain;
 `
+
+export const StyledText = styled(Typography)`
+  font-size: 1.15em;
+  font-weight: 500;
+` 

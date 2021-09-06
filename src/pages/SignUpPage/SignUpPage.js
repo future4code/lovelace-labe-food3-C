@@ -3,8 +3,8 @@ import logo from "../../assets/logo-ifuture.svg"
 import { ScreenContainer } from './styled'
 import SignUpForm from './SignUpForm'
 import { LogoImage } from './styled'
-import Typography from '@material-ui/core/Typography'
 import useUnprotectedPage from '../../hooks/useUnprotectedPage'
+import { StyledText } from './styled'
 
 
 const SignUpPage = () => {
@@ -12,9 +12,9 @@ const SignUpPage = () => {
   return (
     <ScreenContainer>
       <LogoImage src={logo} alt="logo-I-future-foods" />
-      <Typography variant={"h6"}>
-                        Cadastrar
-                    </Typography>
+      <StyledText>
+          Cadastrar
+      </StyledText>
       <SignUpForm />
     </ScreenContainer>
   )
