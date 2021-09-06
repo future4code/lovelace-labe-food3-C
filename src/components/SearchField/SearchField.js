@@ -2,12 +2,13 @@ import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControl from "@material-ui/core/FormControl";
 import SearchIcon from "@material-ui/icons/Search";
+
+import { StyledForm } from "./styled";
 
 export default function SearchField() {
   return (
-    <FormControl variant="outlined" fullWidth={true}>
+    <StyledForm variant="outlined">
       <OutlinedInput
         id="outlined-adornment-weight"
         startAdornment={
@@ -21,6 +22,6 @@ export default function SearchField() {
         labelWidth={0}
         placeholder="Restaurante"
       />
-    </FormControl>
+    </StyledForm>
   );
 }

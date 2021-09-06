@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const StyledHomePage = styled.div`
-  border: 1px solid black;
+  width: 100vw;
 
-  & > div {
-    margin: 0.2rem;
-  }
+  /* & > div {
+    width: 100vw;
+    margin: 0.2rem 0;
+  } */
 `;
