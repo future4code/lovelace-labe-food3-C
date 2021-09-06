@@ -2,6 +2,7 @@ import React from "react"
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 
 import {useHistory} from "react-router-dom";
+import CardFeed from "../../components/CardFeed/CardFeed";
 
 const HomePage = () => {
     useProtectedPage()
@@ -9,7 +10,10 @@ const HomePage = () => {
 
 
     return (
-        <div>opa</div>
+        <div>
+        <CardFeed />
+        <CardFeed /><CardFeed /><CardFeed />
+        </div>
     )
 }
 
