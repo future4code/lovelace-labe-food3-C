@@ -2,7 +2,7 @@ import React from "react"
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 import { MainContainer, HeaderContainer, CardRestaurant, RestaurantPicture,DeliverTaxSpan, CardMenu} from "./styled";
 import {useHistory} from "react-router-dom";
-import CardBurger from "../../components/Loading/CardBurger/CardBurger";
+import CardBurger from "../../components/CardBurger/CardBurger";
 
 const RestaurantPage = () => {
     useProtectedPage()
