@@ -24,7 +24,7 @@ const LoginPage = () => {
                     type={"submit"}
                     fullWidth
                     variant={"text"}
-                    color={"secondary"}
+                    color={"default"}
                 >
                     Não possui cadastro? Clique aqui.
                 </Button>

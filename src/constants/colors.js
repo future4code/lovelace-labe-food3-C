@@ -1,4 +1,8 @@
-export const primaryColor = "#e8222e"
-export const secondaryColor = "#000000"
-export const neutralColor = "#1a1a1b"
-export const background = "transparent"
+export const primaryColor = "#e8222e" // vermelho
+export const secondaryColor = "#000000" // preto
+export const neutralColor = "#d0d0d0"  // cinza claro (campos em branco dos Forms)
+export const background = "#ffffff" // branco
+
+
+
+
