@@ -3,7 +3,7 @@ import useProtectedPage from "../../hooks/useUnprotectedPage";
 
 import {useHistory} from "react-router-dom";
 
-const AdressPage = () => {
+const AddressPage = () => {
     useProtectedPage()
     const history = useHistory()
 
@@ -13,4 +13,4 @@ const AdressPage = () => {
     )
 }
 
-export default AdressPage
+export default AddressPage
