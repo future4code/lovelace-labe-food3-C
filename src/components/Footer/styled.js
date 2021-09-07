@@ -16,7 +16,7 @@ export const StyledFooter = styled.div`
     align-items: center;
 
     background: white;
-    border: 1px solid gray;
+    border-top: 1px solid #d0d0d0;
 
     &>*{
         width: 7.5rem;

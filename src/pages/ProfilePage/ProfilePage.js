@@ -9,7 +9,7 @@ const ProfilePage = () => {
 
 
     return (
-        <div>opa</div>
+        <div>PROFILE PAGE - PERFIL</div>
     )
 }
 

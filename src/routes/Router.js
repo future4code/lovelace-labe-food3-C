@@ -10,11 +10,13 @@ import RestaurantPage from "../pages/RestaurantPage.js/RestaurantPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import UserInfoPage from "../pages/UserInfoPage/UserInfoPage";
 import InitialPage from "../pages/InitialPage/InitialPage";
+import Header from "../components/Header/Header";
 
 
 const Router = () => {
     return (
         <BrowserRouter>
+            <Header/>
             <Switch>
                 <Route exact path="/login">
                     <LoginPage/>

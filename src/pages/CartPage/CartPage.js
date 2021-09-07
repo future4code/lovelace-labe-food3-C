@@ -9,7 +9,7 @@ const CartPage = () => {
 
 
     return (
-        <div>opa</div>
+        <div>CART PAGE - Carrinho</div>
     )
 }
 
