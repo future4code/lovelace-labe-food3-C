@@ -19,7 +19,10 @@ const RestaurantPage = () => {
   useProtectedPage();
   const history = useHistory();
   const params = useParams();
-  const [data, setData] = useRequestData(`restaurants/${params.id}`, {});
+  const [data, setData] = useRequestData(
+    `/fourFoodA/restaurants/${params.id}`,
+    {}
+  );
 
   const arrayFoods =
     data &&

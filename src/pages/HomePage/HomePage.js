@@ -13,9 +13,7 @@ const HomePage = () => {
   useProtectedPage();
   const history = useHistory();
 
-  const [data, setData] = useRequestData(`restaurants`, {});
-
-  console.log(data && data);
+  const [data, setData] = useRequestData(`/fourFoodA/restaurants`, {});
 
   const restaurants = {
     tipo1: [
