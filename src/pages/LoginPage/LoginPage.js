@@ -15,7 +15,7 @@ const LoginPage = () => {
         <ScreenContainer>
             <LogoImage src={logo} alt="logo-I-future-foods" />
             <StyledText>
-                Entrar
+                Login
             </StyledText>
             <LoginForm />
             <SignUpButtonContainer>
