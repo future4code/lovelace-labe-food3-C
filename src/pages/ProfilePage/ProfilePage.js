@@ -33,7 +33,6 @@ const listaHistorico = historico.map((order) => {
 })
     return (
         <MainCont2>
-            <ProfileHeader page='/profile' />
             
             <EditEmailContainer style={{borderTop:'#dfdfdf 1px solid'}}>
                 <Box>

@@ -16,13 +16,7 @@ const UserInfoPage = () => {
         <MainContainer>
              
             <EditContainer >
-             {/* style={{display:'flex',  */}
-                        {/* flexDirection:'column',  */}
-                        {/* alignItems:'center',  */}
-                        {/* gap:'10px', */}
-                        {/* width:'100%'}}> */}
-            
-                        <ProfileHeader page='/profile/edit/user' />
+
             <TextEditStyle
                 required
                 id="outlined-required"

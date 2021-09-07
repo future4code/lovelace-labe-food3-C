@@ -18,10 +18,14 @@ export const goToProfile = (history) => {
     history.push("/profile")
 }
 
-export const goToAdress = (history) => {
-    history.push("/profile/edit/adress")
+export const goToAddress = (history) => {
+    history.push("/profile/edit/address")
 }
 
 export const goToUserInfo = (history) => {
     history.push("/profile/edit/user")
+}
+
+export const goToCart = (history) => {
+    history.push("/cart")
 }

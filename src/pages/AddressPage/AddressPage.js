@@ -7,7 +7,7 @@ import ProfileHeader from "../ProfilePage/ProfileHeader"
 import Button from '@material-ui/core/Button'
 
 
-const AdressPage = () => {
+const AddressPage = () => {
     useProtectedPage()
     const history = useHistory()
 
@@ -15,13 +15,13 @@ const AdressPage = () => {
     return (
          <MainContainer>
              <ProfileHeader page='/profile/edit/adress' />
-            <Box style={{display:'flex', 
-                        flexDirection:'column', 
-                        alignItems:'center', 
+            <Box style={{display:'flex',
+                        flexDirection:'column',
+                        alignItems:'center',
                         gap:'10px',
                         width:'100%'}}>
-            
-            
+
+
             <TextEditStyle
                 required
                 id="outlined-required"
@@ -75,10 +75,10 @@ const AdressPage = () => {
                 Salvar
                 </Button>
             </SaveButtonContainer>
-            
+
             </Box>
             </MainContainer>
     )
 }
 
-export default AdressPage
+export default AddressPage

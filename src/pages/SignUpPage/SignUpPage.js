@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from "../../assets/logo-ifuture.svg"
+import logo from "../../assets/images/logo-ifuture.svg"
 import { ScreenContainer } from './styled'
 import SignUpForm from './SignUpForm'
 import { LogoImage } from './styled'
