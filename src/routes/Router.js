@@ -10,6 +10,7 @@ import RestaurantPage from "../pages/RestaurantPage.js/RestaurantPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import UserInfoPage from "../pages/UserInfoPage/UserInfoPage";
 import InitialPage from "../pages/InitialPage/InitialPage";
+import Header from "../components/Header/Header";
 
 
 const Router = () => {
@@ -21,6 +22,7 @@ const Router = () => {
                 </Route>
 
                 <Route exact path="/signup">
+                    <Header/>
                     <SignUpPage/>
                 </Route>
 
@@ -29,30 +31,37 @@ const Router = () => {
                 </Route>
 
                 <Route exact path="/home">
+                    <Header/>
                     <HomePage />
                 </Route>
 
                 <Route exact path="/restaurant/:id">
+                    <Header/>
                     <RestaurantPage />
                 </Route>
 
                 <Route exact path="/cart">
+                    <Header/>
                     <CartPage />
                 </Route>
 
                 <Route exact path="/profile">
+                    <Header/>
                     <ProfilePage />
                 </Route>
 
-                <Route exact path="/profile/adress">
+                <Route exact path="/profile/address">
+                    <Header/>
                     <AddressPage />
                 </Route>
 
                 <Route exact path="/profile/info">
+                    <Header/>
                     <UserInfoPage />
                 </Route>
 
                 <Route>
+                    <Header/>
                     <ErrorPage/>
                 </Route>
 

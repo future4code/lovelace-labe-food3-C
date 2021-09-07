@@ -15,7 +15,7 @@ const LoginPage = () => {
         <ScreenContainer>
             <LogoImage src={logo} alt="logo-I-future-foods" />
             <StyledText>
-                Entrar
+                Login
             </StyledText>
             <LoginForm />
             <SignUpButtonContainer>
@@ -24,7 +24,7 @@ const LoginPage = () => {
                     type={"submit"}
                     fullWidth
                     variant={"text"}
-                    color={"neutral"}
+                    color={"default"}
                 >
                     Não possui cadastro? Clique aqui.
                 </Button>
