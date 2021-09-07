@@ -4,6 +4,7 @@ import {CssBaseline} from "@material-ui/core";
 import GlobalStateContext from "./global/GlobalStateContext";
 import { ThemeProvider } from '@material-ui/core/styles'
 import theme from "./constants/theme";
+import Header from "./components/Header/Header";
 
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStateContext>
           <CssBaseline/>
-          <Router/>
+            <Router/>
         </GlobalStateContext>
       </ThemeProvider>
   );

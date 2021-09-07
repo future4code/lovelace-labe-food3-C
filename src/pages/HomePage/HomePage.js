@@ -51,7 +51,9 @@ const HomePage = () => {
         );
     }
 
-    getRestaurants((data)=> setRestaurants(data))
+    if (Object.keys(restaurants).length === 0){
+        getRestaurants((data)=> setRestaurants(data))
+    }
 
 
 
