@@ -50,12 +50,12 @@ const Router = () => {
                     <ProfilePage />
                 </Route>
 
-                <Route exact path="/profile/address">
+                <Route exact path="/profile/edit/address">
                     <Header/>
                     <AddressPage />
                 </Route>
 
-                <Route exact path="/profile/info">
+                <Route exact path="/profile/edit/user">
                     <Header/>
                     <UserInfoPage />
                 </Route>
