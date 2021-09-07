@@ -1,6 +1,6 @@
 import React from "react"
 import {Switch, Route, BrowserRouter} from "react-router-dom"
-import AdressPage from "../pages/AdressPage/AdressPage";
+import AddressPage from "../pages/AddressPage/AddressPage";
 import CartPage from "../pages/CartPage/CartPage";
 import ErrorPage from '../pages/ErrorPage/ErrorPage'
 import HomePage from "../pages/HomePage/HomePage";
@@ -44,8 +44,8 @@ const Router = () => {
                     <ProfilePage />
                 </Route>
 
-                <Route exact path="/profile/adress">
-                    <AdressPage />
+                <Route exact path="/profile/address">
+                    <AddressPage />
                 </Route>
 
                 <Route exact path="/profile/info">
