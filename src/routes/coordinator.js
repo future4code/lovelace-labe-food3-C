@@ -19,9 +19,9 @@ export const goToProfile = (history) => {
 }
 
 export const goToAdress = (history) => {
-    history.push("/profile/adress")
+    history.push("/profile/edit/adress")
 }
 
 export const goToUserInfo = (history) => {
-    history.push("/profile/info")
+    history.push("/profile/edit/user")
 }

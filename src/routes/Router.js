@@ -44,11 +44,11 @@ const Router = () => {
                     <ProfilePage />
                 </Route>
 
-                <Route exact path="/profile/adress">
+                <Route exact path="/profile/edit/adress">
                     <AdressPage />
                 </Route>
 
-                <Route exact path="/profile/info">
+                <Route exact path="/profile/edit/user">
                     <UserInfoPage />
                 </Route>
 
