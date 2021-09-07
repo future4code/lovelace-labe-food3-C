@@ -48,4 +48,5 @@ export const LogoImage = styled.img`
 export const StyledText = styled(Typography)`
   font-size: 1.15em;
   font-weight: 500;
+  margin-bottom: 5px;
 ` 

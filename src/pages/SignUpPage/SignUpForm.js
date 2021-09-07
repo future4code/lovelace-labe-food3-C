@@ -5,16 +5,19 @@ import { InputsContainer, SignUpFormContainer } from './styled'
 import { useHistory } from 'react-router-dom'
 import useForm from '../../hooks/useForm'
 import CircularProgress from '@material-ui/core/CircularProgress'
-// import { signUp } from '../../services/user'
+import { signUp } from '../../services/user'
 
 const SignUpForm = () => {
   const history = useHistory()
-  const [form, onChange, clear] = useForm({ username: '', email: '', password: '' })
+  const [form, onChange, clear] = useForm({ name: '', email: '', cpf: '', password: '' })
   const [isLoading, setIsLoading] = useState(false)
 
   const onSubmitForm = (event) => {
     event.preventDefault()
-    // signUp(form, clear, history, setIsLoading)
+
+    // Abaixo lógica para CONFIRMAÇÃO DE SENHA ...
+    form.passwordConfirmation === form.password ? signUp(form, clear, history, setIsLoading) : 
+    alert("A confirmação de senha deve ser igual à senha")
   }
 
   return (
@@ -22,15 +25,16 @@ const SignUpForm = () => {
       <SignUpFormContainer>
         <InputsContainer>
           <TextField
-            value={form.username}
-            name={'username'}
+            value={form.name}
+            name={'name'}
             onChange={onChange}
             label={'Nome'}
             variant={'outlined'}
             fullWidth
             required
             autoFocus
-            margin={'normal'}
+            margin={'dense'}
+            helperText="Nome e Sobrenome"
           />
           <TextField
             value={form.email}
@@ -41,7 +45,8 @@ const SignUpForm = () => {
             type={'email'}
             fullWidth
             required
-            margin={'normal'}
+            margin={'dense'}
+            helperText="Digite seu melhor e-mail"
           />
           <TextField
             value={form.cpf}
@@ -52,8 +57,9 @@ const SignUpForm = () => {
             type={'cpf'}
             fullWidth
             required
-            margin={'normal'}
+            margin={'dense'}
             inputProps={{ pattern: "[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}" }}
+            helperText="Formato 000.111.222-33"
           />
           <TextField
             value={form.password}
@@ -64,18 +70,20 @@ const SignUpForm = () => {
             type={'password'}
             fullWidth
             required
-            margin={'normal'}
+            margin={'dense'}
+            helperText="Deve ter no mínimo 6 dígitos"
           />
           <TextField
             value={form.passwordConfirmation}
             name={'passwordConfirmation'}
-            onChange={onChange}
+            // onChange={onChange}
             label={'Confirmar a senha'}
             variant={'outlined'}
             type={'password'}
             fullWidth
             required
-            margin={'normal'}
+            margin={'dense'}
+            helperText="A confirmação deve ser igual à senha"
           />
         </InputsContainer>
         <Button
