@@ -44,7 +44,7 @@ const Router = () => {
                     <ProfilePage />
                 </Route>
 
-                <Route exact path="/profile/adress">
+                <Route exact path="/profile/address">
                     <AdressPage />
                 </Route>
 

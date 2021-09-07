@@ -4,7 +4,7 @@ import { InputsContainer } from "./styled"
 import TextField from "@material-ui/core/TextField"
 import useForm from "../../hooks/useForm"
 import Button from '@material-ui/core/Button'
-// import { login } from "../../services/user"
+import { login } from "../../services/user"
 import { useHistory } from "react-router-dom"
 import CircularProgress from '@material-ui/core/CircularProgress'
 
@@ -15,10 +15,10 @@ const LoginForm = () => {
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        if (form.password.length < 8) {
-            alert("Digite uma senha maior que 8 caracteres")
+        if (form.password.length < 6) {
+            alert("Digite uma senha maior que 6 caracteres")
         } else {
-            // login(form, clear, history, setIsLoading)
+            login(form, clear, history, setIsLoading)
         }
     }
 

@@ -5,16 +5,19 @@ import { InputsContainer, SignUpFormContainer } from './styled'
 import { useHistory } from 'react-router-dom'
 import useForm from '../../hooks/useForm'
 import CircularProgress from '@material-ui/core/CircularProgress'
-// import { signUp } from '../../services/user'
+import { signUp } from '../../services/user'
 
 const SignUpForm = () => {
   const history = useHistory()
-  const [form, onChange, clear] = useForm({ username: '', email: '', password: '' })
+  const [form, onChange, clear] = useForm({ name: '', email: '', cpf: '', password: '' })
   const [isLoading, setIsLoading] = useState(false)
 
   const onSubmitForm = (event) => {
     event.preventDefault()
-    // signUp(form, clear, history, setIsLoading)
+
+    // Abaixo lógica para CONFIRMAÇÃO DE SENHA ...
+    form.passwordConfirmation === form.password ? signUp(form, clear, history, setIsLoading) : 
+    alert("A confirmação da senha deve ser igual à senha")
   }
 
   return (
@@ -22,8 +25,8 @@ const SignUpForm = () => {
       <SignUpFormContainer>
         <InputsContainer>
           <TextField
-            value={form.username}
-            name={'username'}
+            value={form.name}
+            name={'name'}
             onChange={onChange}
             label={'Nome'}
             variant={'outlined'}
