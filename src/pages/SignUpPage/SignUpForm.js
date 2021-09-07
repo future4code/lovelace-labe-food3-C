@@ -33,7 +33,8 @@ const SignUpForm = () => {
             fullWidth
             required
             autoFocus
-            margin={'normal'}
+            margin={'dense'}
+            helperText="Nome e Sobrenome"
           />
           <TextField
             value={form.email}
@@ -44,7 +45,8 @@ const SignUpForm = () => {
             type={'email'}
             fullWidth
             required
-            margin={'normal'}
+            margin={'dense'}
+            helperText="Digite seu melhor e-mail"
           />
           <TextField
             value={form.cpf}
@@ -55,8 +57,9 @@ const SignUpForm = () => {
             type={'cpf'}
             fullWidth
             required
-            margin={'normal'}
+            margin={'dense'}
             inputProps={{ pattern: "[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}" }}
+            helperText="Formato 000.111.222-33"
           />
           <TextField
             value={form.password}
@@ -67,18 +70,20 @@ const SignUpForm = () => {
             type={'password'}
             fullWidth
             required
-            margin={'normal'}
+            margin={'dense'}
+            helperText="Deve ter no mínimo 6 dígitos"
           />
           <TextField
             value={form.passwordConfirmation}
             name={'passwordConfirmation'}
-            onChange={onChange}
+            // onChange={onChange}
             label={'Confirmar a senha'}
             variant={'outlined'}
             type={'password'}
             fullWidth
             required
-            margin={'normal'}
+            margin={'dense'}
+            helperText="A confirmação deve ser igual à senha"
           />
         </InputsContainer>
         <Button

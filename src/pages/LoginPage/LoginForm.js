@@ -30,7 +30,7 @@ const LoginForm = () => {
                         label={"E-mail"}
                         variant={"outlined"}
                         fullWidth
-                        margin={"normal"}
+                        margin={"dense"}
                         required
                         type={"email"}
                     />
@@ -41,7 +41,7 @@ const LoginForm = () => {
                         label={"Senha"}
                         variant={"outlined"}
                         fullWidth
-                        margin={"normal"}
+                        margin={"dense"}
                         required
                         type={"password"}
                     />
