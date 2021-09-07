@@ -16,13 +16,13 @@ import Header from "../components/Header/Header";
 const Router = () => {
     return (
         <BrowserRouter>
-            <Header/>
             <Switch>
                 <Route exact path="/login">
                     <LoginPage/>
                 </Route>
 
                 <Route exact path="/signup">
+                    <Header/>
                     <SignUpPage/>
                 </Route>
 
@@ -31,30 +31,37 @@ const Router = () => {
                 </Route>
 
                 <Route exact path="/home">
+                    <Header/>
                     <HomePage />
                 </Route>
 
                 <Route exact path="/restaurant/:id">
+                    <Header/>
                     <RestaurantPage />
                 </Route>
 
                 <Route exact path="/cart">
+                    <Header/>
                     <CartPage />
                 </Route>
 
                 <Route exact path="/profile">
+                    <Header/>
                     <ProfilePage />
                 </Route>
 
                 <Route exact path="/profile/address">
+                    <Header/>
                     <AddressPage />
                 </Route>
 
                 <Route exact path="/profile/info">
+                    <Header/>
                     <UserInfoPage />
                 </Route>
 
                 <Route>
+                    <Header/>
                     <ErrorPage/>
                 </Route>
 

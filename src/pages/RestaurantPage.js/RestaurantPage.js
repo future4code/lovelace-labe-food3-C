@@ -43,7 +43,6 @@ const RestaurantPage = () => {
   return (
     <GeralContainer>
       <MainContainer>
-        <HeaderContainer>Header</HeaderContainer>
         {data.restaurant && (
           <CardRestaurant>
             <RestaurantPicture src={data.restaurant.logoUrl} />
