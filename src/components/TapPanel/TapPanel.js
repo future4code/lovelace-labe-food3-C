@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import React from "react";
 
+import CardFeed from "../CardFeed/CardFeed";
 import { StyledTapPanel, StyledTabs } from "./styled"
 
 function TabPanel(props) {
@@ -67,12 +68,19 @@ export default function TapPanel({restaurants}) {
         </StyledTabs>
       </AppBar>
       {typeRestaurants.map((typeRestaurant, index) => (
-        <TabPanel value={value} index={index} key={index}>
+        <TabPanel value={value} index={index} key={typeRestaurant.id}>
           {restaurants && restaurants[ typeRestaurants[index] ].map(restaurant => (
-            // CARD
-            <div key={restaurant.name}>
-              <p>{restaurant.name} - {typeRestaurant}</p>
-            </div>
+            <CardFeed 
+              key={restaurant.id}
+              id={restaurant.id}
+              description={restaurant.description}
+              shipping={restaurant.shipping}
+              address={restaurant.address}
+              name={restaurant.name}
+              logoUrl={restaurant.logoUrl}
+              deliveryTime={restaurant.deliveryTime}
+              category={restaurant.category}
+            />
           ))}
         </TabPanel>
       ))}
