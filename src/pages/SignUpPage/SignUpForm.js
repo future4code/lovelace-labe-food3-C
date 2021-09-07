@@ -17,7 +17,7 @@ const SignUpForm = () => {
 
     // Abaixo lógica para CONFIRMAÇÃO DE SENHA ...
     form.passwordConfirmation === form.password ? signUp(form, clear, history, setIsLoading) : 
-    alert("A confirmação da senha deve ser igual à senha")
+    alert("A confirmação de senha deve ser igual à senha")
   }
 
   return (

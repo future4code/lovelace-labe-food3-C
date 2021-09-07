@@ -15,12 +15,10 @@ const LoginForm = () => {
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        if (form.password.length < 6) {
-            alert("Digite uma senha maior que 6 caracteres")
-        } else {
-            login(form, clear, history, setIsLoading)
+        form.password.length < 6 ? alert("Digite uma senha maior que 6 caracteres") 
+        : login(form, clear, history, setIsLoading)
         }
-    }
+    
 
     return (
             <InputsContainer>
