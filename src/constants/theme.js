@@ -5,15 +5,15 @@ const theme = createTheme({
   palette: {
     primary: {
       main: primaryColor,
-      contrastText: "black"
+      contrastText: "white"
     },
     secondary: {
-      main: secondaryColor,
+      main: neutralColor,
       contrastText: "white"
     },
     text: {
-        primary: neutralColor,
-        secondary: secondaryColor
+        primary: secondaryColor,
+        secondary: neutralColor
     },
     background: {
       default: background
