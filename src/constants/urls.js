@@ -1,8 +1,7 @@
-export const BASE_URL = ""
+export const BASE_URL = "https://us-central1-missao-newton.cloudfunctions.net/fourFoodA/"
 
-// export const HEADERS = {
-//     headers: {
-//         "Content-Type": "application/json",
-//         "Authorization": localStorage.getItem("token")
-//     }
-// }
+export const HEADERS = {
+    headers: {
+        Authorization: localStorage.getItem("token")
+    }
+}
