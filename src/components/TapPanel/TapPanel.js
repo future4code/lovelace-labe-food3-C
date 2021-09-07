@@ -49,7 +49,6 @@ export default function TapPanel({restaurants}) {
     setValue(newValue);
   };
 
-
   return (
     <StyledTapPanel>
       <AppBar position="static" color="default">

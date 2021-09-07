@@ -8,16 +8,13 @@ const useRequestData = (endpoint, initialState) => {
     useEffect(() => {
         const token = localStorage.getItem("token")
 
-        axios.get(`${BASE_URL}${endpoint}`, {
-                headers: {
-                    Auth: token
-                }
-            })
+        axios.get(`${BASE_URL}${endpoint}`, HEADERS)
             .then((response) => {
                 setData(response.data)
+                // console.log(response.data)
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error.response)
                 alert('Ocorreu um erro, tente novamente')
             })
 

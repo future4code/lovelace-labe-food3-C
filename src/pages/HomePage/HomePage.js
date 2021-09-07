@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 import useRequestData from "../../hooks/useRequestData";
@@ -13,24 +13,26 @@ import Footer from "../../components/Footer/Footer";
 import CardFeed from "../../components/CardFeed/CardFeed";
 
 //HELPERS
-import categorizeRestaurants from "../../tools/categorizeRestaurants"
+import {getRestaurants} from "../../services/getRestaurants";
 
 
 const HomePage = () => {
     useProtectedPage();
     const history = useHistory();
-    const [data, setData] = useRequestData(`/fourFoodA/restaurants`, {});
+    // const [data] = useRequestData(`/fourFoodA/restaurants`, {});
     const [searchMode, setSearchMode] = useState(false)
-    const [restaurants, setRestaurants] = useState(categorizeRestaurants( data ))
+    const [restaurants, setRestaurants] = useState({})
     const [selectedRestaurants, setSelectedRestaurants] = useState([])
 
-    if(searchMode){
-        // console.log(selectedRestaurants)
+    // console.log(data.restaurants)
+
+    if (searchMode) {
 
         return (
             <StyledHomePage>
-                <SearchField setSearchMode={setSearchMode} restaurants={restaurants} setSelectedRestaurants={setSelectedRestaurants} />
-                {Object.keys(selectedRestaurants).length>0?
+                <SearchField setSearchMode={setSearchMode} restaurants={restaurants}
+                             setSelectedRestaurants={setSelectedRestaurants}/>
+                {Object.keys(selectedRestaurants).length > 0 ?
                     <div>{selectedRestaurants.map(restaurant => (
                         <CardFeed
                             key={restaurant.id}
@@ -44,10 +46,12 @@ const HomePage = () => {
                             category={restaurant.category}
                         />
                     ))}</div>
-                    :<p>Busque por nome de restaurante</p>}
+                    : <p>Busque por nome de restaurante</p>}
             </StyledHomePage>
         );
     }
+
+    getRestaurants((data)=> setRestaurants(data))
 
 
 
@@ -55,7 +59,6 @@ const HomePage = () => {
         <StyledHomePage>
             <SearchField setSearchMode={setSearchMode}/>
             <TapPanel restaurants={restaurants}/>
-            <CardFeed/>
             <Footer/>
         </StyledHomePage>
     )
