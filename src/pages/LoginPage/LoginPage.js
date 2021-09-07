@@ -1,6 +1,6 @@
 import React from 'react';
 import { LogoImage, ScreenContainer, SignUpButtonContainer, StyledText } from "./styled"
-import logo from "../../assets/logo-ifuture.svg"
+import logo from "../../assets/images/logo-ifuture.svg"
 import Button from '@material-ui/core/Button'
 import LoginForm from "./LoginForm"
 import { goToSignUp } from "../../routes/coordinator"
