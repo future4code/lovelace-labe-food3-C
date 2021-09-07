@@ -9,7 +9,7 @@ const UserInfoPage = () => {
 
 
     return (
-        <div>opa</div>
+        <div>USER INFO PAGE</div>
     )
 }
 
