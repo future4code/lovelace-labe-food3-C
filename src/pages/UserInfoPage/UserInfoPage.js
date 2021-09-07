@@ -3,9 +3,8 @@ import useProtectedPage from "../../hooks/useUnprotectedPage";
 
 import {useHistory} from "react-router-dom";
 import { MainContainer } from "../ProfilePage/styled";
-import ProfileHeader from "../ProfilePage/ProfileHeader";
 import { Box, Button } from "@material-ui/core";
-import { EditContainer, SaveButtonContainer, TextEditStyle } from "../AdressPage/styled";
+import { EditContainer, SaveButtonContainer, TextEditStyle } from "../AddressPage/styled";
 
 const UserInfoPage = () => {
     useProtectedPage()

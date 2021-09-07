@@ -20,5 +20,5 @@ export const SaveButtonContainer = styled.div`
   max-width: 450px;
   `
 export const TextEditStyle = styled(TextField) `
-    width: 40%;
+    width: 50%;
 `

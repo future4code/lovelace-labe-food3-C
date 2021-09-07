@@ -3,7 +3,6 @@ import useProtectedPage from "../../hooks/useUnprotectedPage";
 import {useHistory} from "react-router-dom";
 import { Box } from "@material-ui/core";
 import { SaveButtonContainer, TextEditStyle, MainContainer } from "./styled";
-import ProfileHeader from "../ProfilePage/ProfileHeader"
 import Button from '@material-ui/core/Button'
 
 
@@ -14,7 +13,7 @@ const AddressPage = () => {
 
     return (
          <MainContainer>
-             <ProfileHeader page='/profile/edit/adress' />
+
             <Box style={{display:'flex',
                         flexDirection:'column',
                         alignItems:'center',

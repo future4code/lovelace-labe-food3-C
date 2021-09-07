@@ -3,7 +3,6 @@ import useProtectedPage from "../../hooks/useUnprotectedPage";
 import {useHistory} from "react-router-dom";
 import { Box, List, ListItem, ListItemText, Typography } from "@material-ui/core";
 import { EditEmailContainer, EditEnderecoContainer, MainCont2 } from "./styled";
-import ProfileHeader from "./ProfileHeader";
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 
 const ProfilePage = () => {
