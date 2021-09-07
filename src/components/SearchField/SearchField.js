@@ -6,7 +6,22 @@ import SearchIcon from "@material-ui/icons/Search";
 
 import { StyledForm } from "./styled";
 
-export default function SearchField() {
+export default function SearchField({setSearchMode, setSelectedRestaurants, restaurants}) {
+  
+  const handleChange = e => {
+    let selectedRestaurants = []
+
+    Object.values(restaurants).forEach(category => {
+      category.forEach(restaurant => {
+
+          if(restaurant.name.toUpperCase().includes(e.target.value.toUpperCase()))
+            selectedRestaurants.push(restaurant)
+      })
+    })
+
+    setSelectedRestaurants(selectedRestaurants)
+  }
+
   return (
     <StyledForm variant="outlined">
       <OutlinedInput
@@ -21,6 +36,9 @@ export default function SearchField() {
         aria-describedby="outlined-weight-helper-text"
         labelWidth={0}
         placeholder="Restaurante"
+        onBlur={e => setSearchMode(false)}
+        onFocus={e => setSearchMode(true)}
+        onChange={handleChange}
       />
     </StyledForm>
   );
