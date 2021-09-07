@@ -5,6 +5,7 @@ import SearchField from "../../components/SearchField/SearchField";
 import TapPanel from "../../components/TapPanel/TapPanel";
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 import categorizeRestaurants from "../../tools/categorizeRestaurants"
+import Footer from "../../components/Footer/Footer";
 
 const HomePage = () => {
     useProtectedPage()
@@ -68,7 +69,7 @@ const HomePage = () => {
       <StyledHomePage>
         <SearchField />
         <TapPanel restaurants={categorizeRestaurants(restaurants)}/>
-        <p>Footer</p>
+        <Footer />
       </StyledHomePage>
     )
 }
