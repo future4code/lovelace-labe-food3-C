@@ -69,7 +69,7 @@ const HomePage = () => {
       <StyledHomePage>
         <SearchField />
         <TapPanel restaurants={categorizeRestaurants(restaurants)}/>
-        <Footer />
+        <Footer/>
       </StyledHomePage>
     )
 }
