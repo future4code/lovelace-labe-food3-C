@@ -1,18 +1,16 @@
+import { StyledHomePage } from "./styled";
 import React from "react"
+import {useHistory} from "react-router-dom";
 import SearchField from "../../components/SearchField/SearchField";
 import TapPanel from "../../components/TapPanel/TapPanel";
-import { StyledHomePage } from "./styled";
-
 import useProtectedPage from "../../hooks/useUnprotectedPage";
-
-import {useHistory} from "react-router-dom";
+import categorizeRestaurants from "../../tools/categorizeRestaurants"
 
 const HomePage = () => {
     useProtectedPage()
     const history = useHistory()
 
-    const restaurants = {
-      "Árabe": [
+    const restaurants = [
         {
           "id": "1",
           "description": "Habib's é uma rede de restaurantes",
@@ -33,46 +31,43 @@ const HomePage = () => {
           "deliveryTime": 60,
           "category": "Árabe"
         },
-      ],
-      "Burger": [
-          {
-            "id": "3",
-            "description": "Habib's é uma rede de restaurantes",
-            "shipping": 6,
-            "address": "Rua das Margaridas, 110 - Jardim das Flores",
-            "name": "Habibs",
-            "logoUrl": "http://soter.ninja/futureFoods/logos/habibs.jpg",
-            "deliveryTime": 60,
-            "category": "Burger"
-          },
-          {
-            "id": "4",
-            "description": "Habib's é uma rede de restaurantes",
-            "shipping": 6,
-            "address": "Rua das Margaridas, 110 - Jardim das Flores",
-            "name": "Habibs",
-            "logoUrl": "http://soter.ninja/futureFoods/logos/habibs.jpg",
-            "deliveryTime": 60,
-            "category": "Buerger"
-          },
-          {
-            "id": "5",
-            "description": "Habib's é uma rede de restaurantes",
-            "shipping": 6,
-            "address": "Rua das Margaridas, 110 - Jardim das Flores",
-            "name": "Habibs",
-            "logoUrl": "http://soter.ninja/futureFoods/logos/habibs.jpg",
-            "deliveryTime": 60,
-            "category": "Buerger"
-          },
+        {
+          "id": "3",
+          "description": "Habib's é uma rede de restaurantes",
+          "shipping": 6,
+          "address": "Rua das Margaridas, 110 - Jardim das Flores",
+          "name": "Habibs",
+          "logoUrl": "http://soter.ninja/futureFoods/logos/habibs.jpg",
+          "deliveryTime": 60,
+          "category": "Burger"
+        },
+        {
+          "id": "4",
+          "description": "Habib's é uma rede de restaurantes",
+          "shipping": 6,
+          "address": "Rua das Margaridas, 110 - Jardim das Flores",
+          "name": "Habibs",
+          "logoUrl": "http://soter.ninja/futureFoods/logos/habibs.jpg",
+          "deliveryTime": 60,
+          "category": "Burger"
+        },
+        {
+          "id": "5",
+          "description": "Habib's é uma rede de restaurantes",
+          "shipping": 6,
+          "address": "Rua das Margaridas, 110 - Jardim das Flores",
+          "name": "Habibs",
+          "logoUrl": "http://soter.ninja/futureFoods/logos/habibs.jpg",
+          "deliveryTime": 60,
+          "category": "Burger"
+        },
       ]
-    }
 
 
     return (
       <StyledHomePage>
         <SearchField />
-        <TapPanel restaurants={restaurants}/>
+        <TapPanel restaurants={categorizeRestaurants(restaurants)}/>
         <p>Footer</p>
       </StyledHomePage>
     )
