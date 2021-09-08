@@ -5,11 +5,18 @@ import GlobalContext from "./GlobalContext";
 
 const GlobalStateContext = (props) => {
 
+    const [maximumDeliveryTime, setMaximumDeliveryTime] = useState(0)
 
+    useEffect(() => {
+        if(maximumDeliveryTime>0){
+            setTimeout(() => {
+                setMaximumDeliveryTime(0)
+            }, 5000) //<< trocar 5000 por maximumDeliveryTime
+        }
+    }, [maximumDeliveryTime])
 
-
-    const states = {}
-    const setters = {}
+    const states = { maximumDeliveryTime }
+    const setters = { setMaximumDeliveryTime }
     const requests = {}
 
     return (
