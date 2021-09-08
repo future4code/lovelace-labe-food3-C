@@ -4,7 +4,7 @@ import useProtectedPage from "../../hooks/useUnprotectedPage";
 import {useHistory} from "react-router-dom";
 import { MainContainer } from "../ProfilePage/styled";
 import { Box, Button } from "@material-ui/core";
-import { EditContainer, SaveButtonContainer, TextEditStyle } from "../AddressPage/styled";
+import { EditContainer, SaveButtonContainer, TextEditStyle } from "./styled";
 
 const UserInfoPage = () => {
     useProtectedPage()

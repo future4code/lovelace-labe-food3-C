@@ -9,7 +9,7 @@ const Header = () => {
     const params = useParams()
 
     let headerText = ""
-    
+
     switch (history.location.pathname) {
         case '/home':
             headerText = "iFuture"
@@ -17,7 +17,7 @@ const Header = () => {
 
         case '/signup':
             headerText = ""
-            break 
+            break
 
         case `/restaurant/${params.id}`:
             headerText = "Restaurante"
@@ -29,7 +29,7 @@ const Header = () => {
 
         case '/profile/edit/address':
             headerText = "Meu Endereço"
-            break    
+            break
 
         case '/profile/edit/user':
             headerText = "Editar"
@@ -37,20 +37,20 @@ const Header = () => {
 
         case '/cart':
             headerText = "Meu carrinho"
-            break    
+            break
 
         default:
             headerText = "iFuture"
             break
-        
+
     }
 
     return (
         <>
             <StyledMargin />
             <StyledHeader>
-                
-                <button onClick={() => null}>
+                {/* Onclick tem que ser um GoBack */}
+                <button onClick={() => history.goBack()}>
                     <img src={imgBackArrow} alt='botão para voltar'/>
                 </button>
                 <p>{headerText}</p>
