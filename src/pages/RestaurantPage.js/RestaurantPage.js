@@ -14,6 +14,7 @@ import CardBurger from "../../components/CardBurger/CardBurger";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import useRequestData from "../../hooks/useRequestData";
+import Loading from "../../components/Loading/Loading";
 
 const RestaurantPage = () => {
   useProtectedPage();
@@ -42,24 +43,28 @@ const RestaurantPage = () => {
 
   return (
     <GeralContainer>
-      <MainContainer>
-        {data.restaurant && (
-          <CardRestaurant>
-            <RestaurantPicture src={data.restaurant.logoUrl} />
-            <h5>{data.restaurant.name}</h5>
-            <p>{data.restaurant.category}</p>
-            <p>
-              <span>{data.restaurant.deliveryTime} min</span>
-              <DeliverTaxSpan>R${data.restaurant.shipping}</DeliverTaxSpan>
-            </p>
-            <p>{data.restaurant.address}</p>
-          </CardRestaurant>
-        )}
-        <CardMenu>
-          <h3>Principais</h3>
-          {arrayFoods}
-        </CardMenu>
-      </MainContainer>
+      {arrayFoods ? (
+        <MainContainer>
+          {data.restaurant && (
+            <CardRestaurant>
+              <RestaurantPicture src={data.restaurant.logoUrl} />
+              <h5>{data.restaurant.name}</h5>
+              <p>{data.restaurant.category}</p>
+              <p>
+                <span>{data.restaurant.deliveryTime} min</span>
+                <DeliverTaxSpan>R${data.restaurant.shipping}</DeliverTaxSpan>
+              </p>
+              <p>{data.restaurant.address}</p>
+            </CardRestaurant>
+          )}
+          <CardMenu>
+            <h3>Principais</h3>
+            {arrayFoods}
+          </CardMenu>
+        </MainContainer>
+      ) : (
+        <Loading />
+      )}
     </GeralContainer>
   );
 };
