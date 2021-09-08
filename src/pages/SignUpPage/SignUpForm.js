@@ -76,7 +76,7 @@ const SignUpForm = () => {
           <TextField
             value={form.passwordConfirmation}
             name={'passwordConfirmation'}
-            // onChange={onChange}
+            onChange={onChange}
             label={'Confirmar a senha'}
             variant={'outlined'}
             type={'password'}

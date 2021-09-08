@@ -6,7 +6,7 @@ export const ScreenContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  margin-top: 4vh;
+  margin-top: 1.5vh;
 `
 
 export const InputsContainer = styled.div`
@@ -34,11 +34,12 @@ export const SignUpFormContainer = styled.div`
 export const LogoImage = styled.img`
   width: 6.5rem;
   height: 3.625rem;
-  margin: 1rem 8rem 2rem;
+  margin: 0 0 2rem;
   object-fit: contain;
   `
 
 export const StyledText = styled(Typography)`
   font-size: 1.15em;
   font-weight: 500;
+  margin-bottom: 5px;
 ` 
