@@ -39,3 +39,30 @@ export const signUp = (body, clear, history, setIsLoading) => {
     })
 }
 
+export const saveAddress = (body, clear, history, setIsLoading) => {
+    const token = localStorage.getItem("token")
+    const headers = {
+        headers: {
+            auth: token
+        }
+    }
+
+    setIsLoading(true)
+    axios.put(`${BASE_URL}/fourFoodA/address`, body, headers)
+    .then((res) => {
+        localStorage.removeItem("token")
+        localStorage.setItem("token", res.data.token)
+        console.log("DATA TOTAL", res.data)
+        console.log("TOKEN NOVO", res.data.token)
+        clear()
+        setIsLoading(false)
+        alert("Endereço Cadastrado com sucesso")
+        goToHome(history)
+        
+    })
+    .catch((err) => {
+        setIsLoading(false)
+        console.log("ERRO ENDEREÇO", err.response)
+    })
+}
+
