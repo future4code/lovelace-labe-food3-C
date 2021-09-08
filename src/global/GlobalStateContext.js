@@ -11,7 +11,7 @@ const GlobalStateContext = (props) => {
         if(maximumDeliveryTime>0){
             setTimeout(() => {
                 setMaximumDeliveryTime(0)
-            }, 5000) //<< trocar 5000 por maximumDeliveryTime
+            }, maximumDeliveryTime*100) //<< trocar 100 por valor em 1000*60
         }
     }, [maximumDeliveryTime])
 
