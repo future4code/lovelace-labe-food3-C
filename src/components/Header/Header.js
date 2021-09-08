@@ -1,16 +1,17 @@
 import React from 'react'
 import { StyledHeader, StyledMargin } from "./styled"
 import imgBackArrow from "../../assets/images/back.svg"
+import { useHistory } from 'react-router'
 
 const Header = () => {
-
-
+    const history = useHistory()
+    console.log('location', history.location.pathname)
     return (
         <>
             <StyledMargin />
             <StyledHeader>
                 {/* Onclick tem que ser um GoBack */}
-                <button onClick={() => null}>
+                <button onClick={() => history.goBack()}>
                     <img src={imgBackArrow} alt='botão para voltar'/>
                 </button>
                 <p>iFuture</p>

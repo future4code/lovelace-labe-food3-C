@@ -2,8 +2,9 @@ import React from "react"
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 import {useHistory} from "react-router-dom";
 import { Box, List, ListItem, ListItemText, Typography } from "@material-ui/core";
-import { EditEmailContainer, EditEnderecoContainer, MainCont2 } from "./styled";
+import { EditEmailContainer, EditEnderecoContainer, MainContainer } from "./styled";
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
+import { goToAddress, goToUserInfo } from "../../routes/coordinator";
 
 const ProfilePage = () => {
     useProtectedPage()
@@ -26,27 +27,38 @@ const historico = [
 const listaHistorico = historico.map((order) => {
     return (
         <ListItem >
-            <ListItemText primary={order.descr} />
+            <ListItemText key={order.id} primary={order.descr} />
         </ListItem>
     )
 })
+
+const goEditUser = () => {
+    goToUserInfo(history)
+}
+const goEditAddress = () => {
+    goToAddress(history)
+}
     return (
-        <MainCont2>
+        <MainContainer>
             
-            <EditEmailContainer style={{borderTop:'#dfdfdf 1px solid'}}>
+            <EditEmailContainer >
                 <Box>
                     <Typography variant="subtitle2">Usuário</Typography>
                     <Typography variant="subtitle2">Email</Typography>
                     <Typography variant="subtitle2">CPF</Typography>
                 </Box>
-                <EditTwoToneIcon />
+                <EditTwoToneIcon 
+                 onClick={goEditUser}
+                />
             </EditEmailContainer>
             <EditEnderecoContainer>
                 <Box>
                     <Typography variant='subtitle1' style={{color:'#bcbcbc'}}>Endereço Cadastrado</Typography>
                     <Typography variant="subtitle1" color=''>Rua Alessandra Vieira, 22 - Santana </Typography>
                 </Box>
-                <EditTwoToneIcon />
+                <EditTwoToneIcon 
+                onClick={goEditAddress}
+                />
             </EditEnderecoContainer>
             <EditEmailContainer >
                 <Box style={{width:'100%'}}>
@@ -58,7 +70,7 @@ const listaHistorico = historico.map((order) => {
                 </Box>
                 
             </EditEmailContainer>
-            </MainCont2>
+        </MainContainer>
     )
 }
 
