@@ -6,7 +6,7 @@ import Box from "@material-ui/core/Box";
 import React from "react";
 
 import CardFeed from "../CardFeed/CardFeed";
-import { StyledTapPanel, StyledTabs } from "./styled"
+import { StyledTapPanel, StyledTabs } from "./styled";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -31,19 +31,19 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
 };
 
 function a11yProps(index) {
   return {
     id: `scrollable-auto-tab-${index}`,
-    "aria-controls": `scrollable-auto-tabpanel-${index}`
+    "aria-controls": `scrollable-auto-tabpanel-${index}`,
   };
 }
 
-export default function TapPanel({restaurants}) {
+export default function TapPanel({ restaurants }) {
   const [value, setValue] = React.useState(0);
-  const typeRestaurants = Object.keys(restaurants)
+  const typeRestaurants = Object.keys(restaurants);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -61,26 +61,32 @@ export default function TapPanel({restaurants}) {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-          {typeRestaurants && typeRestaurants.map((typeRestaurantName, index) => (
-            <Tab label={typeRestaurantName} {...a11yProps(index)} key={index}/>
-          ))}
+          {typeRestaurants &&
+            typeRestaurants.map((typeRestaurantName, index) => (
+              <Tab
+                label={typeRestaurantName}
+                {...a11yProps(index)}
+                key={index}
+              />
+            ))}
         </StyledTabs>
       </AppBar>
       {typeRestaurants.map((typeRestaurant, index) => (
         <TabPanel value={value} index={index} key={typeRestaurant.id}>
-          {restaurants && restaurants[ typeRestaurants[index] ].map(restaurant => (
-            <CardFeed 
-              key={restaurant.id}
-              id={restaurant.id}
-              description={restaurant.description}
-              shipping={restaurant.shipping}
-              address={restaurant.address}
-              name={restaurant.name}
-              logoUrl={restaurant.logoUrl}
-              deliveryTime={restaurant.deliveryTime}
-              category={restaurant.category}
-            />
-          ))}
+          {restaurants &&
+            restaurants[typeRestaurants[index]].map((restaurant) => (
+              <CardFeed
+                key={restaurant.id}
+                id={restaurant.id}
+                description={restaurant.description}
+                shipping={restaurant.shipping}
+                address={restaurant.address}
+                name={restaurant.name}
+                logoUrl={restaurant.logoUrl}
+                deliveryTime={restaurant.deliveryTime}
+                category={restaurant.category}
+              />
+            ))}
         </TabPanel>
       ))}
     </StyledTapPanel>
