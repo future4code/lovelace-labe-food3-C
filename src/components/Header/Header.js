@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 
 const Header = () => {
     const history = useHistory()
+
     const params = useParams()
 
     let headerText = ""
