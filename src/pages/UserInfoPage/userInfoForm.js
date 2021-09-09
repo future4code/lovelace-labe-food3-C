@@ -7,7 +7,6 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { UpdateProfile } from "../../services/user"
 import { InputsContainer, UserInfoContainer } from "./styled"
 
-
 const UserInfoForm = () => {
     useProtectedPage()
     const history = useHistory()
@@ -16,7 +15,7 @@ const UserInfoForm = () => {
     
     const onSubmitForm = (event) => {
         event.preventDefault()
-        UpdateProfile(form, clear, history, setIsLoading)
+        updateProfile(form, clear, history, setIsLoading)
     }
     return (
         <form onSubmit={onSubmitForm}>

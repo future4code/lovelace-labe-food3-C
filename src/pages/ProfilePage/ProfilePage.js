@@ -1,15 +1,19 @@
-import React from "react"
+import React, { useContext, useEffect } from "react"
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 import {useHistory} from "react-router-dom";
 import { Box, List, ListItem, ListItemText, Typography } from "@material-ui/core";
 import { EditEmailContainer, EditEnderecoContainer, MainContainer } from "./styled";
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
-import { goToAddress, goToUserInfo } from "../../routes/coordinator";
+import { goToAddress, goToUserInfo } from "../../routes/coordinator"
+import GlobalContext from "../../global/GlobalContext";
 
 const ProfilePage = () => {
     useProtectedPage()
     const history = useHistory()
-
+    const { states, setters, requests } = useContext(GlobalContext)
+    // useEffect(() => {
+    //     requests.getProfile()
+    // }, [])
 const historico = [
     {
     id: 1,
@@ -24,6 +28,7 @@ const historico = [
         descr: 'Pedido 3'
     }
 ]
+
 const listaHistorico = historico.map((order) => {
     return (
         <ListItem >
@@ -43,9 +48,9 @@ const goEditAddress = () => {
             
             <EditEmailContainer >
                 <Box>
-                    <Typography variant="subtitle2">Usuário</Typography>
-                    <Typography variant="subtitle2">Email</Typography>
-                    <Typography variant="subtitle2">CPF</Typography>
+                    <Typography variant="subtitle2">{states.userProfile.name}</Typography>
+                    <Typography variant="subtitle2">{states.userProfile.email}</Typography>
+                    <Typography variant="subtitle2">{states.userProfile.cpf}</Typography>
                 </Box>
                 <EditTwoToneIcon 
                  onClick={goEditUser}
@@ -75,3 +80,4 @@ const goEditAddress = () => {
 }
 
 export default ProfilePage
+

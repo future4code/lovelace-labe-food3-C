@@ -1,8 +1,8 @@
 import axios from "axios"
-import { BASE_URL, HEADERS } from "../constants/urls"
+import { BASE_URL } from "../constants/urls"
 import { goToAddress, goToHome, goToProfile } from "../routes/coordinator"
 
-export const login = (body, clear, history, setIsLoading) => {
+export const login = (body, clear, history, setIsLoading, setUserProfile) => {
     setIsLoading(true)
     axios.post(`${BASE_URL}/fourFoodA/login`, body)
 
@@ -11,7 +11,9 @@ export const login = (body, clear, history, setIsLoading) => {
         localStorage.setItem("token", res.data.token)
         clear()
         setIsLoading(false)
-        res.data.user.hasAddress === false ? goToAddress(history) 
+        console.log('data do login', res.data.user)
+        setUserProfile(res.data.user)
+        res.data.user.hasAddress === false ? goToAddress(history)
         : goToHome(history)
         
     })
@@ -40,7 +42,7 @@ export const signUp = (body, clear, history, setIsLoading) => {
 }
 
 
-export const UpdateProfile = (body, clear, history, setIsLoading) => {
+export const updateProfile = (body, clear, history, setIsLoading) => {
     setIsLoading(true)
     const token = localStorage.getItem("token")
     const headers = {
@@ -89,4 +91,3 @@ export const saveAddress = (body, clear, history, setIsLoading) => {
     })
 
 }
-
