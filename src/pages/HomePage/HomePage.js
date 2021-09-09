@@ -15,11 +15,11 @@ import CardFeed from "../../components/CardFeed/CardFeed";
 //HELPERS
 import { getRestaurants } from "../../services/getRestaurants";
 import Loading from "../../components/Loading/Loading";
+import CardWaitingDelivery from "../../components/CardWaitingDelivery/CardWaitingDelivery";
 
 const HomePage = () => {
   useProtectedPage();
   const history = useHistory();
-  // const [data] = useRequestData(`/fourFoodA/restaurants`, {});
   const [searchMode, setSearchMode] = useState(false);
   const [restaurants, setRestaurants] = useState({});
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
@@ -75,6 +75,7 @@ const HomePage = () => {
       <SearchField setSearchMode={setSearchMode} />
       <TapPanel restaurants={restaurants} />
       <Footer />
+      <CardWaitingDelivery />
     </StyledHomePage>
   );
 };
