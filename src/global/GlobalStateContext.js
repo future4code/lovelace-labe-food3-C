@@ -9,11 +9,11 @@ const GlobalStateContext = (props) => {
     const [waitingRestaurantName, setWaitingRestaurantName] = useState('Bulguer')
     const [subtotalToWait, setSubtotalToAlert] = useState(57.00)
 
-    const waitingDelivery = {maximumDeliveryTime, subtotalToAlert: subtotalToWait, waitingRestaurantName}
-    const setWaitingDelivery = (maximumDeliveryTime, subtotalToAlert, waitingRestaurantName) => {
+    const waitingDelivery = {maximumDeliveryTime, subtotalToWait, waitingRestaurantName}
+    const setWaitingDelivery = (maximumDeliveryTime, subtotalToWait, waitingRestaurantName) => {
         setMaximumDeliveryTime(maximumDeliveryTime)
         setWaitingRestaurantName(waitingRestaurantName)
-        setSubtotalToAlert(subtotalToAlert)
+        setSubtotalToAlert(subtotalToWait)
     }
 
     useEffect(() => {
