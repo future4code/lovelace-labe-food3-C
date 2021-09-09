@@ -1,11 +1,15 @@
 import React from "react";
 import {useEffect, useState} from "react";
 import GlobalContext from "./GlobalContext";
+import axios from "axios";
+import { BASE_URL } from "../constants/urls";
 
 
 const GlobalStateContext = (props) => {
 
     const [maximumDeliveryTime, setMaximumDeliveryTime] = useState(0)
+
+    const [userProfile, setUserProfile] = useState({})
 
     useEffect(() => {
         if(maximumDeliveryTime>0){
@@ -15,9 +19,25 @@ const GlobalStateContext = (props) => {
         }
     }, [maximumDeliveryTime])
 
-    const states = { maximumDeliveryTime }
-    const setters = { setMaximumDeliveryTime }
-    const requests = {}
+    const getProfile = () => {
+        const token = localStorage.getItem("token")
+        const headers = {
+            headers: {
+                auth: token
+            }
+        }
+        axios.get(`${BASE_URL}/fourFoodA/profile`, headers)
+        .then((res) => {
+            setUserProfile(res.data.user)
+        })
+        .catch((err) => {
+            console.log('erro get profile', err)
+        })
+    }
+
+    const states = { maximumDeliveryTime, userProfile }
+    const setters = { setMaximumDeliveryTime, setUserProfile }
+    const requests = { getProfile }
 
     return (
         <GlobalContext.Provider value={{states, setters, requests}}>

@@ -4,7 +4,7 @@ import {useHistory} from "react-router-dom"
 import { Button, TextField } from "@material-ui/core"
 import useForm from "../../hooks/useForm"
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { UpdateProfile } from "../../services/user"
+import { updateProfile } from "../../services/user"
 
 const UserInfoForm = () => {
     useProtectedPage()
@@ -13,7 +13,7 @@ const UserInfoForm = () => {
     const [isLoading, setIsLoading] = useState(false)
     const onSubmitForm = (event) => {
         event.preventDefault()
-        UpdateProfile(form, clear, history, setIsLoading)
+        updateProfile(form, clear, history, setIsLoading)
     }
     return (
         <form onSubmit={onSubmitForm}>
