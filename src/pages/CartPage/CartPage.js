@@ -84,7 +84,7 @@ const CardContainer = styled.div`
   @media (max-width: 30em) {
     width: 100%;
     padding: 10px 20px;
-    border: 1px solid #000;
+    // border: 1px solid #000;
 
   }
 `
@@ -97,8 +97,7 @@ const CartPage = () => {
 
     return (
         <MainContainer>
-            <h5>Header</h5>
-
+          
             <UserAddress>
                 <Typography style={{color: "#b8b8b8", fontSize: "18px"}}>Endereço de entrega</Typography>
                 <Typography style={{color: "#000000", fontSize: "18px"}}>Rua Alessandra Vieira, 42</Typography>

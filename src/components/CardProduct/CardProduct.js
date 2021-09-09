@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components";
 import product from "../../assets/images/mao-santa-burguer-900-x-506.png"
+import {Typography} from "@material-ui/core";
 
 const CardContainer = styled.div`
   /* 580px */
@@ -18,6 +19,7 @@ const CardContainer = styled.div`
     width: 100%;
     border-radius: 8px;
     border: 1px solid #000;
+    display: flex;
   }
 `
 
@@ -46,6 +48,26 @@ const ProductImage = styled.div`
   }
 `
 
+const TextCard = styled.div`
+/* 580px */
+@media (max-width: 36em) {
+
+}
+
+/* 520px */
+@media (max-width: 32em) {
+
+}
+
+/* 480px */
+@media (max-width: 30em) {
+   margin: 0 10px;
+   width: 100%;
+  border: 1px solid #000;
+  
+}
+`
+
 const CardProduct = () => {
 
     return (
@@ -53,14 +75,11 @@ const CardProduct = () => {
 
             <ProductImage Background={product}/>
 
-
-            {/*<did>*/}
-            {/*    <h4>Vinil Butantã</h4>*/}
-            {/*    <ProductPriceAndTax>*/}
-            {/*        <p>50 - 60 min </p>*/}
-            {/*        <p>Frete R$6.00</p>*/}
-            {/*    </ProductPriceAndTax>*/}
-            {/*</did>*/}
+            <TextCard>
+                <Typography color={"primary"} style={{fontSize: "18px"}}>
+                    teste
+                </Typography>
+            </TextCard>
         </CardContainer>
     )
 }
