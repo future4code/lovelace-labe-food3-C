@@ -1,9 +1,15 @@
 import React from "react";
+import { useHistory } from "react-router";
 import { CardContainer, RestaurantPicture, ProductPriceAndTax } from "./styled";
+import { goToRestaurantDetail } from '../../routes/coordinator'
 
 const CardFeed = (props) => {
+  const history = useHistory()
+
   return (
-    <CardContainer>
+    <CardContainer
+      onClick={() => goToRestaurantDetail(history, props.id)}
+    >
       <div>
         <RestaurantPicture src={props.logoUrl} />
       </div>

@@ -5,19 +5,18 @@ import { InputsContainer, SignUpFormContainer } from './styled'
 import { useHistory } from 'react-router-dom'
 import useForm from '../../hooks/useForm'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { signUp } from '../../services/user'
+import { saveAddress } from '../../services/user'
 
-const SignUpForm = () => {
+const AddressForm = () => {
   const history = useHistory()
-  const [form, onChange, clear] = useForm({ name: '', email: '', cpf: '', password: '' })
+  const [form, onChange, clear] = useForm({ street: '', number: '', neighbourhood: '',
+   city: '', state: '', complement: '' })
   const [isLoading, setIsLoading] = useState(false)
 
   const onSubmitForm = (event) => {
     event.preventDefault()
 
-    // Abaixo lógica para CONFIRMAÇÃO DE SENHA ...
-    form.passwordConfirmation === form.password ? signUp(form, clear, history, setIsLoading) : 
-    alert("A confirmação de senha deve ser igual à senha")
+    saveAddress(form, clear, history, setIsLoading)
   }
 
   return (
@@ -25,65 +24,69 @@ const SignUpForm = () => {
       <SignUpFormContainer>
         <InputsContainer>
           <TextField
-            value={form.name}
-            name={'name'}
+            value={form.street}
+            name={'street'}
             onChange={onChange}
-            label={'Nome'}
+            label={'Logradouro'}
             variant={'outlined'}
+            type={'text'}
             fullWidth
             required
             autoFocus
             margin={'dense'}
-            helperText="Nome e Sobrenome"
           />
           <TextField
-            value={form.email}
-            name={'email'}
+            value={form.number}
+            name={'number'}
             onChange={onChange}
-            label={'E-mail'}
+            label={'Número'}
             variant={'outlined'}
-            type={'email'}
+            type={'number'}
             fullWidth
             required
             margin={'dense'}
-            helperText="Digite seu melhor e-mail"
           />
           <TextField
-            value={form.cpf}
-            name={'cpf'}
+            value={form.complement}
+            name={'complement'}
             onChange={onChange}
-            label={'CPF'}
+            label={'Complemento - Apto / Bloco'}
             variant={'outlined'}
-            type={'cpf'}
+            fullWidth
+            margin={'dense'}
+          />
+          <TextField
+            value={form.neighbourhood}
+            name={'neighbourhood'}
+            onChange={onChange}
+            label={'Bairro'}
+            variant={'outlined'}
+            type={'text'}
             fullWidth
             required
             margin={'dense'}
-            inputProps={{ pattern: "[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}" }}
-            helperText="Formato 000.111.222-33"
           />
           <TextField
-            value={form.password}
-            name={'password'}
+            value={form.city}
+            name={'city'}
             onChange={onChange}
-            label={'Senha'}
+            label={'Cidade'}
             variant={'outlined'}
-            type={'password'}
+            type={'text'}
             fullWidth
             required
             margin={'dense'}
-            helperText="Deve ter no mínimo 6 dígitos"
           />
           <TextField
-            value={form.passwordConfirmation}
-            name={'passwordConfirmation'}
+            value={form.state}
+            name={'state'}
             onChange={onChange}
-            label={'Confirmar a senha'}
+            label={'Estado'}
             variant={'outlined'}
-            type={'password'}
+            type={'text'}
             fullWidth
             required
             margin={'dense'}
-            helperText="A confirmação deve ser igual à senha"
           />
         </InputsContainer>
         <Button
@@ -92,11 +95,11 @@ const SignUpForm = () => {
           type={'submit'}
           fullWidth
         >
-          {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Criar</>}
+          {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Salvar</>}
         </Button>
       </SignUpFormContainer>
     </form>
   )
 }
 
-export default SignUpForm
+export default AddressForm

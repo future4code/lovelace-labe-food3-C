@@ -1,14 +1,18 @@
 import styled from 'styled-components'
 
-export const ErrorPageContainer = styled.div`
+export const ErrorPageContainer = styled.div `
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   align-items: center;
-  margin: 20px;
+  margin: 50px;
+  max-width: 350px;
+  button { 
+ margin-top: 15vh;
+  }
 `
 
-export const ErrorImage = styled.img`
+export const ErrorImage = styled.img `
   width: 64vw;
   max-width: 450px;
 `
