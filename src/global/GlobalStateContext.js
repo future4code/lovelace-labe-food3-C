@@ -6,8 +6,8 @@ import GlobalContext from "./GlobalContext";
 const GlobalStateContext = (props) => {
 
     const [maximumDeliveryTime, setMaximumDeliveryTime] = useState(0)
-    const [waitingRestaurantName, setWaitingRestaurantName] = useState('Bulguer')
-    const [subtotalToWait, setSubtotalToAlert] = useState(57.00)
+    const [waitingRestaurantName, setWaitingRestaurantName] = useState('')
+    const [subtotalToWait, setSubtotalToAlert] = useState(0.0)
 
     const waitingDelivery = {maximumDeliveryTime, subtotalToWait, waitingRestaurantName}
     const setWaitingDelivery = (maximumDeliveryTime, subtotalToWait, waitingRestaurantName) => {
