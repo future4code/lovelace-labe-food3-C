@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from "react"
 import { InputsContainer } from "./styled"
 import TextField from "@material-ui/core/TextField"
@@ -7,16 +7,18 @@ import Button from '@material-ui/core/Button'
 import { login } from "../../services/user"
 import { useHistory } from "react-router-dom"
 import CircularProgress from '@material-ui/core/CircularProgress'
+import GlobalContext from '../../global/GlobalContext';
 
 const LoginForm = () => {
     const [form, handleInputChange, clear] = useForm({ email: "", password: "" })
     const history = useHistory()
     const [isLoading, setIsLoading] = useState(false)
+    const { setters } = useContext(GlobalContext)
 
     const onSubmitForm = (event) => {
         event.preventDefault()
         form.password.length < 6 ? alert("Digite uma senha maior que 6 caracteres") 
-        : login(form, clear, history, setIsLoading)
+        : login(form, clear, history, setIsLoading, setters.setUserProfile)
         }
     
 
