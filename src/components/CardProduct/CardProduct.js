@@ -92,6 +92,8 @@ const TextCard = styled.div`
   // border: 1px solid #000;
 }
 `
+
+
 const CardProduct = () => {
 
     return (

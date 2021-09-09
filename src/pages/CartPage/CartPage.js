@@ -1,8 +1,8 @@
-import React, { useContext } from "react"
+import React, {useContext} from "react"
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 import {useHistory} from "react-router-dom";
 import styled from "styled-components";
-import {Typography} from "@material-ui/core";
+import {Typography, Radio, RadioGroup, FormControlLabel, Button} from "@material-ui/core";
 import Footer from "../../components/Footer/Footer";
 import CardProduct from "../../components/CardProduct/CardProduct";
 import GlobalContext from "../../global/GlobalContext";
@@ -90,6 +90,72 @@ const CardContainer = styled.div`
   }
 `
 
+const Frete = styled.div`
+    /* 580px */
+  @media (max-width: 36em) {
+
+  }
+
+  /* 520px */
+  @media (max-width: 32em) {
+
+  }
+
+  /* 480px */
+  @media (max-width: 30em) {
+    width: 100%;
+    text-align: right;
+    padding: 0px 20px;
+    // border: 1px solid #000;
+
+  }
+`
+
+const SubTotal = styled.div`
+    /* 580px */
+  @media (max-width: 36em) {
+
+  }
+
+  /* 520px */
+  @media (max-width: 32em) {
+
+  }
+
+  /* 480px */
+  @media (max-width: 30em) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+    // border: 1px solid #000;
+
+  }
+`
+
+const Payments = styled.div`
+     /* 580px */
+  @media (max-width: 36em) {
+
+  }
+
+  /* 520px */
+  @media (max-width: 32em) {
+
+  }
+
+  /* 480px */
+  @media (max-width: 30em) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-itens: flex-start;
+    padding: 0px 20px;
+    // border: 1px solid #000;
+
+  }
+`
 
 const CartPage = () => {
     useProtectedPage()
@@ -97,10 +163,10 @@ const CartPage = () => {
     const {states, setters, requests} = useContext(GlobalContext)
 
     const handleWaitingDelivery = () => {
-      const exemploTempoMin = 90
-      const exemploSubtotal = 60.70
-      const exeploNomeRestaurante = 'Massas Suaves'
-      setters.setWaitingDelivery(exemploTempoMin, exemploSubtotal, exeploNomeRestaurante)
+        const exemploTempoMin = 90
+        const exemploSubtotal = 60.70
+        const exeploNomeRestaurante = 'Massas Suaves'
+        setters.setWaitingDelivery(exemploTempoMin, exemploSubtotal, exeploNomeRestaurante)
     }
 
 
@@ -130,6 +196,37 @@ const CartPage = () => {
                 <CardProduct/>
             </CardContainer>
 
+            <Frete>
+                <Typography>
+                    Frente: R$ 6,00
+                </Typography>
+            </Frete>
+
+            <SubTotal>
+                <Typography>
+                    SUBTOTAL:
+                </Typography>
+
+                <Typography color={"primary"} style={{fontWeight: "500"}}>
+                    R$67,00
+                </Typography>
+            </SubTotal>
+
+            <Payments>
+                <Typography style={{borderBottom: "1px solid #000", width: "100%", marginTop: "20px"}}>
+                    Formas de Pagamento
+                </Typography>
+
+                <RadioGroup aria-label="gender" name="gender1" >
+                    <FormControlLabel value="money" control={<Radio color="primary" />} label="Dinheiro" />
+                    <FormControlLabel value="creditCard" control={<Radio color="primary" />} label="Cartão de Crédito" />
+                </RadioGroup>
+
+
+
+                <Button variant={"contained"} color={"primary"} style={{width: "100%"}}>Confirmar</Button>
+
+            </Payments>
 
 
             <Footer/>
