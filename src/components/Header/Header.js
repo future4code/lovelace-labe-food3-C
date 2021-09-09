@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom'
 
 const Header = () => {
     const history = useHistory()
-
     const params = useParams()
 
     let headerText = ""
@@ -50,7 +49,7 @@ const Header = () => {
         <>
             <StyledMargin />
             <StyledHeader>
-                {/* Onclick tem que ser um GoBack */}
+                
                 <button onClick={() => history.goBack()}>
                     <img src={imgBackArrow} alt='botão para voltar'/>
                 </button>
@@ -59,7 +58,6 @@ const Header = () => {
             </StyledHeader>
         </>
     )
-
 }
 
 export default Header

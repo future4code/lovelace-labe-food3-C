@@ -4,19 +4,23 @@ import {useHistory} from "react-router-dom"
 import { Button, TextField } from "@material-ui/core"
 import useForm from "../../hooks/useForm"
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { updateProfile } from "../../services/user"
+import { UpdateProfile } from "../../services/user"
+import { InputsContainer, UserInfoContainer } from "./styled"
 
 const UserInfoForm = () => {
     useProtectedPage()
     const history = useHistory()
     const [form, handleInputChange, clear] = useForm({ name: "", email: "", cpf: "" })
     const [isLoading, setIsLoading] = useState(false)
+    
     const onSubmitForm = (event) => {
         event.preventDefault()
         updateProfile(form, clear, history, setIsLoading)
     }
     return (
         <form onSubmit={onSubmitForm}>
+            <UserInfoContainer>
+            <InputsContainer>
             <TextField
                 required
                 name={"name"}
@@ -58,6 +62,7 @@ const UserInfoForm = () => {
                 inputProps={{ pattern: "[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}" }}
                 helperText="Formato 000.111.222-33"
             />
+            </InputsContainer>
                 <Button
                     type={"submit"}
                     fullWidth
@@ -66,6 +71,7 @@ const UserInfoForm = () => {
                 >
                     {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Salvar</>}
                 </Button>
+            </UserInfoContainer>
             </form>
     )
 }
