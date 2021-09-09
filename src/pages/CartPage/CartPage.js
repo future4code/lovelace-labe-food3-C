@@ -1,10 +1,11 @@
-import React from "react"
+import React, { useContext } from "react"
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 import {useHistory} from "react-router-dom";
 import styled from "styled-components";
 import {Typography} from "@material-ui/core";
 import Footer from "../../components/Footer/Footer";
 import CardProduct from "../../components/CardProduct/CardProduct";
+import GlobalContext from "../../global/GlobalContext";
 
 
 const MainContainer = styled.div`
@@ -93,12 +94,19 @@ const CardContainer = styled.div`
 const CartPage = () => {
     useProtectedPage()
     const history = useHistory()
+    const {states, setters, requests} = useContext(GlobalContext)
+
+    const handleWaitingDelivery = () => {
+      const exemploTempoMin = 90
+      const exemploSubtotal = 60.70
+      const exeploNomeRestaurante = 'Massas Suaves'
+      setters.setWaitingDelivery(exemploTempoMin, exemploSubtotal, exeploNomeRestaurante)
+    }
 
 
     return (
         <MainContainer>
             <h5>Header</h5>
-
             <UserAddress>
                 <Typography style={{color: "#b8b8b8", fontSize: "18px"}}>Endereço de entrega</Typography>
                 <Typography style={{color: "#000000", fontSize: "18px"}}>Rua Alessandra Vieira, 42</Typography>

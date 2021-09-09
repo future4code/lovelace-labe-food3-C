@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardContainer = styled.div`
+export const CardContainer = styled.div `
   width: 20.6rem;
   height: 11.75rem;
   padding: 0 0 1rem;
@@ -17,15 +17,16 @@ export const CardContainer = styled.div`
     letter-spacing: -0.39px;
   }
   margin-bottom: 0.5rem;
+  cursor: pointer;
 `;
 
-export const RestaurantPicture = styled.img`
+export const RestaurantPicture = styled.img `
   width: 20.5rem;
   height: 7.5rem;
   border-radius: 8px 8px 0 0;
 `;
 
-export const ProductPriceAndTax = styled.div`
+export const ProductPriceAndTax = styled.div `
   display: flex;
   justify-content: space-between;
   p {

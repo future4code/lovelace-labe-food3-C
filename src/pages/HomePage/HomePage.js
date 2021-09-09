@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import useRequestData from "../../hooks/useRequestData";
@@ -15,15 +15,18 @@ import CardFeed from "../../components/CardFeed/CardFeed";
 //HELPERS
 import { getRestaurants } from "../../services/getRestaurants";
 import Loading from "../../components/Loading/Loading";
+import CardWaitingDelivery from "../../components/CardWaitingDelivery/CardWaitingDelivery";
+import GlobalContext from "../../global/GlobalContext";
 
 const HomePage = () => {
   useProtectedPage();
   const history = useHistory();
-  // const [data] = useRequestData(`/fourFoodA/restaurants`, {});
   const [searchMode, setSearchMode] = useState(false);
   const [restaurants, setRestaurants] = useState({});
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
+
+  const {states, setters, requests} = useContext(GlobalContext)
 
   if (Object.keys(restaurants).length === 0) {
     getRestaurants(setRestaurants, setIsLoading)
@@ -75,6 +78,8 @@ const HomePage = () => {
       <SearchField setSearchMode={setSearchMode} />
       <TapPanel restaurants={restaurants} />
       <Footer />
+      {states.waitingDelivery.maximumDeliveryTime>0
+       && <CardWaitingDelivery data={states.waitingDelivery}/>}
     </StyledHomePage>
   );
 };

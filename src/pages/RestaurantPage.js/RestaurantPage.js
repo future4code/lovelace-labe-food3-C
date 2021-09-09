@@ -37,6 +37,7 @@ const RestaurantPage = () => {
           photoUrl={food.photoUrl}
           description={food.description}
           key={food.id}
+          id={food.id}
         />
       );
     });
