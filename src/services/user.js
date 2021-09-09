@@ -1,6 +1,6 @@
 import axios from "axios"
 import { BASE_URL } from "../constants/urls"
-import { goToAddress, goToHome, goToProfile } from "../routes/coordinator"
+import { goToAddress, goToHome } from "../routes/coordinator"
 
 export const login = (body, clear, history, setIsLoading, setUserProfile) => {
     setIsLoading(true)
@@ -11,7 +11,6 @@ export const login = (body, clear, history, setIsLoading, setUserProfile) => {
         localStorage.setItem("token", res.data.token)
         clear()
         setIsLoading(false)
-        console.log('data do login', res.data.user)
         setUserProfile(res.data.user)
         res.data.user.hasAddress === false ? goToAddress(history)
         : goToHome(history)
@@ -24,7 +23,7 @@ export const login = (body, clear, history, setIsLoading, setUserProfile) => {
     })
 }   
 
-export const signUp = (body, clear, history, setIsLoading) => {
+export const signUp = (body, clear, history, setIsLoading, setUserProfile) => {
     setIsLoading(true)
     axios.post(`${BASE_URL}/fourFoodA/signup`, body)
     .then((res) => {
@@ -32,6 +31,7 @@ export const signUp = (body, clear, history, setIsLoading) => {
         localStorage.setItem("token", res.data.token)
         clear()
         setIsLoading(false)
+        setUserProfile(res.data.user)
         goToAddress(history)
         
     })
@@ -42,7 +42,7 @@ export const signUp = (body, clear, history, setIsLoading) => {
 }
 
 
-export const updateProfile = (body, clear, history, setIsLoading) => {
+export const updateProfile = (body, clear, history, setIsLoading, setUserProfile) => {
     setIsLoading(true)
     const token = localStorage.getItem("token")
     const headers = {
@@ -52,8 +52,8 @@ export const updateProfile = (body, clear, history, setIsLoading) => {
     }
     axios.put(`${BASE_URL}/fourFoodA/profile`, body, headers)
         .then((res) => {
-            console.log(res.data)
             setIsLoading(false)
+            setUserProfile(res.data.user)
             clear()
             history.goBack()
         })
