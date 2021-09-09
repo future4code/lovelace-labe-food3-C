@@ -21,7 +21,7 @@ const CartPage = () => {
         const exeploNomeRestaurante = 'Massas Suaves'
         setters.setWaitingDelivery(exemploTempoMin, exemploSubtotal, exeploNomeRestaurante)
     }
-    
+
     return (
         <MainContainer>
 
@@ -74,12 +74,9 @@ const CartPage = () => {
                     <FormControlLabel value="creditCard" control={<Radio color="primary" />} label="Cartão de Crédito" />
                 </RadioGroup>
 
-
-
                 <Button variant={"contained"} color={"primary"} style={{width: "100%"}}>Confirmar</Button>
 
             </Payments>
-
 
             <Footer/>
         </MainContainer>
