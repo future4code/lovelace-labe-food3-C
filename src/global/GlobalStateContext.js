@@ -8,6 +8,15 @@ import { BASE_URL } from "../constants/urls";
 const GlobalStateContext = (props) => {
 
     const [maximumDeliveryTime, setMaximumDeliveryTime] = useState(0)
+    const [waitingRestaurantName, setWaitingRestaurantName] = useState('')
+    const [subtotalToWait, setSubtotalToAlert] = useState(0.0)
+
+    const waitingDelivery = {maximumDeliveryTime, subtotalToWait, waitingRestaurantName}
+    const setWaitingDelivery = (maximumDeliveryTime, subtotalToWait, waitingRestaurantName) => {
+        setMaximumDeliveryTime(maximumDeliveryTime)
+        setWaitingRestaurantName(waitingRestaurantName)
+        setSubtotalToAlert(subtotalToWait)
+    }
 
     const [userProfile, setUserProfile] = useState({})
 
@@ -35,8 +44,8 @@ const GlobalStateContext = (props) => {
         })
     }
 
-    const states = { maximumDeliveryTime, userProfile }
-    const setters = { setMaximumDeliveryTime, setUserProfile }
+    const states = { waitingDelivery, userProfile }
+    const setters = { setWaitingDelivery, setUserProfile }
     const requests = { getProfile }
 
     return (
