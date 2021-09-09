@@ -14,6 +14,7 @@ import CardFeed from "../../components/CardFeed/CardFeed";
 
 //HELPERS
 import { getRestaurants } from "../../services/getRestaurants";
+import Loading from "../../components/Loading/Loading";
 
 const HomePage = () => {
   useProtectedPage();
@@ -24,6 +25,12 @@ const HomePage = () => {
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
 
   // console.log(data.restaurants)
+  if (!selectedRestaurants)
+    return (
+      <StyledHomePage>
+        <Loading />
+      </StyledHomePage>
+    );
 
   if (searchMode) {
     return (

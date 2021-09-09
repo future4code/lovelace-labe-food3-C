@@ -2,6 +2,8 @@ import React from "react";
 import { CardContainer, RestaurantPicture, ProductPriceAndTax } from "./styled";
 
 const CardFeed = (props) => {
+  const shippingFloat = parseFloat(props.shipping);
+
   return (
     <CardContainer>
       <div>
@@ -10,8 +12,12 @@ const CardFeed = (props) => {
       <did>
         <h4>{props.name}</h4>
         <ProductPriceAndTax>
-          <p>{props.deliveryTime}</p>
-          <p>{props.shipping}</p>
+          <p>{props.deliveryTime} min</p>
+          {shippingFloat !== 0 ? (
+            <p>R${props.shipping},00</p>
+          ) : (
+            <p>Frete Grátis</p>
+          )}
         </ProductPriceAndTax>
       </did>
     </CardContainer>
