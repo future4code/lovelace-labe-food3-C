@@ -23,14 +23,19 @@ const HomePage = () => {
   const [searchMode, setSearchMode] = useState(false);
   const [restaurants, setRestaurants] = useState({});
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
-  // console.log(data.restaurants)
-  if (!selectedRestaurants)
+  if (Object.keys(restaurants).length === 0) {
+    getRestaurants(setRestaurants, setIsLoading)
+  }
+
+  if (isLoading)
     return (
       <StyledHomePage>
         <Loading />
       </StyledHomePage>
     );
+
 
   if (searchMode) {
     return (
@@ -63,9 +68,7 @@ const HomePage = () => {
     );
   }
 
-  if (Object.keys(restaurants).length === 0) {
-    getRestaurants((data) => setRestaurants(data));
-  }
+
 
   return (
     <StyledHomePage>
