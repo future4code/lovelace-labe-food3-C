@@ -12,7 +12,11 @@ const useForm = (initialState) => {
     setForm(initialState)
   }
 
-  return [form, handleInputChange, clear]
+  const setFields = (newValues) => {
+    setForm(newValues)
+  }
+
+  return [form, handleInputChange, clear, setFields]
 }
 
 export default useForm

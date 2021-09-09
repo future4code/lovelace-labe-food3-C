@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { InputsContainer, SignUpFormContainer } from './styled'
@@ -6,11 +6,37 @@ import { useHistory } from 'react-router-dom'
 import useForm from '../../hooks/useForm'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { saveAddress } from '../../services/user'
+import { useRequestDataX } from '../../hooks/useRequestData'
+import { BASE_URL } from '../../constants/urls'
 
 const AddressForm = () => {
   const history = useHistory()
-  const [form, onChange, clear] = useForm({ street: '', number: '', neighbourhood: '',
+  const [form, onChange, clear, setFields] = useForm({ street: '', number: '', neighbourhood: '',
    city: '', state: '', complement: '' })
+
+  const [fullAddress] = useRequestDataX(`${BASE_URL}/fourFoodA/profile/address`, {})
+
+  useEffect(() => {
+    if (fullAddress.address) {
+      console.log("FULL ADDRESS", (fullAddress.address))
+
+      const dados = {
+        "city": fullAddress.address.city,
+        "complement": fullAddress.address.complement,
+        "neighbourhood": fullAddress.address.neighbourhood,
+        "number": fullAddress.address.number,
+        "state": fullAddress.address.state,
+        "street": fullAddress.address.street
+      }
+      
+      setFields(dados)
+      
+
+    }
+  }, [fullAddress])
+
+
+
   const [isLoading, setIsLoading] = useState(false)
 
   const onSubmitForm = (event) => {
