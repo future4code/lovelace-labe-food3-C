@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { InputsContainer, SignUpFormContainer } from './styled'
@@ -6,17 +6,19 @@ import { useHistory } from 'react-router-dom'
 import useForm from '../../hooks/useForm'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { signUp } from '../../services/user'
+import GlobalContext from '../../global/GlobalContext'
 
 const SignUpForm = () => {
   const history = useHistory()
   const [form, onChange, clear] = useForm({ name: '', email: '', cpf: '', password: '' })
   const [isLoading, setIsLoading] = useState(false)
+  const { setters } = useContext(GlobalContext)
 
   const onSubmitForm = (event) => {
     event.preventDefault()
 
     // Abaixo lógica para CONFIRMAÇÃO DE SENHA ...
-    form.passwordConfirmation === form.password ? signUp(form, clear, history, setIsLoading) : 
+    form.passwordConfirmation === form.password ? signUp(form, clear, history, setIsLoading, setters.setUserProfile) : 
     alert("A confirmação de senha deve ser igual à senha")
   }
 

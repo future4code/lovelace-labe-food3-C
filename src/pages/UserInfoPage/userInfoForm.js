@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import useProtectedPage from "../../hooks/useProtectedPage"
 import {useHistory} from "react-router-dom"
 import { Button, TextField } from "@material-ui/core"
@@ -6,16 +6,21 @@ import useForm from "../../hooks/useForm"
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { updateProfile } from "../../services/user"
 import { InputsContainer, UserInfoContainer } from "./styled"
+import GlobalContext from "../../global/GlobalContext"
+
 
 const UserInfoForm = () => {
     useProtectedPage()
     const history = useHistory()
-    const [form, handleInputChange, clear] = useForm({ name: "", email: "", cpf: "" })
+    const { states, setters } = useContext(GlobalContext)
+    const [form, handleInputChange, clear] = useForm({ name: `${states.userProfile.name}`, 
+                                                        email: `${states.userProfile.email}`, 
+                                                        cpf: `${states.userProfile.cpf}` })
     const [isLoading, setIsLoading] = useState(false)
     
     const onSubmitForm = (event) => {
         event.preventDefault()
-        updateProfile(form, clear, history, setIsLoading)
+        updateProfile(form, clear, history, setIsLoading, setters.setUserProfile)
     }
     return (
         <form onSubmit={onSubmitForm}>
@@ -75,5 +80,6 @@ const UserInfoForm = () => {
             </form>
     )
 }
+
 
 export default UserInfoForm
