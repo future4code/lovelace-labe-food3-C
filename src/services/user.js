@@ -1,6 +1,6 @@
 import axios from "axios"
-import { BASE_URL } from "../constants/urls"
-import { goToAddress, goToHome } from "../routes/coordinator"
+import { BASE_URL, HEADERS } from "../constants/urls"
+import { goToAddress, goToHome, goToProfile } from "../routes/coordinator"
 
 export const login = (body, clear, history, setIsLoading) => {
     setIsLoading(true)
@@ -37,5 +37,23 @@ export const signUp = (body, clear, history, setIsLoading) => {
         setIsLoading(false)
         console.log("Erro no Cadastro", err.response)
     })
+}
+
+
+export const UpdateProfile = (body, clear, history, setIsLoading) => {
+    setIsLoading(true)
+    console.log('url', `${BASE_URL}/fourFoodA/profile`, body, HEADERS)
+    axios.post(`${BASE_URL}/fourFoodA/profile`, body, HEADERS)
+        .then((res) => {
+            console.log(res.data)
+            setIsLoading(false)
+            clear()
+            history.GoBack()
+        })
+        .catch((err) => {
+            alert('Erro ao atualizar perfil!')
+            console.log(err.response)
+            setIsLoading(false)
+        })
 }
 

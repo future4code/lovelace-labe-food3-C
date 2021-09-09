@@ -5,7 +5,6 @@ import { useHistory } from 'react-router'
 
 const Header = () => {
     const history = useHistory()
-    console.log('location', history.location.pathname)
     return (
         <>
             <StyledMargin />
