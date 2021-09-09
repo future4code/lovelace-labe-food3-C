@@ -42,19 +42,25 @@ export const signUp = (body, clear, history, setIsLoading) => {
 
 export const UpdateProfile = (body, clear, history, setIsLoading) => {
     setIsLoading(true)
-    console.log('url', `${BASE_URL}/fourFoodA/profile`, body, HEADERS)
-    axios.post(`${BASE_URL}/fourFoodA/profile`, body, HEADERS)
+    const token = localStorage.getItem("token")
+    const headers = {
+        headers: {
+            auth: token
+        }
+    }
+    axios.put(`${BASE_URL}/fourFoodA/profile`, body, headers)
         .then((res) => {
             console.log(res.data)
             setIsLoading(false)
             clear()
-            history.GoBack()
+            history.goBack()
         })
         .catch((err) => {
             alert('Erro ao atualizar perfil!')
-            console.log(err.response)
+            console.log(err)
             setIsLoading(false)
         })
+}
   
 export const saveAddress = (body, clear, history, setIsLoading) => {
     const token = localStorage.getItem("token")
