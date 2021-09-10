@@ -6,10 +6,17 @@ import SearchIcon from "@material-ui/icons/Search";
 
 import { StyledForm } from "./styled";
 
-export default function SearchField({setSearchMode, setSelectedRestaurants, restaurants}) {
+export default function SearchField({setSearchMode, setSelectedRestaurants, restaurants, setIsWriting}) {
   
   const handleChange = e => {
     let selectedRestaurants = []
+
+    if(e.target.value){
+      setIsWriting(true)
+    }
+    else{
+      setIsWriting(false)
+    }
 
     Object.values(restaurants).forEach(category => {
       category.forEach(restaurant => {

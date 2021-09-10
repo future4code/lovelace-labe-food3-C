@@ -18,12 +18,13 @@ import Loading from "../../components/Loading/Loading";
 import CardWaitingDelivery from "../../components/CardWaitingDelivery/CardWaitingDelivery";
 import GlobalContext from "../../global/GlobalContext";
 
-const HomePage = ({setPageTitle}) => {
+const HomePage = ({ setPageTitle }) => {
   useProtectedPage();
   const [searchMode, setSearchMode] = useState(false);
   const [restaurants, setRestaurants] = useState({});
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isWriting, setIsWriting] = useState(false)
 
   const { states, setters, requests } = useContext(GlobalContext);
 
@@ -46,6 +47,7 @@ const HomePage = ({setPageTitle}) => {
           setSearchMode={setSearchMode}
           restaurants={restaurants}
           setSelectedRestaurants={setSelectedRestaurants}
+          setIsWriting={setIsWriting}
         />
         {Object.keys(selectedRestaurants).length > 0 ? (
           <div>
@@ -64,7 +66,13 @@ const HomePage = ({setPageTitle}) => {
             ))}
           </div>
         ) : (
-          <StyledSearching>Busque por nome de restaurante</StyledSearching>
+          <StyledSearching>
+            {
+              isWriting ?
+                'Não encontramos :(' :
+                'Busque por nome de restaurante'
+            }
+          </StyledSearching>
         )}
       </StyledHomePage>
     );
