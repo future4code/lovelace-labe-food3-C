@@ -4,7 +4,7 @@ import useProtectedPage from "../../hooks/useProtectedPage";
 import useRequestData from "../../hooks/useRequestData";
 
 //STYLES
-import { StyledHomePage } from "./styled";
+import { StyledHomePage, StyledSearching } from "./styled";
 
 //COMPONENTS
 import SearchField from "../../components/SearchField/SearchField";
@@ -64,7 +64,7 @@ const HomePage = () => {
             ))}
           </div>
         ) : (
-          <p>Busque por nome de restaurante</p>
+          <StyledSearching>Busque por nome de restaurante</StyledSearching>
         )}
       </StyledHomePage>
     );

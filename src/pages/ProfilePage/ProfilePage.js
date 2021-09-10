@@ -1,35 +1,58 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 import {useHistory} from "react-router-dom";
 import { Box, List, ListItem, ListItemText, Typography } from "@material-ui/core";
 import { EditEmailContainer, EditEnderecoContainer, MainContainer } from "./styled";
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import { goToAddress, goToUserInfo } from "../../routes/coordinator"
-import GlobalContext from "../../global/GlobalContext";
+import GlobalContext from "../../global/GlobalContext"
+import axios from "axios";
+import { BASE_URL } from "../../constants/urls";
 
 const ProfilePage = () => {
     useProtectedPage()
     const history = useHistory()
-    const { states, setters, requests } = useContext(GlobalContext)
-    // useEffect(() => {
-    //     requests.getProfile()
-    // }, [])
-const historico = [
-    {
-    id: 1,
-    descr: 'Pedido 1'
-    },
-    {
-        id: 2,
-        descr: 'Pedido 2'
-    },
-    {
-        id: 3,
-        descr: 'Pedido 3'
-    }
-]
+    const { states } = useContext(GlobalContext)
+    const [ordersHistory, setOrderHistory] = useState([])
+    useEffect(() => {
+        getOrdersHistory()
+    }, [])
 
-const listaHistorico = historico.map((order) => {
+    const getOrdersHistory = () => {
+        const token = localStorage.getItem("token")
+        const headers = {
+            headers: {
+                auth: token
+            }
+        }
+        axios.get(`${BASE_URL}/fourFoodA/orders/history`, headers)
+        .then((res) => {
+            console.log('orders', res.data)
+            // setOrderHistory(res.data)
+        })
+        .catch((err) => {
+            console.log('erro get orders', err)
+        })
+    }
+
+// const historico = 
+
+// [
+//     {
+//     id: 1,
+//     descr: 'Pedido 1'
+//     },
+//     {
+//         id: 2,
+//         descr: 'Pedido 2'
+//     },
+//     {
+//         id: 3,
+//         descr: 'Pedido 3'
+//     }
+// ]
+
+const listaHistorico = ordersHistory.map((order) => {
     return (
         <ListItem >
             <ListItemText key={order.id} primary={order.descr} />
