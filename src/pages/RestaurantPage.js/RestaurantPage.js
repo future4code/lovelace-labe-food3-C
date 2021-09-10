@@ -15,6 +15,7 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import useRequestData from "../../hooks/useRequestData";
 import Loading from "../../components/Loading/Loading";
+import categorizeRestaurants from '../../tools/categorizeRestaurants'
 
 const RestaurantPage = () => {
   useProtectedPage();
@@ -29,18 +30,24 @@ const RestaurantPage = () => {
     data &&
     data.restaurant &&
     data.restaurant.products &&
-    data.restaurant.products.map((food) => {
-      return (
-        <CardBurger
-          name={food.name}
-          price={food.price}
-          photoUrl={food.photoUrl}
-          description={food.description}
-          key={food.id}
-          id={food.id}
-        />
-      );
-    });
+    Object.keys(categorizeRestaurants(data.restaurant.products))
+      .map(category => (
+        <CardMenu>
+          <h3>{category}</h3>
+          {
+            categorizeRestaurants(data.restaurant.products)[category]
+            .map(food => (
+              <CardBurger
+                name={food.name}
+                price={food.price}
+                photoUrl={food.photoUrl}
+                description={food.description}
+                key={food.id}
+                id={food.id}
+              />
+            ))}
+        </CardMenu>
+      ))
 
   return (
     <GeralContainer>
@@ -58,10 +65,7 @@ const RestaurantPage = () => {
               <p>{data.restaurant.address}</p>
             </CardRestaurant>
           )}
-          <CardMenu>
-            <h3>Principais</h3>
-            {arrayFoods}
-          </CardMenu>
+          {arrayFoods}
         </MainContainer>
       ) : (
         <Loading />

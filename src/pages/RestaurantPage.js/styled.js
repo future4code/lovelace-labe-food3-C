@@ -13,6 +13,7 @@ export const MainContainer = styled.div`
 
   width: 22.5rem;
   min-height: 40rem;
+  margin-bottom: 1rem;
 `;
 
 export const HeaderContainer = styled.div`
