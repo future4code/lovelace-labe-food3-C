@@ -4,7 +4,7 @@ import imgBackArrow from "../../assets/images/back.svg"
 import { useHistory } from 'react-router'
 import { useParams } from 'react-router-dom'
 
-const Header = () => {
+const Header = ({title, canGoBackPage}) => {
     const history = useHistory()
     const params = useParams()
 
@@ -49,12 +49,10 @@ const Header = () => {
         <>
             <StyledMargin />
             <StyledHeader>
-                
                 <button onClick={() => history.goBack()}>
                     <img src={imgBackArrow} alt='botão para voltar'/>
                 </button>
                 <p>{headerText}</p>
-            
             </StyledHeader>
         </>
     )

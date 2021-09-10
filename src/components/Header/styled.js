@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledMargin = styled.div`
   width: 100vw;
-  height: 4.375rem;
+  height: 3.062rem;
 `
 
 export const StyledHeader = styled.div`
