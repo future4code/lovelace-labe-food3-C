@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import useProtectedPage from "../../hooks/useProtectedPage";
-import useRequestData from "../../hooks/useRequestData";
 
 //STYLES
 import { StyledHomePage, StyledSearching } from "./styled";
@@ -20,17 +18,21 @@ import GlobalContext from "../../global/GlobalContext";
 
 const HomePage = ({ setPageTitle }) => {
   useProtectedPage();
-  const [searchMode, setSearchMode] = useState(false);
-  const [restaurants, setRestaurants] = useState({});
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
+  const [searchMode, setSearchMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [isWriting, setIsWriting] = useState(false)
+  const [isWriting, setIsWriting] = useState(false);
+  const [restaurants, setRestaurants] = useState({});
 
   const { states, setters, requests } = useContext(GlobalContext);
 
   if (Object.keys(restaurants).length === 0) {
     getRestaurants(setRestaurants, setIsLoading);
   }
+
+  useEffect(() => {
+    requests.getActiveOrder()
+  }, [])
 
   if (isLoading)
     return (
