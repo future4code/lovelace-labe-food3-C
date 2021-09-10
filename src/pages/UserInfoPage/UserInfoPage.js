@@ -1,6 +1,6 @@
 import React from "react"
 import useProtectedPage from "../../hooks/useUnprotectedPage"
-import { MainContainer } from "../ProfilePage/styled"
+import { MainContainer } from "./styled";
 import UserInfoForm from "./userInfoForm";
 
 const UserInfoPage = () => {
