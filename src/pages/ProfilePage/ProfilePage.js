@@ -8,14 +8,16 @@ import { goToAddress, goToUserInfo } from "../../routes/coordinator"
 import GlobalContext from "../../global/GlobalContext"
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
+import CardOrder from "../../components/CardOrder/CardOrder";
 
 const ProfilePage = () => {
     useProtectedPage()
     const history = useHistory()
-    const { states } = useContext(GlobalContext)
+    const { states, requests } = useContext(GlobalContext)
     const [ordersHistory, setOrderHistory] = useState([])
     useEffect(() => {
         getOrdersHistory()
+        requests.getProfile()
     }, [])
 
     const getOrdersHistory = () => {
@@ -27,35 +29,21 @@ const ProfilePage = () => {
         }
         axios.get(`${BASE_URL}/fourFoodA/orders/history`, headers)
         .then((res) => {
-            console.log('orders', res.data)
-            // setOrderHistory(res.data)
+            setOrderHistory(res.data.orders)
         })
         .catch((err) => {
-            console.log('erro get orders', err)
+            alert('Erro ao atualizar histórico de pedidos')
         })
     }
 
-// const historico = 
-
-// [
-//     {
-//     id: 1,
-//     descr: 'Pedido 1'
-//     },
-//     {
-//         id: 2,
-//         descr: 'Pedido 2'
-//     },
-//     {
-//         id: 3,
-//         descr: 'Pedido 3'
-//     }
-// ]
-
 const listaHistorico = ordersHistory.map((order) => {
     return (
-        <ListItem >
-            <ListItemText key={order.id} primary={order.descr} />
+        <ListItem key={order.indexOf}>
+            <CardOrder 
+                restaurant={order.restaurantName}
+                dateCreated={order.createdAt}
+                subTotal={order.totalPrice}
+            ></CardOrder>
         </ListItem>
     )
 })
@@ -82,7 +70,7 @@ const goEditAddress = () => {
             <EditEnderecoContainer>
                 <Box>
                     <Typography variant='subtitle1' style={{color:'#bcbcbc'}}>Endereço Cadastrado</Typography>
-                    <Typography variant="subtitle1" color=''>Rua Alessandra Vieira, 22 - Santana </Typography>
+                    <Typography variant="subtitle1" color=''>{states.userProfile.address}</Typography>
                 </Box>
                 <EditTwoToneIcon 
                 onClick={goEditAddress}
@@ -91,7 +79,7 @@ const goEditAddress = () => {
             <EditEmailContainer >
                 <Box style={{width:'100%'}}>
                     <Typography variant='subtitle1' style={{borderBottom:'black 1px solid'}} >Histórico de pedidos</Typography>
-                    <List component="nav" aria-label="secondary mailbox folders">
+                    <List component="nav" aria-label="secondary mailbox folders" >
                         {(listaHistorico.length > 0) ? listaHistorico : 
                             <Typography style={{textAlign:'center'}}>Você não realizou nenhum pedido</Typography>}
                     </List>
