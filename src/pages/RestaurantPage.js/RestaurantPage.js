@@ -32,7 +32,7 @@ const RestaurantPage = () => {
     data.restaurant.products &&
     Object.keys(categorizeRestaurants(data.restaurant.products))
       .map(category => (
-        <CardMenu>
+        <CardMenu key={category}>
           <h3>{category}</h3>
           {
             categorizeRestaurants(data.restaurant.products)[category]

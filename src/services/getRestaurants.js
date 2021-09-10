@@ -15,6 +15,11 @@ export const getRestaurants = (saveData, setIsLoading) => {
             setIsLoading(false)
         })
         .catch((err) => {
-            console.log(err)
+            if(err.response){
+                alert(err.response.data.message)
+            }
+            else{
+                alert('Ocorreu um erro no site')
+            }
         })
 }

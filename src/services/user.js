@@ -40,10 +40,9 @@ export const signUp = (body, clear, history, setIsLoading, setUserProfile) => {
 
         if(err.response){
             alert(err.response.data.message)
-            console.log("Erro no Cadastro", err.response.data)
         }
         else{
-            console.error(err)
+            alert('Erro no cadastro')
         }
     })
     .finally(() => {
@@ -62,14 +61,19 @@ export const updateProfile = (body, clear, history, setIsLoading, setUserProfile
     }
     axios.put(`${BASE_URL}/fourFoodA/profile`, body, headers)
         .then((res) => {
-            setIsLoading(false)
             setUserProfile(res.data.user)
             clear()
             history.goBack()
         })
         .catch((err) => {
-            alert('Erro ao atualizar perfil!')
-            console.log(err)
+            if(err.response){
+                alert(err.response.data.message)
+            }
+            else {
+                alert('Erro ao atualizar perfil!')
+            }
+        })
+        .finally(() => {
             setIsLoading(false)
         })
 }
@@ -87,17 +91,24 @@ export const saveAddress = (body, clear, history, setIsLoading) => {
     .then((res) => {
         localStorage.removeItem("token")
         localStorage.setItem("token", res.data.token)
-        console.log("DATA TOTAL", res.data)
-        console.log("TOKEN NOVO", res.data.token)
         clear()
-        setIsLoading(false)
-        alert("Endereço Cadastrado com sucesso")
-        goToHome(history)
+
+        if(res.status===200){
+            alert("Endereço Cadastrado com sucesso")
+            goToHome(history)
+        }
         
     })
     .catch((err) => {
+        if(err.response){
+            alert(err.response.data.message)
+        }
+        else {
+            alert("ERRO ENDEREÇO")
+        }
+    })
+    .finally(() => {
         setIsLoading(false)
-        console.log("ERRO ENDEREÇO", err.response)
     })
 
 }

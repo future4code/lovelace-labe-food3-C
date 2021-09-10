@@ -19,8 +19,12 @@ const useRequestData = (endpoint, initialState) => {
                 setData(response.data)
             })
             .catch((error) => {
-                console.log(error.response)
-                alert('Ocorreu um erro, tente novamente')
+                if(error.response){
+                    alert(error.response.data.message)
+                }
+                else{
+                    alert('Ocorreu um erro, tente novamente')
+                }
             })
 
     }, [endpoint])
@@ -50,7 +54,12 @@ export const useRequestDataX = (url, initialState) => {
                 setData(response.data)
             })
             .catch((error) => {
-                console.log('Sem dados iniciais no formulário', error.message)
+                if(error.response){
+                    alert(error.response.data.message)
+                }
+                else{
+                    alert('Sem dados iniciais no formulário')
+                }
             })
 
     }, [url])
