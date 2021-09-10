@@ -24,6 +24,26 @@ const GlobalStateContext = (props) => {
     setWaitingRestaurantName(waitingRestaurantName);
     setSubtotalToAlert(subtotalToWait);
   };
+  const getActiveOrder = () => {
+    const token = localStorage.getItem("token")
+    const headers = {
+      headers: {
+        auth: token
+      }
+    }
+    axios.get(`${BASE_URL}/fourFoodA/active-order`, headers)
+      .then((response) => {
+        const order = response.data.order
+        
+        if (order && order !== null) {
+          const dt = Number(order.expiresAt) - Number(order.createdAt)
+          setWaitingDelivery(dt, order.totalPrice, order.restaurantName)
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
   const [userProfile, setUserProfile] = useState({});
 
@@ -31,7 +51,7 @@ const GlobalStateContext = (props) => {
     if (maximumDeliveryTime > 0) {
       setTimeout(() => {
         setMaximumDeliveryTime(0);
-      }, maximumDeliveryTime * 100); //<< trocar 100 por valor em 1000*60
+      }, maximumDeliveryTime / 100);
     }
   }, [maximumDeliveryTime]);
 
@@ -54,7 +74,7 @@ const GlobalStateContext = (props) => {
 
   const states = { waitingDelivery, userProfile, addedProducts };
   const setters = { setWaitingDelivery, setUserProfile, setAddedProducts };
-  const requests = { getProfile };
+  const requests = { getProfile, getActiveOrder };
 
   return (
     <GlobalContext.Provider value={{ states, setters, requests }}>
