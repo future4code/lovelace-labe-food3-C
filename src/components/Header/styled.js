@@ -16,12 +16,19 @@ export const StyledHeader = styled.div`
   background-color: #FFF;
   z-index: 1;
   
-  button {
+  
+  div {
     justify-self: left;
-    border: none;
     background: none;
     margin-left: 10px;
     margin-top: 1%;
+    width: 1rem;
+    min-height: 2px;
+  }
+  
+  button {
+    border: none;
+    background: none;
   }
 
   p {
@@ -31,7 +38,6 @@ export const StyledHeader = styled.div`
     font-size: 1rem;
     text-align: center;
     flex-grow: 1;
-    margin-right: 11%;
     font-weight: normal;
     color: black;
   }

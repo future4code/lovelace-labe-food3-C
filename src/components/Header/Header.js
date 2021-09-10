@@ -50,9 +50,13 @@ const Header = ({pageTitle="", setPageTitle}) => {
         <>
             <StyledMargin />
             <StyledHeader>
-                {canGoBack && <button onClick={() => history.goBack()}>
+                <div>
+                {canGoBack &&
+                <button onClick={() => history.goBack()}>
                     <img src={imgBackArrow} alt='botão para voltar'/>
-                </button>}
+                </button>
+                }
+                </div>
                 <p>{pageTitle}</p>
             </StyledHeader>
         </>
