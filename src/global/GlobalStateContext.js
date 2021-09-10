@@ -41,7 +41,13 @@ const GlobalStateContext = (props) => {
         }
       })
       .catch((err) => {
-        console.log(err)
+
+        if(err.response){
+          alert(err.response.data.message)
+        }
+        else {
+          alert('Erro ao buscar o alerta de pedido')
+        }
       })
   }
 
@@ -68,7 +74,13 @@ const GlobalStateContext = (props) => {
         setUserProfile(res.data.user);
       })
       .catch((err) => {
-        console.log("erro get profile", err);
+
+        if(err.response){
+          alert(err.response.data.message)
+        }
+        else{
+          alert('Erro ao buscar perfil')
+        }
       });
   };
 

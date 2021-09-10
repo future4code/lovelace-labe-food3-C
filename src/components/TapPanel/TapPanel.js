@@ -72,7 +72,7 @@ export default function TapPanel({ restaurants }) {
         </StyledTabs>
       </AppBar>
       {typeRestaurants.map((typeRestaurant, index) => (
-        <TabPanel value={value} index={index} key={typeRestaurant.id}>
+        <TabPanel value={value} index={index} key={index}>
           {restaurants &&
             restaurants[typeRestaurants[index]].map((restaurant) => (
               <CardFeed

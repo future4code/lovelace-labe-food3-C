@@ -7,8 +7,8 @@ export default function CardOrder(props) {
     const date = (milesecunds) => {
         const data = new Date(milesecunds)
         const dia  = data.getDate().toString()
-        const diaF = (dia.length == 1) ? '0'+dia : dia
-        const mes  = (data.getMonth()+1).toString()
+        const diaF = (dia.length === 1) ? '0'+dia : dia
+        // const mes  = (data.getMonth()+1).toString()
         const month = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"][data.getMonth()];
         const anoF = data.getFullYear()
     return diaF + " de " + month + " de "+ anoF
