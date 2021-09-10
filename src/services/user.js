@@ -27,17 +27,27 @@ export const signUp = (body, clear, history, setIsLoading, setUserProfile) => {
     setIsLoading(true)
     axios.post(`${BASE_URL}/fourFoodA/signup`, body)
     .then((res) => {
-        
+       
         localStorage.setItem("token", res.data.token)
-        clear()
-        setIsLoading(false)
         setUserProfile(res.data.user)
-        goToAddress(history)
+        clear()
+
+        if(res.status===200)
+            goToAddress(history)
         
     })
     .catch((err) => {
+
+        if(err.response){
+            alert(err.response.data.message)
+            console.log("Erro no Cadastro", err.response.data)
+        }
+        else{
+            console.error(err)
+        }
+    })
+    .finally(() => {
         setIsLoading(false)
-        console.log("Erro no Cadastro", err.response)
     })
 }
 
