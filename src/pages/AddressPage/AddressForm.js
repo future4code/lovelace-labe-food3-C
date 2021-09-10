@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { InputsContainer, SignUpFormContainer } from './styled'
@@ -11,14 +11,15 @@ import { BASE_URL } from '../../constants/urls'
 
 const AddressForm = () => {
   const history = useHistory()
-  const [form, onChange, clear, setFields] = useForm({ street: '', number: '', neighbourhood: '',
-   city: '', state: '', complement: '' })
+  const [form, onChange, clear, setFields] = useForm({
+    street: '', number: '', neighbourhood: '',
+    city: '', state: '', complement: ''
+  })
 
   const [fullAddress] = useRequestDataX(`${BASE_URL}/fourFoodA/profile/address`, {})
 
   useEffect(() => {
     if (fullAddress.address) {
-      console.log("FULL ADDRESS", (fullAddress.address))
 
       const dados = {
         "city": fullAddress.address.city,
@@ -28,9 +29,8 @@ const AddressForm = () => {
         "state": fullAddress.address.state,
         "street": fullAddress.address.street
       }
-      
+
       setFields(dados)
-      
 
     }
   }, [fullAddress])
@@ -41,7 +41,6 @@ const AddressForm = () => {
 
   const onSubmitForm = (event) => {
     event.preventDefault()
-
     saveAddress(form, clear, history, setIsLoading)
   }
 
@@ -121,7 +120,7 @@ const AddressForm = () => {
           type={'submit'}
           fullWidth
         >
-          {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Salvar</>}
+          {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Salvar</>}
         </Button>
       </SignUpFormContainer>
     </form>
