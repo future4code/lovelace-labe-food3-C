@@ -18,7 +18,7 @@ const CardContainer = styled.div`
   @media (max-width: 30em) {
     width: 100%;
     border-radius: 8px;
-    border: 1px solid #000;
+    border: 1px solid #b8b8b8;
     display: flex;
     position: relative;
     margin-bottom: 10px;
@@ -39,8 +39,8 @@ const CardContainer = styled.div`
     } 
     
     span {
-        width: 90px;
-        height: 30px;
+        width: 60px;
+        height: 35px;
         text-align: center;
         border: solid 1px #e8222e;
         border-radius: 0 8px 0 8px;
