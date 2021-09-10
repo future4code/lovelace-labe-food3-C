@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
 import styled from "styled-components";
-import product from "../../assets/images/mao-santa-burguer-900-x-506.png"
-import { Button, Typography} from "@material-ui/core";
+import product from "../../assets/images/mao-santa-burguer-900-x-506.png";
+import { Button, Typography } from "@material-ui/core";
 
 const CardContainer = styled.div`
   /* 580px */
@@ -46,18 +46,15 @@ const CardContainer = styled.div`
         border-radius: 0 8px 0 8px;
         color: #e8222e;
     }
-    
-`
+    `;
 
 const ProductImage = styled.div`
   /* 580px */
   @media (max-width: 36em) {
-
   }
 
   /* 520px */
   @media (max-width: 32em) {
-
   }
 
   /* 480px */
@@ -70,59 +67,59 @@ const ProductImage = styled.div`
     background-size: cover;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-    
   }
-`
+`;
 
 const TextCard = styled.div`
-/* 580px */
-@media (max-width: 36em) {
+  /* 580px */
+  @media (max-width: 36em) {
+  }
 
-}
+  /* 520px */
+  @media (max-width: 32em) {
+  }
 
-/* 520px */
-@media (max-width: 32em) {
-
-}
-
-/* 480px */
-@media (max-width: 30em) {
-   margin: 0 10px;
-   width: 100%;
-  // border: 1px solid #000;
-}
-`
-
+  /* 480px */
+  @media (max-width: 30em) {
+    margin: 0 10px;
+    width: 100%;
+    // border: 1px solid #000;
+  }
+`;
 
 const CardProduct = () => {
+  return (
+    <CardContainer>
+      <ProductImage Background={product} />
 
-    return (
-        <CardContainer>
+      <TextCard>
+        <Typography
+          color={"primary"}
+          style={{
+            fontSize: "20px",
+            fontWeight: "400",
+            margin: "10px 0px 0px 5px",
+          }}
+        >
+          Stencil
+        </Typography>
 
-            <ProductImage Background={product}/>
+        <Typography
+          style={{ color: "#b8b8b8", fontSize: "14px", margin: "5px" }}
+        >
+          Pão, carne, queijo, cebola roxa, tomate, alface e molho.
+        </Typography>
 
-            <TextCard>
-                <Typography color={"primary"} style={{fontSize: "20px", fontWeight: "400", margin: "10px 0px 0px 5px"}}>
-                    Stencil
-                </Typography>
+        <Typography style={{ color: "#000", fontSize: "18px", margin: "5px" }}>
+          R$46,00
+        </Typography>
+      </TextCard>
 
-                <Typography style={{color: "#b8b8b8", fontSize: "14px", margin: "5px"}}>
-                    Pão, carne, queijo, cebola roxa, tomate, alface e molho.
-                </Typography>
+      <span>2</span>
 
-                <Typography style={{color: "#000", fontSize: "18px", margin: "5px"}}>
-                    R$46,00
-                </Typography>
+      <button>Remover</button>
+    </CardContainer>
+  );
+};
 
-            </TextCard>
-
-            <span>
-                2
-            </span>
-
-            <button>Remover</button>
-        </CardContainer>
-    )
-}
-
-export default CardProduct
+export default CardProduct;

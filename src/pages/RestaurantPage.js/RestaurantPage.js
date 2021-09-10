@@ -10,7 +10,7 @@ import {
   GeralContainer,
 } from "./styled";
 import { useHistory, useParams } from "react-router-dom";
-import CardBurger from "../../components/CardBurger/CardBurger";
+import CardBurger from "../../components/CardProducts/CardProducts";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import useRequestData from "../../hooks/useRequestData";

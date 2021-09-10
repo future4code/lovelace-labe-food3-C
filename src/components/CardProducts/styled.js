@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardFood = styled.div`
+export const CardFood = styled.div `
   display: flex;
   width: 20.5rem;
 
@@ -24,13 +24,28 @@ export const CardFood = styled.div`
   }
 `;
 
-export const MiniPicture = styled.img`
+export const QuantityCard = styled.div `
+    position: absolute;
+    top:0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        width: 30px;
+        height: 30px;
+
+        border: solid 1px #e8222e;
+        border-radius: 0 8px 0 8px;
+        color: #e8222e;
+`
+
+export const MiniPicture = styled.img `
   height: 7rem;
   width: 6rem;
   border-radius: 5px 0 0 5px;
 `;
 
-export const TextCard = styled.div`
+export const TextCard = styled.div `
   display: flex;
   flex-direction: column;
   justify-content: space-around;
