@@ -15,9 +15,12 @@ import { getRestaurants } from "../../services/getRestaurants";
 import Loading from "../../components/Loading/Loading";
 import CardWaitingDelivery from "../../components/CardWaitingDelivery/CardWaitingDelivery";
 import GlobalContext from "../../global/GlobalContext";
+import useAuthorizedPage from "../../hooks/useAuthorizedPage";
 
 const HomePage = ({ setPageTitle }) => {
   useProtectedPage();
+  const hasAuthorization = useAuthorizedPage()
+
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
   const [searchMode, setSearchMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -26,12 +29,14 @@ const HomePage = ({ setPageTitle }) => {
 
   const { states, setters, requests } = useContext(GlobalContext);
 
-  if (Object.keys(restaurants).length === 0) {
+  if (Object.keys(restaurants).length === 0 && hasAuthorization) {
     getRestaurants(setRestaurants, setIsLoading);
   }
 
   useEffect(() => {
-    requests.getActiveOrder()
+    if(hasAuthorization)
+      requests.getActiveOrder()
+      // eslint-disable-next-line
   }, [])
 
   if (isLoading)
