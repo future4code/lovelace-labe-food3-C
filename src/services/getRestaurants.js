@@ -16,7 +16,7 @@ export const getRestaurants = (saveData, setIsLoading) => {
         })
         .catch((err) => {
             if(err.response){
-                alert(err.response.data.message)
+                alert('Erro ao buscar restaurantes ' + err.response.data.message)
             }
             else{
                 alert('Ocorreu um erro no site')
