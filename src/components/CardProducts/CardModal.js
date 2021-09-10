@@ -11,13 +11,31 @@ const CardModal = (props) => {
   const handleChange = (event) => {
     setQuantity(event.target.value);
   };
+
   const addItems = () => {
-    setters.setAddedProducts([
-      ...states.addedProducts,
-      { id: props.productId, quantity: quantity },
-    ]);
+    const productInArray = states.addedProducts.find((product) => {
+      return props.productId === product.id;
+    });
+
+    if (productInArray) {
+      const newProduct = states.addedProducts.map((product) => {
+        if (props.productId === product.id) {
+          return {
+            ...product,
+            quantity: quantity,
+          };
+        }
+        return product;
+      });
+
+      setters.setAddedProducts(newProduct);
+    } else {
+      setters.setAddedProducts([
+        ...states.addedProducts,
+        { id: props.productId, quantity: quantity },
+      ]);
+    }
     props.setShowModal(false);
-    console.log(states.addedProducts);
   };
 
   return (

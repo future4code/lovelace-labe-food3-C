@@ -30,6 +30,7 @@ export const Main = styled.div`
     position: absolute;
     bottom: 1.5rem;
     right: 1rem;
+    box-shadow: none;
   }
   padding: 1rem;
 `;
