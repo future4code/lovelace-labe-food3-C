@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import {Switch, Route, BrowserRouter} from "react-router-dom"
 import AddressPage from "../pages/AddressPage/AddressPage";
 import CartPage from "../pages/CartPage/CartPage";
@@ -14,57 +14,48 @@ import Header from "../components/Header/Header";
 
 
 const Router = () => {
+    const [pageTitle, setPageTitle] = useState('')
     return (
         <BrowserRouter>
             <Switch>
                 <Route exact path="/login">
                     <LoginPage/>
                 </Route>
-
                 <Route exact path="/signup">
-                    <Header/>
-                    <SignUpPage/>
+                    <Header pageTitle={pageTitle} setPageTitle={setPageTitle}/>
+                    <SignUpPage setPageTitle={setPageTitle}/>
                 </Route>
-
                 <Route exact path="/">
                     <InitialPage/>
                 </Route>
-
                 <Route exact path="/home">
-                    <Header/>
-                    <HomePage />
+                    <Header pageTitle={pageTitle} setPageTitle={setPageTitle}/>
+                    <HomePage setPageTitle={setPageTitle}/>
                 </Route>
-
                 <Route exact path="/restaurant/:id">
-                    <Header/>
-                    <RestaurantPage />
+                    <Header pageTitle={pageTitle} setPageTitle={setPageTitle}/>
+                    <RestaurantPage setPageTitle={setPageTitle}/>
                 </Route>
-
                 <Route exact path="/cart">
-                    <Header/>
-                    <CartPage />
+                    <Header pageTitle={pageTitle} setPageTitle={setPageTitle}/>
+                    <CartPage setPageTitle={setPageTitle}/>
                 </Route>
-
                 <Route exact path="/profile">
-                    <Header/>
-                    <ProfilePage />
+                    <Header pageTitle={pageTitle} setPageTitle={setPageTitle}/>
+                    <ProfilePage setPageTitle={setPageTitle}/>
                 </Route>
-
                 <Route exact path="/profile/edit/address">
-                    <Header/>
-                    <AddressPage />
+                    <Header pageTitle={pageTitle} setPageTitle={setPageTitle}/>
+                    <AddressPage setPageTitle={setPageTitle}/>
                 </Route>
-
                 <Route exact path="/profile/edit/user">
-                    <Header/>
-                    <UserInfoPage />
+                    <Header pageTitle={pageTitle} setPageTitle={setPageTitle}/>
+                    <UserInfoPage setPageTitle={setPageTitle}/>
                 </Route>
-
                 <Route>
-                    <Header/>
-                    <ErrorPage/>
+                    <Header pageTitle={pageTitle} setPageTitle={setPageTitle}/>
+                    <ErrorPage setPageTitle={setPageTitle}/>
                 </Route>
-
             </Switch>
         </BrowserRouter>
     )

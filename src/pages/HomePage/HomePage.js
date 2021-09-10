@@ -18,9 +18,8 @@ import Loading from "../../components/Loading/Loading";
 import CardWaitingDelivery from "../../components/CardWaitingDelivery/CardWaitingDelivery";
 import GlobalContext from "../../global/GlobalContext";
 
-const HomePage = () => {
+const HomePage = ({setPageTitle}) => {
   useProtectedPage();
-  const history = useHistory();
   const [searchMode, setSearchMode] = useState(false);
   const [restaurants, setRestaurants] = useState({});
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
@@ -40,6 +39,7 @@ const HomePage = () => {
     );
 
   if (searchMode) {
+    setPageTitle('Busca')
     return (
       <StyledHomePage>
         <SearchField

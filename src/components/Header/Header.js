@@ -4,43 +4,44 @@ import imgBackArrow from "../../assets/images/back.svg"
 import { useHistory } from 'react-router'
 import { useParams } from 'react-router-dom'
 
-const Header = ({title, canGoBackPage}) => {
+const Header = ({pageTitle="", setPageTitle}) => {
     const history = useHistory()
     const params = useParams()
 
-    let headerText = ""
+    let canGoBack = true
 
     switch (history.location.pathname) {
         case '/home':
-            headerText = "iFuture"
+            setPageTitle("iFuture")
+            canGoBack = false
             break
 
         case '/signup':
-            headerText = ""
+            setPageTitle("")
             break
 
         case `/restaurant/${params.id}`:
-            headerText = "Restaurante"
+            setPageTitle("Restaurante")
             break
 
         case '/profile':
-            headerText = "Meu Perfil"
+            setPageTitle("Meu Perfil")
             break
 
         case '/profile/edit/address':
-            headerText = "Meu Endereço"
+            setPageTitle("Meu Endereço")
             break
 
         case '/profile/edit/user':
-            headerText = "Editar"
+            setPageTitle("Editar")
             break
 
         case '/cart':
-            headerText = "Meu carrinho"
+            setPageTitle("Meu carrinho")
             break
 
         default:
-            headerText = "iFuture"
+            setPageTitle("iFuture")
             break
 
     }
@@ -49,10 +50,10 @@ const Header = ({title, canGoBackPage}) => {
         <>
             <StyledMargin />
             <StyledHeader>
-                <button onClick={() => history.goBack()}>
+                {canGoBack && <button onClick={() => history.goBack()}>
                     <img src={imgBackArrow} alt='botão para voltar'/>
-                </button>
-                <p>{headerText}</p>
+                </button>}
+                <p>{pageTitle}</p>
             </StyledHeader>
         </>
     )
