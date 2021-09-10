@@ -24,12 +24,12 @@ const HomePage = () => {
   const [searchMode, setSearchMode] = useState(false);
   const [restaurants, setRestaurants] = useState({});
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
-  const {states, setters, requests} = useContext(GlobalContext)
+  const { states, setters, requests } = useContext(GlobalContext);
 
   if (Object.keys(restaurants).length === 0) {
-    getRestaurants(setRestaurants, setIsLoading)
+    getRestaurants(setRestaurants, setIsLoading);
   }
 
   if (isLoading)
@@ -38,7 +38,6 @@ const HomePage = () => {
         <Loading />
       </StyledHomePage>
     );
-
 
   if (searchMode) {
     return (
@@ -71,15 +70,14 @@ const HomePage = () => {
     );
   }
 
-
-
   return (
     <StyledHomePage>
       <SearchField setSearchMode={setSearchMode} />
       <TapPanel restaurants={restaurants} />
       <Footer />
-      {states.waitingDelivery.maximumDeliveryTime>0
-       && <CardWaitingDelivery data={states.waitingDelivery}/>}
+      {states.waitingDelivery.maximumDeliveryTime > 0 && (
+        <CardWaitingDelivery data={states.waitingDelivery} />
+      )}
     </StyledHomePage>
   );
 };

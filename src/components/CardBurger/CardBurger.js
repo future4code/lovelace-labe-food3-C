@@ -17,7 +17,9 @@ const CardBurger = (props) => {
         <h5> R${props.price} </h5>{" "}
       </TextCard>
       <button onClick={() => setShowModal(true)}> Adicionar </button>
-      {showModal ? <CardModal setShowModal={setShowModal} /> : null}
+      {showModal ? (
+        <CardModal setShowModal={setShowModal} productId={props.id} />
+      ) : null}
     </CardFood>
   );
 };
