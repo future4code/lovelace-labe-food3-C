@@ -11,18 +11,6 @@ const CardModal = (props) => {
     setQuantity(event.target.value);
   };
 
-  const setRestaurantAndProducts = () => {
-    if (states.infoRestaurant === 0) {
-      setters.setInfoRestarant(props.infoRestaurant);
-      addItems();
-    } else if (states.infoRestaurant === props.infoRestaurant) {
-      addItems();
-    } else {
-      props.setShowModal(false);
-      alert("Você só pode adicionar pedidos de um restaurante");
-    }
-  };
-
   const addItems = () => {
     const productInArray = states.addedProducts.find((product) => {
       return props.product.id === product.food.id;
@@ -51,6 +39,18 @@ const CardModal = (props) => {
       ]);
     }
     props.setShowModal(false);
+  };
+
+  const setRestaurantAndProducts = () => {
+    if (states.infoRestaurant === 0) {
+      setters.setInfoRestarant(props.infoRestaurant);
+      addItems();
+    } else if (states.infoRestaurant === props.infoRestaurant) {
+      addItems();
+    } else {
+      props.setShowModal(false);
+      alert("Você só pode adicionar pedidos de um restaurante");
+    }
   };
 
   return (
