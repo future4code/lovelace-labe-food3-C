@@ -141,9 +141,9 @@ const GlobalStateContext = (props) => {
         });
     };
 
-    // const removeFromCart = (productId) => {
+    const removeFromCart = (productId) => {
         
-    // };
+    };
 
     const states = {waitingDelivery, userProfile, addedProducts, infoRestaurant};
     const setters = {setWaitingDelivery, setUserProfile, setAddedProducts, setInfoRestaurant, removeFromCart};
