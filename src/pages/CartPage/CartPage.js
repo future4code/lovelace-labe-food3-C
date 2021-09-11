@@ -1,14 +1,22 @@
-import React, {useContext, useState} from "react";
-import useProtectedPage from "../../hooks/useUnprotectedPage";
+import React, {useContext, useEffect, useState} from "react";
+import {useHistory} from "react-router";
+import GlobalContext from "../../global/GlobalContext";
+
+//STYLES
 import {Typography, Radio, RadioGroup, FormControlLabel, Button} from "@material-ui/core";
+import {CardContainer, Frete, MainContainer, Payments, RestaurantAddress, SubTotal, UserAddress} from "./styled";
+
+
+//COMPONENTS
 import Footer from "../../components/Footer/Footer";
 import CardProduct from "../../components/CardProduct/CardProduct";
-import GlobalContext from "../../global/GlobalContext";
-import {CardContainer, Frete, MainContainer, Payments, RestaurantAddress, SubTotal, UserAddress} from "./styled";
-import useRequestData from "../../hooks/useRequestData";
+
+//HELPERS
+import useProtectedPage from "../../hooks/useProtectedPage"
 
 const CartPage = () => {
     useProtectedPage();
+    const history = useHistory();
     const {states, requests} = useContext(GlobalContext);
     const [value, setValue] = useState("money");
 
@@ -18,8 +26,6 @@ const CartPage = () => {
         return restaurant.restaurantId;
     });
 
-    const [data] = useRequestData(`/fourFoodA/restaurants/${restaurantId[0]}`, {});
-
     const handleChange = (event) => {
         setValue(event.target.value);
     };
@@ -28,27 +34,33 @@ const CartPage = () => {
         return acc + item.food.price * item.quantity;
     }, 0);
 
+    useEffect(() => {
+        requests.getProfile();
+        requests.getRestaurantDetail(restaurantId[0]);
+        // eslint-disable-next-line
+    }, []);
+
 
     return (
         <MainContainer>
             <UserAddress>
                 <Typography style={{color: "#b8b8b8", fontSize: "18px"}}>Endereço de entrega</Typography>
-                <Typography style={{color: "#000000", fontSize: "18px"}}>Rua Alessandra Vieira, 42</Typography>
+                <Typography style={{color: "#000000", fontSize: "18px"}}>{states.userProfile.address}</Typography>
             </UserAddress>
 
             {product.length > 0 ? (
                 <>
                     <RestaurantAddress>
                         <Typography color={"primary"} style={{fontSize: "16px", paddingBottom: "5px"}}>
-                            {data && data.restaurant && data.restaurant.name}
+                            {states.infoRestaurant && states.infoRestaurant.name}
                         </Typography>
 
                         <Typography style={{color: "#b8b8b8", fontSize: "16px", paddingBottom: "5px"}}>
-                            {data && data.restaurant && data.restaurant.address}
+                            {states.infoRestaurant && states.infoRestaurant.address}
                         </Typography>
 
                         <Typography style={{color: "#b8b8b8", fontSize: "16px"}}>
-                            {data && data.restaurant && data.restaurant.deliveryTime} min
+                            {states.infoRestaurant && states.infoRestaurant.deliveryTime} min
                         </Typography>
                     </RestaurantAddress>
 
@@ -85,12 +97,12 @@ const CartPage = () => {
                 {product.length > 0 ? (
                     <Typography>
                         Frente:{" "}
-                        {data &&
-                                    data.restaurant &&
-                                    data.restaurant.shipping.toLocaleString("pt-BR", {
-                                        style: "currency",
-                                        currency: "BRL"
-                                    })}
+                        {states.infoRestaurant &&
+                            states.infoRestaurant.shipping &&
+                            states.infoRestaurant.shipping.toLocaleString("pt-BR", {
+                                style: "currency",
+                                currency: "BRL"
+                            })}
                     </Typography>
                 ) : (
                     <Typography>Frente: R$ 00,00</Typography>
@@ -129,7 +141,12 @@ const CartPage = () => {
                 </RadioGroup>
 
                 {product.length > 0 ? (
-                    <Button variant={"contained"} color={"primary"} style={{width: "100%"}}>
+                    <Button
+                        variant={"contained"}
+                        color={"primary"}
+                        style={{width: "100%"}}
+                        onClick={() => requests.placeOrder(product, value, restaurantId[0], history)}
+                    >
                         Confirmar
                     </Button>
                 ) : (
