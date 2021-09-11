@@ -29,7 +29,14 @@ const CardModal = (props) => {
 
             setters.setAddedProducts(newProduct);
         } else {
-            setters.setAddedProducts([...states.addedProducts, {food: props.product, quantity: quantity}]);
+            setters.setAddedProducts([
+                ...states.addedProducts,
+                {
+                    food: props.product, 
+                    quantity: quantity, 
+                    restaurantId: props.infoRestaurant
+                }
+            ]);
         }
         props.setShowModal(false);
     };

@@ -1,24 +1,33 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import useProtectedPage from "../../hooks/useUnprotectedPage";
-import {useHistory} from "react-router-dom";
 import {Typography, Radio, RadioGroup, FormControlLabel, Button} from "@material-ui/core";
 import Footer from "../../components/Footer/Footer";
 import CardProduct from "../../components/CardProduct/CardProduct";
 import GlobalContext from "../../global/GlobalContext";
 import {CardContainer, Frete, MainContainer, Payments, RestaurantAddress, SubTotal, UserAddress} from "./styled";
+import useRequestData from "../../hooks/useRequestData";
 
 const CartPage = () => {
     useProtectedPage();
-    const history = useHistory();
-    const {states, setters, requests} = useContext(GlobalContext);
-    const [value, setValue] = React.useState("money");
+    const {states, requests} = useContext(GlobalContext);
+    const [value, setValue] = useState("money");
+
+    const product = states && states.addedProducts;
+
+    const restaurantId = product.map((restaurant) => {
+        return restaurant.restaurantId;
+    });
+
+    const [data] = useRequestData(`/fourFoodA/restaurants/${restaurantId[0]}`, {});
 
     const handleChange = (event) => {
         setValue(event.target.value);
     };
-    const product = states && states.addedProducts;
 
-    console.log(product);
+    const totalPrice = product.reduce((acc, item) => {
+        return acc + item.food.price * item.quantity;
+    }, 0);
+
 
     return (
         <MainContainer>
@@ -31,21 +40,31 @@ const CartPage = () => {
                 <>
                     <RestaurantAddress>
                         <Typography color={"primary"} style={{fontSize: "16px", paddingBottom: "5px"}}>
-                            Bullguer Vila Madalena
+                            {data && data.restaurant && data.restaurant.name}
                         </Typography>
 
                         <Typography style={{color: "#b8b8b8", fontSize: "16px", paddingBottom: "5px"}}>
-                            R. Fradique Coutinho, 1136 - Vila Madalena
+                            {data && data.restaurant && data.restaurant.address}
                         </Typography>
 
-                        <Typography style={{color: "#b8b8b8", fontSize: "16px"}}>30 - 45 min</Typography>
+                        <Typography style={{color: "#b8b8b8", fontSize: "16px"}}>
+                            {data && data.restaurant && data.restaurant.deliveryTime} min
+                        </Typography>
                     </RestaurantAddress>
 
                     <CardContainer>
-                        {/* {product.map(())} */}
-                        <CardProduct 
-                            // Name={}
-                        />
+                        {product.map((product) => {
+                            return (
+                                <CardProduct
+                                    Id={product.food.id}
+                                    Name={product.food.name}
+                                    Description={product.food.description}
+                                    Quantity={product.quantity}
+                                    Price={product.food.price}
+                                    Photo={product.food.photoUrl}
+                                />
+                            );
+                        })}
                     </CardContainer>
                 </>
             ) : (
@@ -64,7 +83,15 @@ const CartPage = () => {
 
             <Frete>
                 {product.length > 0 ? (
-                    <Typography>Frente: R$ 00,00</Typography>
+                    <Typography>
+                        Frente:{" "}
+                        {data &&
+                                    data.restaurant &&
+                                    data.restaurant.shipping.toLocaleString("pt-BR", {
+                                        style: "currency",
+                                        currency: "BRL"
+                                    })}
+                    </Typography>
                 ) : (
                     <Typography>Frente: R$ 00,00</Typography>
                 )}
@@ -74,17 +101,12 @@ const CartPage = () => {
                 <Typography>SUBTOTAL:</Typography>
 
                 {product.length > 0 ? (
-                    product.map((product) => {
-                        const subTotal = product.quantity * product.food.price;
-                        return (
-                            <Typography color={"primary"} style={{fontWeight: "500"}}>
-                                {subTotal.toLocaleString("pt-BR", {
-                                    style: "currency",
-                                    currency: "BRL"
-                                })}
-                            </Typography>
-                        );
-                    })
+                    <Typography color={"primary"} style={{fontWeight: "500"}}>
+                        {totalPrice.toLocaleString("pt-BR", {
+                            style: "currency",
+                            currency: "BRL"
+                        })}
+                    </Typography>
                 ) : (
                     <Typography color={"primary"} style={{fontWeight: "500"}}>
                         R$ 00,00
