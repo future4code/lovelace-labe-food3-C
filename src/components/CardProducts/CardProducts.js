@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import {CardFood, MiniPicture, TextCard, QuantityCard} from "./styled";
 import CardModal from "./CardModal";
 import GlobalContext from "../../global/GlobalContext";
@@ -11,7 +11,7 @@ const CardProducts = (props) => {
 
     const productQuantity = itemQuantity
         .filter((product) => {
-            return product.id === props.Food.id;
+            return product.food.id === props.Food.id;
         })
         .map((product) => {
             return product.quantity;
@@ -31,9 +31,15 @@ const CardProducts = (props) => {
                 <h5> R$ {props.Food.price} </h5>
             </TextCard>
 
-            <button onClick={() => setShowModal(true)}>
-                {!productQuantity[0] ? <span> Adicionar </span> : <span>Alterar</span>}
-            </button>
+            {productQuantity && !productQuantity[0] ? (
+                <button onClick={() => setShowModal(true)}>
+                    <span> Adicionar </span>
+                </button>
+            ) : (
+                <button onClick={() => setShowModal(true)} style={{border: "1px solid #e8222e"}}>
+                    <span style={{color: "#e8222e"}}>Alterar</span>
+                </button>
+            )}
 
             {productQuantity[0] ? <QuantityCard>{productQuantity[0]}</QuantityCard> : null}
 
