@@ -14,12 +14,12 @@ const CardModal = (props) => {
 
   const addItems = () => {
     const productInArray = states.addedProducts.find((product) => {
-      return props.productId === product.id;
+      return props.product.id === product.id;
     });
 
     if (productInArray) {
       const newProduct = states.addedProducts.map((product) => {
-        if (props.productId === product.id) {
+        if (props.product.id === product.id) {
           return {
             ...product,
             quantity: quantity,
@@ -30,10 +30,7 @@ const CardModal = (props) => {
 
       setters.setAddedProducts(newProduct);
     } else {
-      setters.setAddedProducts([
-        ...states.addedProducts,
-        { id: props.productId, quantity: quantity },
-      ]);
+      setters.setAddedProducts([...states.addedProducts, { food: props.product, quantity: quantity }]);
     }
     props.setShowModal(false);
   };

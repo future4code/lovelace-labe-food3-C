@@ -13,9 +13,8 @@ const CardProducts = (props) => {
 
   const productQuantity = itemQuantity
     .filter((product) => {
-      return product.id === props.id;
+      return product.id === props.Food.id;
     })
-
     .map((product) => {
       return product.quantity;
     });
@@ -23,22 +22,19 @@ const CardProducts = (props) => {
   return (
     <CardFood>
       <div>
-        <MiniPicture src={props.photoUrl} />{" "}
+        <MiniPicture src={props.Food.photoUrl} />{" "}
       </div>{" "}
       <TextCard>
-        <h4> {props.name} </h4> <p>{props.description}</p>{" "}
-        <h5> R$ {props.price} </h5>{" "}
+        <h4> {props.Food.name} </h4>
+        <p>{props.Food.description}</p>
+        <h5> R$ {props.Food.price} </h5>{" "}
       </TextCard>{" "}
       <button onClick={() => setShowModal(true)}>
         {" "}
         {!productQuantity[0] ? <span> Adicionar </span> : <span>Alterar</span>}
       </button>
-      {productQuantity[0] ? (
-        <QuantityCard>{productQuantity[0]}</QuantityCard>
-      ) : null}
-      {showModal ? (
-        <CardModal setShowModal={setShowModal} productId={props.id} />
-      ) : null}{" "}
+      {productQuantity[0] ? <QuantityCard>{productQuantity[0]}</QuantityCard> : null}
+      {showModal ? <CardModal setShowModal={setShowModal} product={props.Food} /> : null}{" "}
     </CardFood>
   );
 };

@@ -15,12 +15,8 @@ const CartPage = () => {
     const history = useHistory()
     const {states, setters, requests} = useContext(GlobalContext)
 
-    const handleWaitingDelivery = () => {
-        const exemploTempoMin = 90
-        const exemploSubtotal = 60.70
-        const exeploNomeRestaurante = 'Massas Suaves'
-        setters.setWaitingDelivery(exemploTempoMin, exemploSubtotal, exeploNomeRestaurante)
-    }
+  
+    console.log(states.addedProducts);
 
     return (
         <MainContainer>
