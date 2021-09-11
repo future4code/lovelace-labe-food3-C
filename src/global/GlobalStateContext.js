@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import GlobalContext from "./GlobalContext";
 import axios from "axios";
 import {BASE_URL} from "../constants/urls";
-import { goToHome } from '../routes/coordinator';
+import {goToHome} from "../routes/coordinator";
 
 const GlobalStateContext = (props) => {
     const [maximumDeliveryTime, setMaximumDeliveryTime] = useState(0);
@@ -125,25 +125,24 @@ const GlobalStateContext = (props) => {
             paymentMethod: payment
         };
 
-        axios.post(`${BASE_URL}/fourFoodA/restaurants/${restaurantId}/order`, body, headers)
-        .then((response) => {
-            alert("Pedido realizado com sucesso!")
-            setInfoRestaurant({});
-            setAddedProducts([])
-            goToHome(history)
-        })
-        .catch((error) => {
-             if (error.response) {
-                 alert(error.response.data.message);
-             } else {
-                 alert("Erro ao realizar pedido");
-             }
-        });
+        axios
+            .post(`${BASE_URL}/fourFoodA/restaurants/${restaurantId}/order`, body, headers)
+            .then((response) => {
+                alert("Pedido realizado com sucesso!");
+                setInfoRestaurant({});
+                setAddedProducts([]);
+                goToHome(history);
+            })
+            .catch((error) => {
+                if (error.response) {
+                    alert(error.response.data.message);
+                } else {
+                    alert("Erro ao realizar pedido");
+                }
+            });
     };
 
-    // const removeFromCart = (productId) => {
-        
-    // };
+    const removeFromCart = (productId) => {};
 
     const states = {waitingDelivery, userProfile, addedProducts, infoRestaurant};
     const setters = {setWaitingDelivery, setUserProfile, setAddedProducts, setInfoRestaurant, removeFromCart};

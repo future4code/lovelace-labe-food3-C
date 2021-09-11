@@ -37,6 +37,7 @@ const CartPage = () => {
     useEffect(() => {
         requests.getProfile();
         requests.getRestaurantDetail(restaurantId[0]);
+        
         // eslint-disable-next-line
     }, []);
 
