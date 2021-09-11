@@ -13,12 +13,12 @@ const CardModal = (props) => {
 
     const addItems = () => {
         const productInArray = states.addedProducts.find((product) => {
-            return props.product.id === product.id;
+            return props.product.id === product.food.id;
         });
 
         if (productInArray) {
             const newProduct = states.addedProducts.map((product) => {
-                if (props.product.id === product.id) {
+                if (props.product.id === product.food.id) {
                     return {
                         ...product,
                         quantity: quantity
@@ -32,8 +32,8 @@ const CardModal = (props) => {
             setters.setAddedProducts([
                 ...states.addedProducts,
                 {
-                    food: props.product, 
-                    quantity: quantity, 
+                    food: props.product,
+                    quantity: quantity,
                     restaurantId: props.infoRestaurant
                 }
             ]);
@@ -55,7 +55,7 @@ const CardModal = (props) => {
                 })}
             </TextField>
 
-            <Button variant={"contained"} type={"submit"} onClick={addItems}>
+            <Button variant={"contained"} onClick={addItems}>
                 Adicionar ao Carrinho
             </Button>
         </UIModal>
