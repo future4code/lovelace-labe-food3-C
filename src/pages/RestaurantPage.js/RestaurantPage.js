@@ -1,21 +1,17 @@
 import React from "react";
 import useProtectedPage from "../../hooks/useUnprotectedPage";
-import {
-    MainContainer,
-    CardRestaurant,
-    RestaurantPicture,
-    DeliverTaxSpan,
-    CardMenu,
-    GeralContainer
-} from "./styled";
+import {MainContainer, CardRestaurant, RestaurantPicture, DeliverTaxSpan, CardMenu, GeralContainer} from "./styled";
 import {useParams} from "react-router-dom";
 import CardProducts from "../../components/CardProducts/CardProducts";
 import useRequestData from "../../hooks/useRequestData";
 import Loading from "../../components/Loading/Loading";
 import categorizeRestaurants from "../../tools/categorizeRestaurants";
+import useRestaurantBlock from "../../hooks/useRestaurantBlock";
 
 const RestaurantPage = () => {
     useProtectedPage();
+    useRestaurantBlock();
+
     const params = useParams();
     const [data] = useRequestData(`/fourFoodA/restaurants/${params.id}`, {});
 

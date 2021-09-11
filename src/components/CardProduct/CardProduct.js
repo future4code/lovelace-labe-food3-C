@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import product from "../../assets/images/mao-santa-burguer-900-x-506.png";
 import { Button, Typography } from "@material-ui/core";
+import GlobalContext from '../../global/GlobalContext';
 
 const CardContainer = styled.div`
   /* 580px */
@@ -88,6 +89,8 @@ const TextCard = styled.div`
 `;
 
 const CardProduct = (props) => {
+  const {setters} = useContext(GlobalContext)
+
   return (
       <CardContainer>
           <ProductImage Background={props.Photo} />
@@ -116,7 +119,7 @@ const CardProduct = (props) => {
 
           <span>{props.Quantity}</span>
 
-          <button>Remover</button>
+          <button onClick={() => setters.removeFromCart(props.Id)}>Remover</button>
       </CardContainer>
   );
 };
