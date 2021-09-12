@@ -3,22 +3,23 @@ import UIModal from "../Modal/UIModal";
 import {Button, MenuItem, TextField} from "@material-ui/core";
 import GlobalContext from "../../global/GlobalContext";
 
-const quantities = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const quantities = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const CardModal = (props) => {
-    const {states, setters, requests} = useContext(GlobalContext);
+    const {states, setters} = useContext(GlobalContext);
     const [quantity, setQuantity] = useState(0);
+
     const handleChange = (event) => {
         setQuantity(event.target.value);
     };
 
     const addItems = () => {
         const productInArray = states.addedProducts.find((product) => {
-            return props.product.id === product.id;
+            return props.product.id === product.food.id;
         });
 
         if (productInArray) {
             const newProduct = states.addedProducts.map((product) => {
-                if (props.product.id === product.id) {
+                if (props.product.id === product.food.id) {
                     return {
                         ...product,
                         quantity: quantity
@@ -29,7 +30,14 @@ const CardModal = (props) => {
 
             setters.setAddedProducts(newProduct);
         } else {
-            setters.setAddedProducts([...states.addedProducts, {food: props.product, quantity: quantity}]);
+            setters.setAddedProducts([
+                ...states.addedProducts,
+                {
+                    food: props.product,
+                    quantity: quantity,
+                    restaurantId: props.infoRestaurant
+                }
+            ]);
         }
         props.setShowModal(false);
     };
@@ -48,7 +56,7 @@ const CardModal = (props) => {
                 })}
             </TextField>
 
-            <Button variant={"contained"} type={"submit"} onClick={addItems}>
+            <Button variant={"contained"} onClick={addItems}>
                 Adicionar ao Carrinho
             </Button>
         </UIModal>

@@ -28,7 +28,12 @@ const CardProducts = (props) => {
 
                 <p>{props.Food.description}</p>
 
-                <h5> R$ {props.Food.price} </h5>
+                <h5>
+                    {props.Food.price.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL"
+                    })}{" "}
+                </h5>
             </TextCard>
 
             <button onClick={() => setShowModal(true)}>
@@ -37,7 +42,9 @@ const CardProducts = (props) => {
 
             {productQuantity[0] ? <QuantityCard>{productQuantity[0]}</QuantityCard> : null}
 
-            {showModal ? <CardModal setShowModal={setShowModal} product={props.Food} /> : null}
+            {showModal ? (
+                <CardModal setShowModal={setShowModal} product={props.Food} infoRestaurant={props.infoRestaurant} />
+            ) : null}
         </CardFood>
     );
 };

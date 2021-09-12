@@ -5,25 +5,24 @@ import { useContext } from 'react'
 import GlobalContext from '../global/GlobalContext'
 
 const useAuthorizedPage = () => {
-  const history = useHistory()
-  const [hasAuthorization, setHasAuthorization] = useState(false)
-  const { states, requests } = useContext(GlobalContext)
+    const history = useHistory()
+    const [hasAuthorization, setHasAuthorization] = useState(false)
+    const { states, requests } = useContext(GlobalContext)
 
     useLayoutEffect(() => {
-      if (!Object.keys(states.userProfile).length) {
-        console.log('Primeira rodada', states.userProfile)
-        requests.getProfile()
-      }
-      if(!Object.keys(states.userProfile).length){
-        console.log('Segunda rodada', states.userProfile)
-        goToLogin(history)
-        setHasAuthorization(false)
-      }
-      else{
-        setHasAuthorization(true)
-      }
+        if (!Object.keys(states.userProfile).length) {
 
-      // eslint-disable-next-line
+            requests.getProfile()
+        }
+        if (!Object.keys(states.userProfile).length) {
+
+            goToLogin(history)
+            setHasAuthorization(false)
+        } else {
+            setHasAuthorization(true)
+        }
+
+        // eslint-disable-next-line
     }, [history])
 
     return hasAuthorization

@@ -1,51 +1,83 @@
-import React, {useContext} from "react";
-import useProtectedPage from "../../hooks/useUnprotectedPage";
-import {useHistory} from "react-router-dom";
+import React, {useContext, useEffect, useState} from "react";
+import {useHistory} from "react-router";
+import GlobalContext from "../../global/GlobalContext";
+
+//STYLES
 import {Typography, Radio, RadioGroup, FormControlLabel, Button} from "@material-ui/core";
+import {CardContainer, Frete, MainContainer, Payments, RestaurantAddress, SubTotal, UserAddress} from "./styled";
+
+
+//COMPONENTS
 import Footer from "../../components/Footer/Footer";
 import CardProduct from "../../components/CardProduct/CardProduct";
-import GlobalContext from "../../global/GlobalContext";
-import {CardContainer, Frete, MainContainer, Payments, RestaurantAddress, SubTotal, UserAddress} from "./styled";
+
+//HELPERS
+import useProtectedPage from "../../hooks/useProtectedPage"
 
 const CartPage = () => {
     useProtectedPage();
     const history = useHistory();
-    const {states, setters, requests} = useContext(GlobalContext);
-    const [value, setValue] = React.useState("money");
+    const {states, requests} = useContext(GlobalContext);
+    const [value, setValue] = useState("money");
+
+    const product = states && states.addedProducts;
+
+    const restaurantId = product.map((restaurant) => {
+        return restaurant.restaurantId;
+    });
 
     const handleChange = (event) => {
         setValue(event.target.value);
     };
-    const product = states && states.addedProducts;
 
-    console.log(product);
+    const totalPrice = product.reduce((acc, item) => {
+        return acc + item.food.price * item.quantity;
+    }, 0);
+
+    useEffect(() => {
+        requests.getProfile();
+        requests.getRestaurantDetail(restaurantId[0]);
+        
+        // eslint-disable-next-line
+    }, []);
+
 
     return (
         <MainContainer>
             <UserAddress>
                 <Typography style={{color: "#b8b8b8", fontSize: "18px"}}>Endereço de entrega</Typography>
-                <Typography style={{color: "#000000", fontSize: "18px"}}>Rua Alessandra Vieira, 42</Typography>
+                <Typography style={{color: "#000000", fontSize: "18px"}}>{states.userProfile.address}</Typography>
             </UserAddress>
 
             {product.length > 0 ? (
                 <>
                     <RestaurantAddress>
                         <Typography color={"primary"} style={{fontSize: "16px", paddingBottom: "5px"}}>
-                            Bullguer Vila Madalena
+                            {states.infoRestaurant && states.infoRestaurant.name}
                         </Typography>
 
                         <Typography style={{color: "#b8b8b8", fontSize: "16px", paddingBottom: "5px"}}>
-                            R. Fradique Coutinho, 1136 - Vila Madalena
+                            {states.infoRestaurant && states.infoRestaurant.address}
                         </Typography>
 
-                        <Typography style={{color: "#b8b8b8", fontSize: "16px"}}>30 - 45 min</Typography>
+                        <Typography style={{color: "#b8b8b8", fontSize: "16px"}}>
+                            {states.infoRestaurant && states.infoRestaurant.deliveryTime} min
+                        </Typography>
                     </RestaurantAddress>
 
                     <CardContainer>
-                        {/* {product.map(())} */}
-                        <CardProduct 
-                            // Name={}
-                        />
+                        {product.map((product) => {
+                            return (
+                                <CardProduct
+                                    Id={product.food.id}
+                                    Name={product.food.name}
+                                    Description={product.food.description}
+                                    Quantity={product.quantity}
+                                    Price={product.food.price}
+                                    Photo={product.food.photoUrl}
+                                />
+                            );
+                        })}
                     </CardContainer>
                 </>
             ) : (
@@ -64,7 +96,15 @@ const CartPage = () => {
 
             <Frete>
                 {product.length > 0 ? (
-                    <Typography>Frente: R$ 00,00</Typography>
+                    <Typography>
+                        Frente:{" "}
+                        {states.infoRestaurant &&
+                            states.infoRestaurant.shipping &&
+                            states.infoRestaurant.shipping.toLocaleString("pt-BR", {
+                                style: "currency",
+                                currency: "BRL"
+                            })}
+                    </Typography>
                 ) : (
                     <Typography>Frente: R$ 00,00</Typography>
                 )}
@@ -74,17 +114,12 @@ const CartPage = () => {
                 <Typography>SUBTOTAL:</Typography>
 
                 {product.length > 0 ? (
-                    product.map((product) => {
-                        const subTotal = product.quantity * product.food.price;
-                        return (
-                            <Typography color={"primary"} style={{fontWeight: "500"}}>
-                                {subTotal.toLocaleString("pt-BR", {
-                                    style: "currency",
-                                    currency: "BRL"
-                                })}
-                            </Typography>
-                        );
-                    })
+                    <Typography color={"primary"} style={{fontWeight: "500"}}>
+                        {totalPrice.toLocaleString("pt-BR", {
+                            style: "currency",
+                            currency: "BRL"
+                        })}
+                    </Typography>
                 ) : (
                     <Typography color={"primary"} style={{fontWeight: "500"}}>
                         R$ 00,00
@@ -107,7 +142,12 @@ const CartPage = () => {
                 </RadioGroup>
 
                 {product.length > 0 ? (
-                    <Button variant={"contained"} color={"primary"} style={{width: "100%"}}>
+                    <Button
+                        variant={"contained"}
+                        color={"primary"}
+                        style={{width: "100%"}}
+                        onClick={() => requests.placeOrder(product, value, restaurantId[0], history)}
+                    >
                         Confirmar
                     </Button>
                 ) : (

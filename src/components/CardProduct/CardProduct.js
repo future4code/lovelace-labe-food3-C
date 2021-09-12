@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import product from "../../assets/images/mao-santa-burguer-900-x-506.png";
 import { Button, Typography } from "@material-ui/core";
+import GlobalContext from '../../global/GlobalContext';
 
 const CardContainer = styled.div`
   /* 580px */
@@ -87,38 +88,39 @@ const TextCard = styled.div`
   }
 `;
 
-const CardProduct = () => {
+const CardProduct = (props) => {
+  const {setters} = useContext(GlobalContext)
+
   return (
-    <CardContainer>
-      <ProductImage Background={product} />
+      <CardContainer>
+          <ProductImage Background={props.Photo} />
 
-      <TextCard>
-        <Typography
-          color={"primary"}
-          style={{
-            fontSize: "20px",
-            fontWeight: "400",
-            margin: "10px 0px 0px 5px",
-          }}
-        >
-          Stencil
-        </Typography>
+          <TextCard>
+              <Typography
+                  color={"primary"}
+                  style={{
+                      fontSize: "20px",
+                      fontWeight: "400",
+                      margin: "10px 0px 0px 5px"
+                  }}
+              >
+                  {props.Name}
+              </Typography>
 
-        <Typography
-          style={{ color: "#b8b8b8", fontSize: "14px", margin: "5px" }}
-        >
-          Pão, carne, queijo, cebola roxa, tomate, alface e molho.
-        </Typography>
+              <Typography style={{color: "#b8b8b8", fontSize: "14px", margin: "5px"}}>{props.Description}</Typography>
 
-        <Typography style={{ color: "#000", fontSize: "18px", margin: "5px" }}>
-          R$46,00
-        </Typography>
-      </TextCard>
+              <Typography style={{color: "#000", fontSize: "18px", margin: "5px"}}>
+                  {props.Price.toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL"
+                  })}
+              </Typography>
+          </TextCard>
 
-      <span>2</span>
+          <span>{props.Quantity}</span>
 
-      <button>Remover</button>
-    </CardContainer>
+          <button onClick={() => setters.removeFromCart(props.Id)}>Remover</button>
+      </CardContainer>
   );
 };
 

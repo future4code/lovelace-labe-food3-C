@@ -9,10 +9,10 @@ import SearchField from "../../components/SearchField/SearchField";
 import TapPanel from "../../components/TapPanel/TapPanel";
 import Footer from "../../components/Footer/Footer";
 import CardFeed from "../../components/CardFeed/CardFeed";
+import Loading from "../../components/Loading/Loading";
 
 //HELPERS
 import { getRestaurants } from "../../services/getRestaurants";
-import Loading from "../../components/Loading/Loading";
 import CardWaitingDelivery from "../../components/CardWaitingDelivery/CardWaitingDelivery";
 import GlobalContext from "../../global/GlobalContext";
 import useAuthorizedPage from "../../hooks/useAuthorizedPage";
@@ -27,7 +27,7 @@ const HomePage = ({ setPageTitle }) => {
   const [isWriting, setIsWriting] = useState(false);
   const [restaurants, setRestaurants] = useState({});
 
-  const { states, setters, requests } = useContext(GlobalContext);
+  const { states, requests } = useContext(GlobalContext);
 
   if (Object.keys(restaurants).length === 0 && hasAuthorization) {
     getRestaurants(setRestaurants, setIsLoading);

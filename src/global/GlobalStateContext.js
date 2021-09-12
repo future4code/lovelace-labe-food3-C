@@ -3,14 +3,15 @@ import {useEffect, useState} from "react";
 import GlobalContext from "./GlobalContext";
 import axios from "axios";
 import {BASE_URL} from "../constants/urls";
+import {goToHome} from "../routes/coordinator";
 
 const GlobalStateContext = (props) => {
     const [maximumDeliveryTime, setMaximumDeliveryTime] = useState(0);
     const [waitingRestaurantName, setWaitingRestaurantName] = useState("");
     const [subtotalToWait, setSubtotalToAlert] = useState(0.0);
     const [addedProducts, setAddedProducts] = useState([]);
-    const [infoRestaurant, setInfoRestarant] = useState({})
-    const [infoUserAddress, setInfoUserAddress] = useState({})
+    const [userProfile, setUserProfile] = useState({});
+    const [infoRestaurant, setInfoRestaurant] = useState({});
 
     const waitingDelivery = {
         maximumDeliveryTime,
@@ -50,8 +51,6 @@ const GlobalStateContext = (props) => {
             });
     };
 
-    const [userProfile, setUserProfile] = useState({});
-
     useEffect(() => {
         if (maximumDeliveryTime > 0) {
             setTimeout(() => {
@@ -81,9 +80,73 @@ const GlobalStateContext = (props) => {
             });
     };
 
-    const states = {waitingDelivery, userProfile, addedProducts, infoRestaurant, infoUserAddress};
-    const setters = {setWaitingDelivery, setUserProfile, setAddedProducts, setInfoRestarant, setInfoUserAddress};
-    const requests = {getProfile, getActiveOrder};
+    const getRestaurantDetail = (restaurantId) => {
+        const token = localStorage.getItem("token");
+        const headers = {
+            headers: {
+                auth: token
+            }
+        };
+
+        if (restaurantId === undefined) {
+            return false;
+        } else {
+            axios
+                .get(`${BASE_URL}/fourFoodA/restaurants/${restaurantId}`, headers)
+                .then((res) => {
+                    setInfoRestaurant(res.data.restaurant);
+                })
+                .catch((err) => {
+                    if (err.response) {
+                        alert(err.response.data.message);
+                    } else {
+                        alert("Erro! Restaurante não encontrado");
+                    }
+                });
+        }
+    };
+
+    const placeOrder = (products, payment, restaurantId, history) => {
+        const token = localStorage.getItem("token");
+
+        const headers = {
+            headers: {
+                auth: token
+            }
+        };
+
+        const body = {
+            products: products.map((product) => {
+                return {
+                    id: product.food.id,
+                    quantity: product.quantity
+                };
+            }),
+            paymentMethod: payment
+        };
+
+        axios
+            .post(`${BASE_URL}/fourFoodA/restaurants/${restaurantId}/order`, body, headers)
+            .then((response) => {
+                alert("Pedido realizado com sucesso!");
+                setInfoRestaurant({});
+                setAddedProducts([]);
+                goToHome(history);
+            })
+            .catch((error) => {
+                if (error.response) {
+                    alert(error.response.data.message);
+                } else {
+                    alert("Erro ao realizar pedido");
+                }
+            });
+    };
+
+    const removeFromCart = (productId) => {};
+
+    const states = {waitingDelivery, userProfile, addedProducts, infoRestaurant};
+    const setters = {setWaitingDelivery, setUserProfile, setAddedProducts, setInfoRestaurant, removeFromCart};
+    const requests = {getProfile, getActiveOrder, getRestaurantDetail, placeOrder};
 
     return <GlobalContext.Provider value={{states, setters, requests}}>{props.children}</GlobalContext.Provider>;
 };

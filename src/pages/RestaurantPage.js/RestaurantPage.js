@@ -1,26 +1,19 @@
-import React, {useContext} from "react";
+import React from "react";
 import useProtectedPage from "../../hooks/useUnprotectedPage";
-import {
-    MainContainer,
-    HeaderContainer,
-    CardRestaurant,
-    RestaurantPicture,
-    DeliverTaxSpan,
-    CardMenu,
-    GeralContainer
-} from "./styled";
-import {useHistory, useParams} from "react-router-dom";
+import {MainContainer, CardRestaurant, RestaurantPicture, DeliverTaxSpan, CardMenu, GeralContainer} from "./styled";
+import {useParams} from "react-router-dom";
 import CardProducts from "../../components/CardProducts/CardProducts";
 import useRequestData from "../../hooks/useRequestData";
 import Loading from "../../components/Loading/Loading";
 import categorizeRestaurants from "../../tools/categorizeRestaurants";
-import GlobalContext from "../../global/GlobalContext";
+import useRestaurantBlock from "../../hooks/useRestaurantBlock";
 
 const RestaurantPage = () => {
     useProtectedPage();
+    useRestaurantBlock();
+
     const params = useParams();
     const [data] = useRequestData(`/fourFoodA/restaurants/${params.id}`, {});
-    const {setters} = useContext(GlobalContext);
 
     const arrayFoods =
         data &&
@@ -30,7 +23,7 @@ const RestaurantPage = () => {
             <CardMenu key={category}>
                 <h3>{category}</h3>
                 {categorizeRestaurants(data.restaurant.products)[category].map((food) => (
-                    <CardProducts Food={food} infoRestaurant={data.restaurant}/>
+                    <CardProducts Food={food} infoRestaurant={data.restaurant.id} />
                 ))}
             </CardMenu>
         ));
