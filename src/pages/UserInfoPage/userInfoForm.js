@@ -11,7 +11,7 @@ import GlobalContext from "../../global/GlobalContext";
 const UserInfoForm = () => {
   useProtectedPage();
   const history = useHistory();
-  const { states } = useContext(GlobalContext)
+  const { states, setters } = useContext(GlobalContext)
   const [form, handleInputChange, clear] = useForm({
     name: states.userProfile.name,
     email: states.userProfile.email,
@@ -21,7 +21,7 @@ const UserInfoForm = () => {
 
   const onSubmitForm = (event) => {
     event.preventDefault();
-    updateProfile(form, clear, history, setIsLoading);
+    updateProfile(form, clear, history, setIsLoading, setters.setUserProfile);
   };
   return (
     <form onSubmit={onSubmitForm}>
