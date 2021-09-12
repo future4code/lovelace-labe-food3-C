@@ -29,7 +29,7 @@ const GlobalStateContext = (props) => {
         if (maximumDeliveryTime > 0) {
             setTimeout(() => {
                 setMaximumDeliveryTime(0);
-            }, maximumDeliveryTime / 100);
+            }, maximumDeliveryTime);
         }
     }, [maximumDeliveryTime]);
 
