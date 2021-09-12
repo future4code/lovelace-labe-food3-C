@@ -1,67 +1,130 @@
-import React, {useContext} from "react"
-import useProtectedPage from "../../hooks/useUnprotectedPage";
-import {useHistory} from "react-router-dom";
-import styled from "styled-components";
-import {Typography, Radio, RadioGroup, FormControlLabel, Button} from "@material-ui/core";
-import Footer from "../../components/Footer/Footer";
-import CardProduct from "../../components/CardProduct/CardProduct";
+import React, {useContext, useEffect, useState} from "react";
+import {useHistory} from "react-router";
 import GlobalContext from "../../global/GlobalContext";
+
+//STYLES
+import {Typography, Radio, RadioGroup, FormControlLabel, Button} from "@material-ui/core";
 import {CardContainer, Frete, MainContainer, Payments, RestaurantAddress, SubTotal, UserAddress} from "./styled";
 
 
+//COMPONENTS
+import Footer from "../../components/Footer/Footer";
+import CardProduct from "../../components/CardProduct/CardProduct";
+
+//HELPERS
+import useProtectedPage from "../../hooks/useProtectedPage"
 
 const CartPage = () => {
-    useProtectedPage()
-    const history = useHistory()
-    const {states, setters, requests} = useContext(GlobalContext)
+    useProtectedPage();
+    const history = useHistory();
+    const {states, requests} = useContext(GlobalContext);
+    const [value, setValue] = useState("money");
 
-    const handleWaitingDelivery = () => {
-        const exemploTempoMin = 90
-        const exemploSubtotal = 60.70
-        const exeploNomeRestaurante = 'Massas Suaves'
-        setters.setWaitingDelivery(exemploTempoMin, exemploSubtotal, exeploNomeRestaurante)
-    }
+    const product = states && states.addedProducts;
+
+    const restaurantId = product.map((restaurant) => {
+        return restaurant.restaurantId;
+    });
+
+    const handleChange = (event) => {
+        setValue(event.target.value);
+    };
+
+    const subtotal = product.reduce((acc, item) => {
+        return acc + item.food.price * item.quantity;
+    }, 0);
+
+    useEffect(() => {
+        requests.getProfile();
+        requests.getRestaurantDetail(restaurantId[0]);
+        
+        // eslint-disable-next-line
+    }, []);
+
 
     return (
         <MainContainer>
-
             <UserAddress>
                 <Typography style={{color: "#b8b8b8", fontSize: "18px"}}>Endereço de entrega</Typography>
-                <Typography style={{color: "#000000", fontSize: "18px"}}>Rua Alessandra Vieira, 42</Typography>
+                <Typography style={{color: "#000000", fontSize: "18px"}}>{states.userProfile.address}</Typography>
             </UserAddress>
 
-            <RestaurantAddress>
-                <Typography color={"primary"} style={{fontSize: "16px", paddingBottom: "5px"}}>
-                    Bullguer Vila Madalena
-                </Typography>
+            {product.length > 0 ? (
+                <>
+                    <RestaurantAddress>
+                        <Typography color={"primary"} style={{fontSize: "16px", paddingBottom: "5px"}}>
+                            {states.infoRestaurant && states.infoRestaurant.name}
+                        </Typography>
 
-                <Typography style={{color: "#b8b8b8", fontSize: "16px", paddingBottom: "5px"}}>
-                    R. Fradique Coutinho, 1136 - Vila Madalena
-                </Typography>
+                        <Typography style={{color: "#b8b8b8", fontSize: "16px", paddingBottom: "5px"}}>
+                            {states.infoRestaurant && states.infoRestaurant.address}
+                        </Typography>
 
-                <Typography style={{color: "#b8b8b8", fontSize: "16px"}}>
-                    30 - 45 min
-                </Typography>
-            </RestaurantAddress>
+                        <Typography style={{color: "#b8b8b8", fontSize: "16px"}}>
+                            {states.infoRestaurant && states.infoRestaurant.deliveryTime} min
+                        </Typography>
+                    </RestaurantAddress>
 
-            <CardContainer>
-                <CardProduct/>
-            </CardContainer>
+                    <CardContainer>
+                        {product.map((product) => {
+                            return (
+                                <CardProduct
+                                    Id={product.food.id}
+                                    Name={product.food.name}
+                                    Description={product.food.description}
+                                    Quantity={product.quantity}
+                                    Price={product.food.price}
+                                    Photo={product.food.photoUrl}
+                                />
+                            );
+                        })}
+                    </CardContainer>
+                </>
+            ) : (
+                <Typography
+                    style={{
+                        color: "#000000",
+                        fontSize: "18px",
+                        textAlign: "center",
+                        fontWeight: "700",
+                        margin: "20px auto"
+                    }}
+                >
+                    Carrinho Vazio
+                </Typography>
+            )}
 
             <Frete>
-                <Typography>
-                    Frente: R$ 6,00
-                </Typography>
+                {product.length > 0 ? (
+                    <Typography>
+                        Frente:{" "}
+                        {states.infoRestaurant &&
+                            states.infoRestaurant.shipping &&
+                            states.infoRestaurant.shipping.toLocaleString("pt-BR", {
+                                style: "currency",
+                                currency: "BRL"
+                            })}
+                    </Typography>
+                ) : (
+                    <Typography>Frente: R$ 00,00</Typography>
+                )}
             </Frete>
 
             <SubTotal>
-                <Typography>
-                    SUBTOTAL:
-                </Typography>
+                <Typography>SUBTOTAL:</Typography>
 
-                <Typography color={"primary"} style={{fontWeight: "500"}}>
-                    R$67,00
-                </Typography>
+                {product.length > 0 ? (
+                    <Typography color={"primary"} style={{fontWeight: "500"}}>
+                        {subtotal.toLocaleString("pt-BR", {
+                            style: "currency",
+                            currency: "BRL"
+                        })}
+                    </Typography>
+                ) : (
+                    <Typography color={"primary"} style={{fontWeight: "500"}}>
+                        R$ 00,00
+                    </Typography>
+                )}
             </SubTotal>
 
             <Payments>
@@ -69,18 +132,34 @@ const CartPage = () => {
                     Formas de Pagamento
                 </Typography>
 
-                <RadioGroup aria-label="gender" name="gender1" >
+                <RadioGroup aria-label="payment" name="payment" value={value} onChange={handleChange}>
                     <FormControlLabel value="money" control={<Radio color="primary" />} label="Dinheiro" />
-                    <FormControlLabel value="creditCard" control={<Radio color="primary" />} label="Cartão de Crédito" />
+                    <FormControlLabel
+                        value="creditcard"
+                        control={<Radio color="primary" />}
+                        label="Cartão de Crédito"
+                    />
                 </RadioGroup>
 
-                <Button variant={"contained"} color={"primary"} style={{width: "100%"}}>Confirmar</Button>
-
+                {product.length > 0 ? (
+                    <Button
+                        variant={"contained"}
+                        color={"primary"}
+                        style={{width: "100%"}}
+                        onClick={() => requests.placeOrder(product, value, restaurantId[0], history, subtotal)}
+                    >
+                        Confirmar
+                    </Button>
+                ) : (
+                    <Button variant={"contained"} color={"primary"} style={{width: "100%"}} disabled>
+                        Confirmar
+                    </Button>
+                )}
             </Payments>
 
-            <Footer/>
+            <Footer />
         </MainContainer>
-    )
-}
+    );
+};
 
-export default CartPage 
+export default CartPage;

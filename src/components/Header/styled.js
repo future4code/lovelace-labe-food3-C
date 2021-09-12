@@ -8,6 +8,7 @@ export const StyledMargin = styled.div`
 export const StyledHeader = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   height: 3.062rem;
@@ -18,22 +19,20 @@ export const StyledHeader = styled.div`
   
   
   div {
-    justify-self: left;
     background: none;
     margin-left: 10px;
     margin-top: 1%;
     width: 1rem;
     min-height: 2px;
-    
   }
   
   button {
-    border: none;
+    border: 1px solid transparent;
     background: none;
+    height: 100%;
   }
 
   p {
-    width: 5.25rem;
     height: 1.188rem;
     font-family: Roboto;
     font-size: 1rem;

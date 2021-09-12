@@ -1,5 +1,5 @@
 import axios from "axios";
-import {BASE_URL, HEADERS} from "../constants/urls";
+import { BASE_URL } from "../constants/urls";
 import categorizeRestaurants from "../tools/categorizeRestaurants"
 
 export const getRestaurants = (saveData, setIsLoading) => {
@@ -16,7 +16,7 @@ export const getRestaurants = (saveData, setIsLoading) => {
         })
         .catch((err) => {
             if(err.response){
-                alert(err.response.data.message)
+                alert('Erro ao buscar restaurantes ' + err.response.data.message)
             }
             else{
                 alert('Ocorreu um erro no site')
