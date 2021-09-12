@@ -78,36 +78,6 @@ export const updateProfile = (
       setIsLoading(false);
     });
 };
-
-
-export const updateProfile = (body, clear, history, setIsLoading, setUserProfile) => {
-    setIsLoading(true)
-    const token = localStorage.getItem("token")
-    const headers = {
-        headers: {
-            auth: token
-        }
-    }
-    axios.put(`${BASE_URL}/fourFoodA/profile`, body, headers)
-        .then((res) => {
-            setUserProfile(res.data.user)
-            clear()
-            history.goBack()
-        })
-        .catch((err) => {
-
-            console.log(err)
-            if(err.response){
-                alert(err.response.data.message)
-            }
-            else {
-                alert('Erro ao atualizar perfil!')
-            }
-        })
-        .finally(() => {
-            setIsLoading(false)
-        })
-}
   
 export const saveAddress = (body, clear, setIsLoading, getUserProfile) => {
     const token = localStorage.getItem("token")
