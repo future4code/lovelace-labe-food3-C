@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 import {useHistory} from "react-router-dom";
-import {Box, Button, List, ListItem, ListItemText, Typography} from "@material-ui/core";
+import {Box, Button, List, ListItem, Typography} from "@material-ui/core";
 import {EditEmailContainer, EditEnderecoContainer, HistoryListContainer, MainContainer} from "./styled";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 import {goToAddress, goToLogin, goToUserInfo} from "../../routes/coordinator";
@@ -49,8 +49,18 @@ const ProfilePage = () => {
         getOrdersHistory();
         requests.getProfile();
     }, [requests]);
+    const compare = ( a, b ) => {
+        if(a.createdAt < b.createdAt){
+            return 1
+        } else if(a.createdAt === b.createdAt){
+            return 0
+        } else {
+            return -1
+        }
+    }
 
-    const orderList = ordersHistory && ordersHistory.map((order, index) => {
+    const orderList = ordersHistory && ordersHistory.sort(compare).map((order, index) => {
+        console.log('order', order)
         return (
             <ListItem key={index}>
                 <CardOrder

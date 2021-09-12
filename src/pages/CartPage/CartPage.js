@@ -31,7 +31,7 @@ const CartPage = () => {
     };
 
     const subtotal = product.reduce((acc, item) => {
-        return acc + item.food.price * item.quantity;
+        return acc + (item.food.price * item.quantity);
     }, 0);
 
     useEffect(() => {
@@ -106,7 +106,7 @@ const CartPage = () => {
                             })}
                     </Typography>
                 ) : (
-                    <Typography>Frente: R$ 00,00</Typography>
+                    <Typography>Frete: R$ 00,00</Typography>
                 )}
             </Frete>
 
@@ -115,7 +115,7 @@ const CartPage = () => {
 
                 {product.length > 0 ? (
                     <Typography color={"primary"} style={{fontWeight: "500"}}>
-                        {subtotal.toLocaleString("pt-BR", {
+                        {(subtotal + states.infoRestaurant.shipping).toLocaleString("pt-BR", {
                             style: "currency",
                             currency: "BRL"
                         })}
