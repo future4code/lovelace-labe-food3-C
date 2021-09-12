@@ -15,27 +15,37 @@ import Loading from "../../components/Loading/Loading";
 import { getRestaurants } from "../../services/getRestaurants";
 import CardWaitingDelivery from "../../components/CardWaitingDelivery/CardWaitingDelivery";
 import GlobalContext from "../../global/GlobalContext";
+import { goToLogin } from "../../routes/coordinator";
+import { useHistory } from "react-router";
 
 const HomePage = ({ setPageTitle }) => {
-  useProtectedPage();
+  const hasAuthorization = useProtectedPage();
+
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
   const [searchMode, setSearchMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isWriting, setIsWriting] = useState(false);
   const [restaurants, setRestaurants] = useState({});
+  const history = useHistory()
 
   const { states, requests } = useContext(GlobalContext);
 
-  if (Object.keys(restaurants).length === 0) {
-    getRestaurants(setRestaurants, setIsLoading);
-  }
-
+  
   useEffect(() => {
-    requests.getActiveOrder()
+    if(hasAuthorization){
+      if (Object.keys(restaurants).length === 0) {
+        getRestaurants(setRestaurants, setIsLoading);
+      }
+      
+      requests.getActiveOrder()
+    }
+    else if(hasAuthorization===false){
+      goToLogin(history)
+    }
     // eslint-disable-next-line
-  }, [])
+  }, [hasAuthorization])
 
-  if (isLoading)
+  if (isLoading || !hasAuthorization)
     return (
       <StyledHomePage>
         <Loading />

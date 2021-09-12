@@ -1,9 +1,9 @@
 import React from "react";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import GlobalContext from "./GlobalContext";
 import axios from "axios";
-import {BASE_URL} from "../constants/urls";
-import {goToHome} from "../routes/coordinator";
+import { BASE_URL } from "../constants/urls";
+import { goToHome } from "../routes/coordinator";
 
 const GlobalStateContext = (props) => {
     const [maximumDeliveryTime, setMaximumDeliveryTime] = useState(0);
@@ -66,6 +66,7 @@ const GlobalStateContext = (props) => {
                 auth: token
             }
         };
+
         axios
             .get(`${BASE_URL}/fourFoodA/profile`, headers)
             .then((res) => {
@@ -77,7 +78,7 @@ const GlobalStateContext = (props) => {
                 } else {
                     alert("Erro ao buscar perfil");
                 }
-            });
+            })
     };
 
     const getRestaurantDetail = (restaurantId) => {
@@ -157,11 +158,11 @@ const GlobalStateContext = (props) => {
         setAddedProducts(newCart);
     };
 
-    const states = {waitingDelivery, userProfile, addedProducts, infoRestaurant};
-    const setters = {setWaitingDelivery, setUserProfile, setAddedProducts, setInfoRestaurant, removeFromCart};
-    const requests = {getProfile, getActiveOrder, getRestaurantDetail, placeOrder};
+    const states = { waitingDelivery, userProfile, addedProducts, infoRestaurant };
+    const setters = { setWaitingDelivery, setUserProfile, setAddedProducts, setInfoRestaurant, removeFromCart };
+    const requests = { getProfile, getActiveOrder, getRestaurantDetail, placeOrder };
 
-    return <GlobalContext.Provider value={{states, setters, requests}}>{props.children}</GlobalContext.Provider>;
+    return <GlobalContext.Provider value={{ states, setters, requests }}>{props.children}</GlobalContext.Provider>;
 };
 
 export default GlobalStateContext;

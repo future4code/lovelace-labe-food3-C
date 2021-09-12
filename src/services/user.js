@@ -37,7 +37,6 @@ export const signUp = (body, clear, history, setIsLoading, setUserProfile) => {
         
     })
     .catch((err) => {
-
         if(err.response){
             alert(err.response.data.message)
         }
