@@ -9,12 +9,13 @@ import GlobalContext from "../../global/GlobalContext";
 import axios from "axios";
 import {BASE_URL} from "../../constants/urls";
 import CardOrder from "../../components/CardOrder/CardOrder";
+import Loading from "../../components/Loading/Loading";
 
 const ProfilePage = () => {
     useProtectedPage();
     const history = useHistory();
     const {states, requests} = useContext(GlobalContext);
-    const [ordersHistory, setOrderHistory] = useState([]);
+    const [ordersHistory, setOrderHistory] = useState();
     useEffect(() => {
         getOrdersHistory();
         requests.getProfile();
@@ -37,7 +38,7 @@ const ProfilePage = () => {
             });
     };
 
-    const listaHistorico = ordersHistory.map((order) => {
+    const orderList = ordersHistory && ordersHistory.map((order) => {
         return (
             <ListItem key={order.indexOf}>
                 <CardOrder
@@ -79,17 +80,13 @@ const ProfilePage = () => {
                 <EditTwoToneIcon onClick={goEditAddress} />
             </EditEnderecoContainer>
             <EditEmailContainer>
-                <Box style={{width: "100%"}}>
-                    <Typography variant="subtitle1" style={{borderBottom: "black 1px solid"}}>
-                        Histórico de pedidos
-                    </Typography>
-                    <List component="nav" aria-label="secondary mailbox folders">
-                        {listaHistorico.length > 0 ? (
-                            listaHistorico
-                        ) : (
-                            <Typography style={{textAlign: "center"}}>Você não realizou nenhum pedido</Typography>
-                        )}
-                    </List>
+            <Box style={{width:'100%'}}>
+                    <Typography variant='subtitle1' style={{borderBottom:'black 1px solid'}} >Histórico de pedidos</Typography>
+                    {ordersHistory ? 
+                        <List component="nav" aria-label="secondary mailbox folders" >
+                            { (orderList.length > 0) ? orderList : 
+                            <Typography style={{textAlign:'center'}}>Você não realizou nenhum pedido</Typography>}
+                        </List> : <Loading />}
                 </Box>
             </EditEmailContainer>
         </MainContainer>
