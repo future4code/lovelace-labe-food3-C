@@ -20,8 +20,10 @@ export const StyledHeader = styled.div`
   
   div {
     background: none;
-    height: 80%;
-    width: 2.5rem;
+    margin-left: 10px;
+    margin-top: 1%;
+    width: 1rem;
+    min-height: 2px;
   }
   
   button {
@@ -35,7 +37,23 @@ export const StyledHeader = styled.div`
     font-family: Roboto;
     font-size: 1rem;
     text-align: center;
-    flex-grow: 1;
+    flex-grow: 0.9;
+    font-weight: normal;
     color: black;
   }
+
+/* Ipad e Ipad Pro */
+@media (min-width: 30em){
+  p {
+    width: 5.25rem;
+    height: 1.188rem;
+    font-family: Roboto;
+    font-size: 1.1rem;
+    text-align: center;
+    flex-grow: 0.95;
+    font-weight: normal;
+    
+  }
+  
+}
 `
