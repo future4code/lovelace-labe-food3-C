@@ -35,7 +35,12 @@ const ProfilePage = () => {
                 setOrderHistory(res.data.orders);
             })
             .catch((err) => {
-                alert("Erro ao atualizar histórico de pedidos");
+                if(err.response){
+                    alert(err.response.data.message)
+                }
+                else {
+                    alert("Erro ao atualizar histórico de pedidos");
+                }
             });
     };
 
