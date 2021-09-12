@@ -35,7 +35,6 @@ const UserInfoForm = () => {
             id="outlined-required"
             label="Nome"
             type={"text"}
-            defaultValue=""
             variant="outlined"
             fullWidth
             margin={"dense"}
@@ -48,7 +47,6 @@ const UserInfoForm = () => {
             id="outlined-required"
             label="E-mail"
             type={"email"}
-            defaultValue=""
             variant="outlined"
             fullWidth
             margin={"dense"}
@@ -61,7 +59,6 @@ const UserInfoForm = () => {
             id="outlined-required"
             label="CPF"
             type="text"
-            defaultValue=""
             variant="outlined"
             fullWidth
             margin={"dense"}

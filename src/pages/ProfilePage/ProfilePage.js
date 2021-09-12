@@ -10,6 +10,7 @@ import axios from "axios";
 import {BASE_URL} from "../../constants/urls";
 import CardOrder from "../../components/CardOrder/CardOrder";
 import Loading from "../../components/Loading/Loading";
+import Footer from "../../components/Footer/Footer";
 
 const ProfilePage = () => {
     useProtectedPage();
@@ -73,7 +74,7 @@ const ProfilePage = () => {
                     <Typography variant="subtitle1" style={{color: "#bcbcbc"}}>
                         Endereço Cadastrado
                     </Typography>
-                    <Typography variant="subtitle1" color="">
+                    <Typography variant="subtitle1" >
                         {states.userProfile.address}
                     </Typography>
                 </Box>
@@ -91,6 +92,7 @@ const ProfilePage = () => {
                     </HistoryListContainer>
                 </Box>
             </EditEmailContainer>
+            <Footer />
         </MainContainer>
     );
 };
