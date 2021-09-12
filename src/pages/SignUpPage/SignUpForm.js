@@ -70,7 +70,7 @@ const SignUpForm = () => {
             fullWidth
             required
             margin={'dense'}
-            inputProps={{ pattern: "[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}" }}
+            inputProps={{ pattern: "[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" }}
             helperText="Formato 000.111.222-33"
           />
          

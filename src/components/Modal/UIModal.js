@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDom from "react-dom";
 import { Overlay, Main } from "./styled";
 const portalRoot = document.getElementById("portal-root");
 var ReactDOM = require("react-dom");

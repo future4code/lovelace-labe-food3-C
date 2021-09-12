@@ -9,6 +9,7 @@ import { saveAddress } from '../../services/user'
 import { useRequestDataX } from '../../hooks/useRequestData'
 import { BASE_URL } from '../../constants/urls'
 import GlobalContext from '../../global/GlobalContext'
+import { goToHome } from '../../routes/coordinator'
 
 const AddressForm = () => {
   const history = useHistory()
@@ -23,7 +24,8 @@ const AddressForm = () => {
 
   const onSubmitForm = (event) => {
     event.preventDefault()
-    saveAddress(form, clear, history, setIsLoading, requests.getProfile)
+    saveAddress(form, clear, setIsLoading, requests.getProfile)
+    goToHome(history)
   }
 
   useEffect(() => {
@@ -43,7 +45,7 @@ const AddressForm = () => {
     }
 
     // eslint-disable-next-line
-  }, [fullAddress])
+  }, [])
 
 
   return (
