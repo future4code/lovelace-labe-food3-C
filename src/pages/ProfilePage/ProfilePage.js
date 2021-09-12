@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 import {useHistory} from "react-router-dom";
 import {Box, List, ListItem, ListItemText, Typography} from "@material-ui/core";
-import {EditEmailContainer, EditEnderecoContainer, MainContainer} from "./styled";
+import {EditEmailContainer, EditEnderecoContainer, HistoryListContainer, MainContainer} from "./styled";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 import {goToAddress, goToUserInfo} from "../../routes/coordinator";
 import GlobalContext from "../../global/GlobalContext";
@@ -82,11 +82,13 @@ const ProfilePage = () => {
             <EditEmailContainer>
             <Box style={{width:'100%'}}>
                     <Typography variant='subtitle1' style={{borderBottom:'black 1px solid'}} >Histórico de pedidos</Typography>
+                    <HistoryListContainer>
                     {ordersHistory ? 
                         <List component="nav" aria-label="secondary mailbox folders" >
                             { (orderList.length > 0) ? orderList : 
                             <Typography style={{textAlign:'center'}}>Você não realizou nenhum pedido</Typography>}
                         </List> : <Loading />}
+                    </HistoryListContainer>
                 </Box>
             </EditEmailContainer>
         </MainContainer>
