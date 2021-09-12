@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledContainer, StyledFirstP, StyledSecondP, StyledThirstP } from './styled'
+import { StyledContainer, StyledFirstP, StyledSecondP } from './styled'
 import ClockImage from '../../assets/images/clock.svg'
 
 export default function CardWaitingDelivery({data}){

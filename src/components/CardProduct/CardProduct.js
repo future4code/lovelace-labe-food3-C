@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import product from "../../assets/images/mao-santa-burguer-900-x-506.png";
-import { Button, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import GlobalContext from '../../global/GlobalContext';
 
 const CardContainer = styled.div`

@@ -46,9 +46,12 @@ const ProfilePage = () => {
     };
 
     useEffect(() => {
-        getOrdersHistory();
-        requests.getProfile();
-    }, [requests]);
+        getOrdersHistory()
+        requests.getProfile()
+
+        // eslint-disable-next-line
+    }, []);
+    
     const compare = ( a, b ) => {
         if(a.createdAt < b.createdAt){
             return 1
@@ -60,7 +63,6 @@ const ProfilePage = () => {
     }
 
     const orderList = ordersHistory && ordersHistory.sort(compare).map((order, index) => {
-        console.log('order', order)
         return (
             <ListItem key={index}>
                 <CardOrder

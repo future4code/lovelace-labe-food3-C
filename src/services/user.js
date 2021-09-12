@@ -79,33 +79,55 @@ export const updateProfile = (
     });
 };
 
-export const saveAddress = (
-  body,
-  clear,
-  history,
-  setIsLoading,
-  getUserProfile
-) => {
-  const token = localStorage.getItem("token");
-  const headers = {
-    headers: {
-      auth: token,
-    },
-  };
+
+export const updateProfile = (body, clear, history, setIsLoading, setUserProfile) => {
+    setIsLoading(true)
+    const token = localStorage.getItem("token")
+    const headers = {
+        headers: {
+            auth: token
+        }
+    }
+    axios.put(`${BASE_URL}/fourFoodA/profile`, body, headers)
+        .then((res) => {
+            setUserProfile(res.data.user)
+            clear()
+            history.goBack()
+        })
+        .catch((err) => {
+
+            console.log(err)
+            if(err.response){
+                alert(err.response.data.message)
+            }
+            else {
+                alert('Erro ao atualizar perfil!')
+            }
+        })
+        .finally(() => {
+            setIsLoading(false)
+        })
+}
+  
+export const saveAddress = (body, clear, setIsLoading, getUserProfile) => {
+    const token = localStorage.getItem("token")
+    const headers = {
+        headers: {
+            auth: token
+        }
+    }
 
   setIsLoading(true);
   axios
     .put(`${BASE_URL}/fourFoodA/address`, body, headers)
     .then((res) => {
-      localStorage.removeItem("token");
-      localStorage.setItem("token", res.data.token);
-      clear();
 
-      if (res.status === 200) {
-        alert("Endereço Cadastrado com sucesso");
-        getUserProfile();
-        goToHome(history);
-      }
+        localStorage.removeItem("token")
+        localStorage.setItem("token", res.data.token)
+        clear()
+        alert("Endereço Cadastrado com sucesso")
+        getUserProfile()
+
     })
     .catch((err) => {
       if (err.response) {

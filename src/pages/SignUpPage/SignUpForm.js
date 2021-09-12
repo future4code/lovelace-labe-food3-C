@@ -75,7 +75,7 @@ const SignUpForm = () => {
             type={"cpf"}
             fullWidth
             required
-            margin={"dense"}
+            margin={'dense'}
             inputProps={{ pattern: "[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" }}
             helperText="Formato 000.111.222-33"
           />
