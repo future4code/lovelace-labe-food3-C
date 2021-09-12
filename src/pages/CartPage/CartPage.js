@@ -135,7 +135,7 @@ const CartPage = () => {
                 <RadioGroup aria-label="payment" name="payment" value={value} onChange={handleChange}>
                     <FormControlLabel value="money" control={<Radio color="primary" />} label="Dinheiro" />
                     <FormControlLabel
-                        value="creditCard"
+                        value="creditcard"
                         control={<Radio color="primary" />}
                         label="Cartão de Crédito"
                     />
