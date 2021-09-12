@@ -1,94 +1,99 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, {useContext, useEffect, useState} from "react";
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 import {useHistory} from "react-router-dom";
-import { Box, List, ListItem, ListItemText, Typography } from "@material-ui/core";
-import { EditEmailContainer, EditEnderecoContainer, MainContainer } from "./styled";
-import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
-import { goToAddress, goToUserInfo } from "../../routes/coordinator"
-import GlobalContext from "../../global/GlobalContext"
+import {Box, List, ListItem, ListItemText, Typography} from "@material-ui/core";
+import {EditEmailContainer, EditEnderecoContainer, MainContainer} from "./styled";
+import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
+import {goToAddress, goToUserInfo} from "../../routes/coordinator";
+import GlobalContext from "../../global/GlobalContext";
 import axios from "axios";
-import { BASE_URL } from "../../constants/urls";
+import {BASE_URL} from "../../constants/urls";
 import CardOrder from "../../components/CardOrder/CardOrder";
 
 const ProfilePage = () => {
-    useProtectedPage()
-    const history = useHistory()
-    const { states, requests } = useContext(GlobalContext)
-    const [ordersHistory, setOrderHistory] = useState([])
+    useProtectedPage();
+    const history = useHistory();
+    const {states, requests} = useContext(GlobalContext);
+    const [ordersHistory, setOrderHistory] = useState([]);
     useEffect(() => {
-        getOrdersHistory()
-        requests.getProfile()
-    }, [])
+        getOrdersHistory();
+        requests.getProfile();
+    }, [requests]);
 
     const getOrdersHistory = () => {
-        const token = localStorage.getItem("token")
+        const token = localStorage.getItem("token");
         const headers = {
             headers: {
                 auth: token
             }
-        }
-        axios.get(`${BASE_URL}/fourFoodA/orders/history`, headers)
-        .then((res) => {
-            setOrderHistory(res.data.orders)
-        })
-        .catch((err) => {
-            alert('Erro ao atualizar histórico de pedidos')
-        })
-    }
+        };
+        axios
+            .get(`${BASE_URL}/fourFoodA/orders/history`, headers)
+            .then((res) => {
+                setOrderHistory(res.data.orders);
+            })
+            .catch((err) => {
+                alert("Erro ao atualizar histórico de pedidos");
+            });
+    };
 
-const listaHistorico = ordersHistory.map((order) => {
-    return (
-        <ListItem key={order.indexOf}>
-            <CardOrder 
-                restaurant={order.restaurantName}
-                dateCreated={order.createdAt}
-                subTotal={order.totalPrice}
-            ></CardOrder>
-        </ListItem>
-    )
-})
+    const listaHistorico = ordersHistory.map((order) => {
+        return (
+            <ListItem key={order.indexOf}>
+                <CardOrder
+                    restaurant={order.restaurantName}
+                    dateCreated={order.createdAt}
+                    subTotal={order.totalPrice}
+                ></CardOrder>
+            </ListItem>
+        );
+    });
 
-const goEditUser = () => {
-    goToUserInfo(history)
-}
-const goEditAddress = () => {
-    goToAddress(history)
-}
+    const goEditUser = () => {
+        goToUserInfo(history);
+    };
+    const goEditAddress = () => {
+        goToAddress(history);
+    };
+
+    
     return (
         <MainContainer>
-            
-            <EditEmailContainer >
+            <EditEmailContainer>
                 <Box>
                     <Typography variant="subtitle2">{states.userProfile.name}</Typography>
                     <Typography variant="subtitle2">{states.userProfile.email}</Typography>
                     <Typography variant="subtitle2">{states.userProfile.cpf}</Typography>
                 </Box>
-                <EditTwoToneIcon 
-                 onClick={goEditUser}
-                />
+                <EditTwoToneIcon onClick={goEditUser} />
             </EditEmailContainer>
             <EditEnderecoContainer>
                 <Box>
-                    <Typography variant='subtitle1' style={{color:'#bcbcbc'}}>Endereço Cadastrado</Typography>
-                    <Typography variant="subtitle1" color=''>{states.userProfile.address}</Typography>
+                    <Typography variant="subtitle1" style={{color: "#bcbcbc"}}>
+                        Endereço Cadastrado
+                    </Typography>
+                    <Typography variant="subtitle1" color="">
+                        {states.userProfile.address}
+                    </Typography>
                 </Box>
-                <EditTwoToneIcon 
-                onClick={goEditAddress}
-                />
+                <EditTwoToneIcon onClick={goEditAddress} />
             </EditEnderecoContainer>
-            <EditEmailContainer >
-                <Box style={{width:'100%'}}>
-                    <Typography variant='subtitle1' style={{borderBottom:'black 1px solid'}} >Histórico de pedidos</Typography>
-                    <List component="nav" aria-label="secondary mailbox folders" >
-                        {(listaHistorico.length > 0) ? listaHistorico : 
-                            <Typography style={{textAlign:'center'}}>Você não realizou nenhum pedido</Typography>}
+            <EditEmailContainer>
+                <Box style={{width: "100%"}}>
+                    <Typography variant="subtitle1" style={{borderBottom: "black 1px solid"}}>
+                        Histórico de pedidos
+                    </Typography>
+                    <List component="nav" aria-label="secondary mailbox folders">
+                        {listaHistorico.length > 0 ? (
+                            listaHistorico
+                        ) : (
+                            <Typography style={{textAlign: "center"}}>Você não realizou nenhum pedido</Typography>
+                        )}
                     </List>
                 </Box>
-                
             </EditEmailContainer>
         </MainContainer>
-    )
-}
+    );
+};
 
-export default ProfilePage
-
+export default ProfilePage;

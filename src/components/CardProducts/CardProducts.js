@@ -5,13 +5,13 @@ import GlobalContext from "../../global/GlobalContext";
 
 const CardProducts = (props) => {
     const [showModal, setShowModal] = useState(false);
-    const {states} = useContext(GlobalContext);
+    const {states, setters} = useContext(GlobalContext);
 
     const itemQuantity = states.addedProducts;
 
     const productQuantity = itemQuantity
         .filter((product) => {
-            return product.id === props.Food.id;
+            return product.food.id === props.Food.id;
         })
         .map((product) => {
             return product.quantity;
@@ -36,9 +36,15 @@ const CardProducts = (props) => {
                 </h5>
             </TextCard>
 
-            <button onClick={() => setShowModal(true)}>
-                {!productQuantity[0] ? <span> Adicionar </span> : <span>Alterar</span>}
-            </button>
+            {productQuantity && !productQuantity[0] ? (
+                <button onClick={() => setShowModal(true)}>
+                    <span> Adicionar </span>
+                </button>
+            ) : (
+                <button onClick={() => setters.removeFromCart(props.Food.id)} style={{border: "1px solid #e8222e"}}>
+                    <span style={{color: "#e8222e"}}>Remover</span>
+                </button>
+            )}
 
             {productQuantity[0] ? <QuantityCard>{productQuantity[0]}</QuantityCard> : null}
 
