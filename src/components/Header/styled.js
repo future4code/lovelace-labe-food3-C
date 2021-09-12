@@ -19,17 +19,19 @@ export const StyledHeader = styled.div`
   
   
   div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: none;
-    margin-left: 10px;
-    margin-top: 1%;
-    width: 1rem;
-    min-height: 2px;
+    width: 3rem;
+    min-height: 80%;
   }
   
   button {
     border: 1px solid transparent;
     background: none;
     height: 100%;
+    width: 100%;
   }
 
   p {
