@@ -27,10 +27,10 @@ const useProtectedPage = () => {
 
 
   useEffect(() => {
-    if (states.userProfile.hasAddress) {
+    if (states.userProfile.hasAddress===true) {
       setHasAuthorization(true)
     }
-    else {
+    if (states.userProfile.hasAddress===false) {
       setHasAuthorization(false)
     }
 
