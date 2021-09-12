@@ -1,4 +1,5 @@
 import React from "react"
+import Footer from "../../components/Footer/Footer";
 import useProtectedPage from "../../hooks/useUnprotectedPage"
 import { MainContainer } from "./styled";
 import UserInfoForm from "./userInfoForm";
@@ -8,6 +9,7 @@ const UserInfoPage = () => {
     return (
         <MainContainer>
             <UserInfoForm />
+            <Footer />
         </MainContainer>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { useHistory } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
@@ -6,14 +6,16 @@ import useForm from "../../hooks/useForm";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { updateProfile } from "../../services/user";
 import { InputsContainer, UserInfoContainer } from "./styled";
+import GlobalContext from "../../global/GlobalContext";
 
 const UserInfoForm = () => {
   useProtectedPage();
   const history = useHistory();
+  const { states } = useContext(GlobalContext)
   const [form, handleInputChange, clear] = useForm({
-    name: "",
-    email: "",
-    cpf: "",
+    name: states.userProfile.name,
+    email: states.userProfile.email,
+    cpf: states.userProfile.cpf
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,7 +35,6 @@ const UserInfoForm = () => {
             id="outlined-required"
             label="Nome"
             type={"text"}
-            defaultValue=""
             variant="outlined"
             fullWidth
             margin={"dense"}
@@ -46,7 +47,6 @@ const UserInfoForm = () => {
             id="outlined-required"
             label="E-mail"
             type={"email"}
-            defaultValue=""
             variant="outlined"
             fullWidth
             margin={"dense"}
@@ -59,7 +59,6 @@ const UserInfoForm = () => {
             id="outlined-required"
             label="CPF"
             type="text"
-            defaultValue=""
             variant="outlined"
             fullWidth
             margin={"dense"}

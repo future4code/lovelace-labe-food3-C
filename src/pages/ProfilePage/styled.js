@@ -23,3 +23,9 @@ export const EditEnderecoContainer = styled.div `
   background-color: #eee;
   padding: 15px;
 `
+export const HistoryListContainer = styled.div `
+  height: 60vh;
+  overflow: auto;
+`
+
+

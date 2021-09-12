@@ -2,19 +2,21 @@ import React, {useContext, useEffect, useState} from "react";
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 import {useHistory} from "react-router-dom";
 import {Box, List, ListItem, ListItemText, Typography} from "@material-ui/core";
-import {EditEmailContainer, EditEnderecoContainer, MainContainer} from "./styled";
+import {EditEmailContainer, EditEnderecoContainer, HistoryListContainer, MainContainer} from "./styled";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 import {goToAddress, goToUserInfo} from "../../routes/coordinator";
 import GlobalContext from "../../global/GlobalContext";
 import axios from "axios";
 import {BASE_URL} from "../../constants/urls";
 import CardOrder from "../../components/CardOrder/CardOrder";
+import Loading from "../../components/Loading/Loading";
+import Footer from "../../components/Footer/Footer";
 
 const ProfilePage = () => {
     useProtectedPage();
     const history = useHistory();
     const {states, requests} = useContext(GlobalContext);
-    const [ordersHistory, setOrderHistory] = useState([]);
+    const [ordersHistory, setOrderHistory] = useState();
     useEffect(() => {
         getOrdersHistory();
         requests.getProfile();
@@ -37,7 +39,7 @@ const ProfilePage = () => {
             });
     };
 
-    const listaHistorico = ordersHistory.map((order) => {
+    const orderList = ordersHistory && ordersHistory.map((order) => {
         return (
             <ListItem key={order.indexOf}>
                 <CardOrder
@@ -72,26 +74,25 @@ const ProfilePage = () => {
                     <Typography variant="subtitle1" style={{color: "#bcbcbc"}}>
                         Endereço Cadastrado
                     </Typography>
-                    <Typography variant="subtitle1" color="">
+                    <Typography variant="subtitle1" >
                         {states.userProfile.address}
                     </Typography>
                 </Box>
                 <EditTwoToneIcon onClick={goEditAddress} />
             </EditEnderecoContainer>
             <EditEmailContainer>
-                <Box style={{width: "100%"}}>
-                    <Typography variant="subtitle1" style={{borderBottom: "black 1px solid"}}>
-                        Histórico de pedidos
-                    </Typography>
-                    <List component="nav" aria-label="secondary mailbox folders">
-                        {listaHistorico.length > 0 ? (
-                            listaHistorico
-                        ) : (
-                            <Typography style={{textAlign: "center"}}>Você não realizou nenhum pedido</Typography>
-                        )}
-                    </List>
+            <Box style={{width:'100%'}}>
+                    <Typography variant='subtitle1' style={{borderBottom:'black 1px solid'}} >Histórico de pedidos</Typography>
+                    <HistoryListContainer>
+                    {ordersHistory ? 
+                        <List component="nav" aria-label="secondary mailbox folders" >
+                            { (orderList.length > 0) ? orderList : 
+                            <Typography style={{textAlign:'center'}}>Você não realizou nenhum pedido</Typography>}
+                        </List> : <Loading />}
+                    </HistoryListContainer>
                 </Box>
             </EditEmailContainer>
+            <Footer />
         </MainContainer>
     );
 };
