@@ -134,11 +134,6 @@ const GlobalStateContext = (props) => {
                 alert("Pedido realizado com sucesso!");
                 setInfoRestaurant({});
                 setAddedProducts([]);
-
-                //Implementação da espera do pedido na Home
-
-                setWaitingDelivery(infoRestaurant.deliveryTime, subtotal, infoRestaurant.name);
-
                 goToHome(history);
             })
             .catch((error) => {
