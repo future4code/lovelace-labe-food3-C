@@ -11,12 +11,18 @@ import { BASE_URL } from '../../constants/urls'
 
 const AddressForm = () => {
   const history = useHistory()
+  const [isLoading, setIsLoading] = useState(false)
   const [form, onChange, clear, setFields] = useForm({
     street: '', number: '', neighbourhood: '',
     city: '', state: '', complement: ''
   })
 
   const [fullAddress] = useRequestDataX(`${BASE_URL}/fourFoodA/profile/address`, {})
+
+  const onSubmitForm = (event) => {
+    event.preventDefault()
+    saveAddress(form, clear, history, setIsLoading)
+  }
 
   useEffect(() => {
     if (fullAddress.address) {
@@ -33,16 +39,10 @@ const AddressForm = () => {
       setFields(dados)
 
     }
+
+    // eslint-disable-next-line
   }, [fullAddress])
 
-
-
-  const [isLoading, setIsLoading] = useState(false)
-
-  const onSubmitForm = (event) => {
-    event.preventDefault()
-    saveAddress(form, clear, history, setIsLoading)
-  }
 
   return (
     <form onSubmit={onSubmitForm}>

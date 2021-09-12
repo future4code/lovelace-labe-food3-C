@@ -28,8 +28,6 @@ const SignUpForm = () => {
 
   const onSubmitForm = (event) => {
     event.preventDefault()
-
-    // Abaixo lógica para CONFIRMAÇÃO DE SENHA ...
     form.passwordConfirmation === form.password ? signUp(form, clear, history, setIsLoading, setters.setUserProfile) : 
     alert("A confirmação de senha deve ser igual à senha")
   }
