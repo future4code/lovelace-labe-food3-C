@@ -1,7 +1,7 @@
 ![iFuture_Readme_Header](https://user-images.githubusercontent.com/85365177/132917268-959dfe30-a6b4-4965-b258-e4b99b918748.png)
 
 ## Link do Surge:  
-- link
+- https://lovelace-labe-food3-c.surge.sh/
 
 
 ## Planejamento Inicial
@@ -154,12 +154,6 @@ Para realizar outro pedido, o usuário deve esperar o seu pedido ativo ser concl
 
 - Implementado uso do Global State em uma parte da aplicação
 
-
-## Faltou Implementar
-
-- Logout [Recurso extra - Não foi exigido neste projeto]
-
-
 ## Integrantes do Grupo
 
 - [Tiago Harumitsu Kodama](https://github.com/tiagoharumitsukodama)
@@ -181,11 +175,5 @@ Para realizar outro pedido, o usuário deve esperar o seu pedido ativo ser concl
 
 ![image](https://user-images.githubusercontent.com/85365177/132996769-59148514-7253-48d4-a7af-4fe8b6446d4f.png)
 
-![image](https://user-images.githubusercontent.com/85365177/132996796-aadc1f08-d6f2-4d02-9535-287dcaa01c9a.png)
-
-
-
-
-
-
+![carrinho](https://user-images.githubusercontent.com/31461569/133005514-eab28ec7-9ef9-4e06-8647-b31772d5e2b3.png)
 
