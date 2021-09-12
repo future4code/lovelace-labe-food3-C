@@ -58,6 +58,7 @@ const Header = ({pageTitle="", setPageTitle}) => {
                 }
                 </div>
                 <p>{pageTitle}</p>
+                <div />
             </StyledHeader>
         </>
     )
