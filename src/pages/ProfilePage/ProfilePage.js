@@ -39,9 +39,9 @@ const ProfilePage = () => {
             });
     };
 
-    const orderList = ordersHistory && ordersHistory.map((order) => {
+    const orderList = ordersHistory && ordersHistory.map((order, index) => {
         return (
-            <ListItem key={order.indexOf}>
+            <ListItem key={index}>
                 <CardOrder
                     restaurant={order.restaurantName}
                     dateCreated={order.createdAt}

@@ -66,6 +66,8 @@ export const updateProfile = (body, clear, history, setIsLoading, setUserProfile
             history.goBack()
         })
         .catch((err) => {
+
+            console.log(err)
             if(err.response){
                 alert(err.response.data.message)
             }
