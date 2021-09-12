@@ -11,11 +11,11 @@ const useAuthorizedPage = () => {
 
     useLayoutEffect(() => {
         if (!Object.keys(states.userProfile).length) {
-            console.log(states.userProfile)
+
             requests.getProfile()
         }
         if (!Object.keys(states.userProfile).length) {
-            console.log(states.userProfile)
+
             goToLogin(history)
             setHasAuthorization(false)
         } else {
