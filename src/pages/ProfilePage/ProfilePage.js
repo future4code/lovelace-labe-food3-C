@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
 import useProtectedPage from "../../hooks/useUnprotectedPage";
 import {useHistory} from "react-router-dom";
-import {Box, List, ListItem, ListItemText, Typography} from "@material-ui/core";
+import {Box, Button, List, ListItem, ListItemText, Typography} from "@material-ui/core";
 import {EditEmailContainer, EditEnderecoContainer, HistoryListContainer, MainContainer} from "./styled";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
-import {goToAddress, goToUserInfo} from "../../routes/coordinator";
+import {goToAddress, goToLogin, goToUserInfo} from "../../routes/coordinator";
 import GlobalContext from "../../global/GlobalContext";
 import axios from "axios";
 import {BASE_URL} from "../../constants/urls";
@@ -17,10 +17,11 @@ const ProfilePage = () => {
     const history = useHistory();
     const {states, requests} = useContext(GlobalContext);
     const [ordersHistory, setOrderHistory] = useState();
-    useEffect(() => {
-        getOrdersHistory();
-        requests.getProfile();
-    }, [requests]);
+
+    const handleLogout = () => {
+        window.localStorage.setItem('token', '')
+        goToLogin(history)
+    }
 
     const getOrdersHistory = () => {
         const token = localStorage.getItem("token");
@@ -43,6 +44,11 @@ const ProfilePage = () => {
                 }
             });
     };
+
+    useEffect(() => {
+        getOrdersHistory();
+        requests.getProfile();
+    }, [requests]);
 
     const orderList = ordersHistory && ordersHistory.map((order, index) => {
         return (
@@ -97,6 +103,10 @@ const ProfilePage = () => {
                     </HistoryListContainer>
                 </Box>
             </EditEmailContainer>
+            <Button
+                color='primary'
+                onClick={handleLogout}
+            >Sair</Button>
             <Footer />
         </MainContainer>
     );
