@@ -25,6 +25,14 @@ const GlobalStateContext = (props) => {
         setSubtotalToAlert(subtotalToWait);
     };
 
+    useEffect(() => {
+        if (maximumDeliveryTime > 0) {
+            setTimeout(() => {
+                setMaximumDeliveryTime(0);
+            }, maximumDeliveryTime / 100);
+        }
+    }, [maximumDeliveryTime]);
+
     const getActiveOrder = () => {
         const token = localStorage.getItem("token");
         const headers = {
@@ -50,14 +58,6 @@ const GlobalStateContext = (props) => {
                 }
             });
     };
-
-    useEffect(() => {
-        if (maximumDeliveryTime > 0) {
-            setTimeout(() => {
-                setMaximumDeliveryTime(0);
-            }, maximumDeliveryTime / 100);
-        }
-    }, [maximumDeliveryTime]);
 
     const getProfile = () => {
         const token = localStorage.getItem("token");
@@ -106,7 +106,7 @@ const GlobalStateContext = (props) => {
         }
     };
 
-    const placeOrder = (products, payment, restaurantId, history) => {
+    const placeOrder = (products, payment, restaurantId, history, subtotal) => {
         const token = localStorage.getItem("token");
 
         const headers = {
@@ -125,12 +125,19 @@ const GlobalStateContext = (props) => {
             paymentMethod: payment
         };
 
+        // console.log(infoRestaurant.deliveryTime);
+
         axios
             .post(`${BASE_URL}/fourFoodA/restaurants/${restaurantId}/order`, body, headers)
             .then((response) => {
                 alert("Pedido realizado com sucesso!");
                 setInfoRestaurant({});
                 setAddedProducts([]);
+
+                //Implementação da espera do pedido na Home
+
+                setWaitingDelivery(infoRestaurant.deliveryTime, subtotal, infoRestaurant.name);
+
                 goToHome(history);
             })
             .catch((error) => {
@@ -142,7 +149,13 @@ const GlobalStateContext = (props) => {
             });
     };
 
-    const removeFromCart = (productId) => {};
+    const removeFromCart = (productId) => {
+        const newCart = addedProducts.filter((product) => {
+            return product.food.id !== productId;
+        });
+
+        setAddedProducts(newCart);
+    };
 
     const states = {waitingDelivery, userProfile, addedProducts, infoRestaurant};
     const setters = {setWaitingDelivery, setUserProfile, setAddedProducts, setInfoRestaurant, removeFromCart};

@@ -30,7 +30,7 @@ const CartPage = () => {
         setValue(event.target.value);
     };
 
-    const totalPrice = product.reduce((acc, item) => {
+    const subtotal = product.reduce((acc, item) => {
         return acc + item.food.price * item.quantity;
     }, 0);
 
@@ -115,7 +115,7 @@ const CartPage = () => {
 
                 {product.length > 0 ? (
                     <Typography color={"primary"} style={{fontWeight: "500"}}>
-                        {totalPrice.toLocaleString("pt-BR", {
+                        {subtotal.toLocaleString("pt-BR", {
                             style: "currency",
                             currency: "BRL"
                         })}
@@ -146,7 +146,7 @@ const CartPage = () => {
                         variant={"contained"}
                         color={"primary"}
                         style={{width: "100%"}}
-                        onClick={() => requests.placeOrder(product, value, restaurantId[0], history)}
+                        onClick={() => requests.placeOrder(product, value, restaurantId[0], history, subtotal)}
                     >
                         Confirmar
                     </Button>
