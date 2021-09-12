@@ -79,7 +79,7 @@ export const updateProfile = (body, clear, history, setIsLoading, setUserProfile
         })
 }
   
-export const saveAddress = (body, clear, history, setIsLoading) => {
+export const saveAddress = (body, clear, history, setIsLoading, getUserProfile) => {
     const token = localStorage.getItem("token")
     const headers = {
         headers: {
@@ -96,6 +96,7 @@ export const saveAddress = (body, clear, history, setIsLoading) => {
 
         if(res.status===200){
             alert("Endereço Cadastrado com sucesso")
+            getUserProfile()
             goToHome(history)
         }
         

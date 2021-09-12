@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { InputsContainer, SignUpFormContainer } from './styled'
@@ -8,10 +8,12 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { saveAddress } from '../../services/user'
 import { useRequestDataX } from '../../hooks/useRequestData'
 import { BASE_URL } from '../../constants/urls'
+import GlobalContext from '../../global/GlobalContext'
 
 const AddressForm = () => {
   const history = useHistory()
   const [isLoading, setIsLoading] = useState(false)
+  const { requests } = useContext(GlobalContext)
   const [form, onChange, clear, setFields] = useForm({
     street: '', number: '', neighbourhood: '',
     city: '', state: '', complement: ''
@@ -21,7 +23,7 @@ const AddressForm = () => {
 
   const onSubmitForm = (event) => {
     event.preventDefault()
-    saveAddress(form, clear, history, setIsLoading)
+    saveAddress(form, clear, history, setIsLoading, requests.getProfile)
   }
 
   useEffect(() => {
