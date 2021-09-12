@@ -15,7 +15,7 @@ import Loading from "../../components/Loading/Loading";
 import { getRestaurants } from "../../services/getRestaurants";
 import CardWaitingDelivery from "../../components/CardWaitingDelivery/CardWaitingDelivery";
 import GlobalContext from "../../global/GlobalContext";
-import { goToLogin } from "../../routes/coordinator";
+import { goToAddress } from "../../routes/coordinator";
 import { useHistory } from "react-router";
 
 const HomePage = ({ setPageTitle }) => {
@@ -32,7 +32,7 @@ const HomePage = ({ setPageTitle }) => {
 
   
   useEffect(() => {
-    if(hasAuthorization){
+    if(hasAuthorization===true){
       if (Object.keys(restaurants).length === 0) {
         getRestaurants(setRestaurants, setIsLoading);
       }
@@ -40,12 +40,12 @@ const HomePage = ({ setPageTitle }) => {
       requests.getActiveOrder()
     }
     else if(hasAuthorization===false){
-      goToLogin(history)
+      goToAddress(history)
     }
     // eslint-disable-next-line
   }, [hasAuthorization])
 
-  if (isLoading || !hasAuthorization)
+  if (isLoading || hasAuthorization===null)
     return (
       <StyledHomePage>
         <Loading />
